@@ -1,0 +1,32 @@
+[
+    {
+        "id": "cat-1",
+        "name": "Cuộc sống",
+        "numberOfPosts": 6
+    },
+    {
+        "id": "cat-2",
+        "name": "Đời sống",
+        "numberOfPosts": 13
+    },
+    {
+        "id": "cat-3",
+        "name": "Thể thao",
+        "numberOfPosts": 9
+    },
+    {
+        "id": "cat-4",
+        "name": "Chính trị",
+        "numberOfPosts": 2
+    },
+    {
+        "id": "cat-5",
+        "name": "Công nghệ",
+        "numberOfPosts": 5
+    },
+    {
+        "id": "cat-6",
+        "name": "Văn hóa",
+        "numberOfPosts": 4
+    }
+]

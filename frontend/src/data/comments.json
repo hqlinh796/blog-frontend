@@ -1,0 +1,92 @@
+[
+    {
+        "id": "cmt-1",
+        "postID": "post-1",
+        "name": "Dương Đức",
+        "email": "duongudc456@gmail.com",
+        "content": "Tui thấy bài viết khá là cô động và xúc tích. Được đấy",
+        "rate": 4,
+        "date": 1582779996
+    },
+    {
+        "id": "cmt-2",
+        "postID": "post-1",
+        "name": "Dương Đức",
+        "email": "duongudc456@gmail.com",
+        "content": "Tui thấy bài viết khá là cô động và xúc tích. Được đấy",
+        "rate": 4,
+        "date": 1571179996
+    },
+    {
+        "id": "cmt-3",
+        "postID": "post-2",
+        "name": "Dương Đức",
+        "email": "duongudc456@gmail.com",
+        "content": "Tui thấy bài viết khá là cô động và xúc tích. Được đấy",
+        "rate": 4,
+        "date": 1556179996
+    },
+    {
+        "id": "cmt-4",
+        "postID": "post-1",
+        "name": "Dương Đức",
+        "email": "duongudc456@gmail.com",
+        "content": "Tui thấy bài viết khá là cô động và xúc tích. Được đấy",
+        "rate": 4,
+        "date": 1582401996
+    },
+    {
+        "id": "cmt-5",
+        "postID": "post-2",
+        "name": "Dương Đức",
+        "email": "duongudc456@gmail.com",
+        "content": "Tui thấy bài viết khá là cô động và xúc tích. Được đấy",
+        "rate": 4,
+        "date": 1582779996
+    },
+    {
+        "id": "cmt-6",
+        "postID": "post-3",
+        "name": "Dương Đức",
+        "email": "duongudc456@gmail.com",
+        "content": "Tui thấy bài viết khá là cô động và xúc tích. Được đấy",
+        "rate": 4,
+        "date": 1582779996
+    },
+    {
+        "id": "cmt-7",
+        "postID": "post-4",
+        "name": "Dương Đức",
+        "email": "duongudc456@gmail.com",
+        "content": "Tui thấy bài viết khá là cô động và xúc tích. Được đấy",
+        "rate": 4,
+        "date": 1582345996
+    },
+    {
+        "id": "cmt-8",
+        "postID": "post-4",
+        "name": "Dương Đức",
+        "email": "duongudc456@gmail.com",
+        "content": "Tui thấy bài viết khá là cô động và xúc tích. Được đấy",
+        "rate": 4,
+        "date": 1582129996
+    },
+    {
+        "id": "cmt-9",
+        "postID": "post-5",
+        "name": "Dương Đức",
+        "email": "duongudc456@gmail.com",
+        "content": "Tui thấy bài viết khá là cô động và xúc tích. Được đấy",
+        "rate": 4,
+        "date": 1582079996
+    },
+    {
+        "id": "cmt-10",
+        "postID": "post-6",
+        "name": "Dương Đức",
+        "email": "duongudc456@gmail.com",
+        "content": "Tui thấy bài viết khá là cô động và xúc tích. Được đấy",
+        "rate": 4,
+        "date": 1582799996
+    }
+]

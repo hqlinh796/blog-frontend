@@ -1,0 +1,37 @@
+[
+    {
+        "id": "tag-1",
+        "name": "laptrinh",
+        "numberOfTags": 10
+    },
+    {
+        "id": "tag-2",
+        "name": "meohay",
+        "numberOfTags": 4
+    },
+    {
+        "id": "tag-3",
+        "name": "ronaldo",
+        "numberOfTags": 10
+    },
+    {
+        "id": "tag-4",
+        "name": "game",
+        "numberOfTags": 7
+    },
+    {
+        "id": "tag-5",
+        "name": "girl",
+        "numberOfTags": 18
+    },
+    {
+        "id": "tag-6",
+        "name": "vietnam",
+        "numberOfTags": 11
+    },
+    {
+        "id": "tag-7",
+        "name": "doisong",
+        "numberOfTags": 3
+    }
+]
