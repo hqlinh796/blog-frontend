@@ -11,13 +11,19 @@ class LeftSlideBarBD extends Component {
         if (postDetail)
             return <ContentBlog cover={postDetail.cover} content={postDetail.content} category={postDetail.category} date={postDetail.date} title={postDetail.title} author={postDetail.author}/>
     }
+    getComments = (comments) => {
+        console.log(this.props);
+        if (comments)
+            return comments;
+        return [];
+    }
     render() {    
         const {postDetail} = this.props;
         return (
             <div className="left-slide-bar-blog-detail-wrapper bg-white p-tb-50 col-lg-8 col">
                 {this.showPostDetail(postDetail)}
                 <PrevAndNextPost/>
-                <ListComment/>
+                <ListComment comments={this.getComments(postDetail.comments)}/>
                 <WriteComment/>
              </div>
         );

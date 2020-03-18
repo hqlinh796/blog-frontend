@@ -459,6 +459,11 @@ textarea[name="content"]{
     overflow: hidden;
 }
 
+.cover-skeleton{
+    width: 100% !important;
+    overflow: hidden;
+}
+
 
 @media only screen and (min-width: 1200px){
 

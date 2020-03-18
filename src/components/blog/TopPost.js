@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import TopPostItem from './TopPostItem';
+import TopAndRecentPostSkeleton from './TopAndRecentPostSkeleton';
+
 
 class TopPost extends Component {
 
@@ -21,11 +23,23 @@ class TopPost extends Component {
         }
     }
 
+    showTopPostSkeleton = () => {
+        let i = 0, result = [];
+        for ( ; i < 5 ; i++)
+            result.push(
+                <TopAndRecentPostSkeleton key={i}/>
+            )
+        return result;
+    }
+
     render() {
         return (
             <div className="blog-slide-bar-top-post m-t-50">
                 <h1 className="f-bold fs-22 m-b-50">Top posts</h1>
-                {this.showTopPosts(this.props.topPosts)}
+                
+                { !this.props.isTopPostFetching && this.showTopPosts(this.props.topPosts) }
+                { this.props.isTopPostFetching && this.showTopPostSkeleton() }
+
             </div>
 
         );

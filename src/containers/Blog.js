@@ -19,7 +19,6 @@ class Blog extends Component {
         console.log("blog constructor");
         super(props);
         this.state = ({
-            
             isSearch: false,
             keyword: ""
         })
@@ -59,8 +58,7 @@ class Blog extends Component {
     
     
     render() {
-        if (this.props.posts.length > 0){
-            console.log("trong return: " + this.props.posts);
+        
             return (
                 <section className="container-blog-content p-t-100">
                     <div className="blog-content-wrapper container">
@@ -68,22 +66,17 @@ class Blog extends Component {
                             {this.showSearchResult()}
                         </div>
                         <div className="row">
-                        <LeftSlideBar page={0} posts={this.props.posts} topic={this.getTopic()} keyword={this.state.keyword}/>
-                        <RightSlideBar isSearch={this.state.isSearch} posts={this.props.posts} recentPosts={this.props.recentPosts} topPosts={this.props.topPosts} keyword={(event, keyword) => this.props.search(event, keyword)}/>
-                            
+                        <LeftSlideBar isPostFetching={this.props.isPostFetching} page={0} posts={this.props.posts} 
+                        topic={this.getTopic()} keyword={this.state.keyword}/>
+                        
+                        <RightSlideBar isTopPostFetching={this.props.isTopPostFetching} isRecentPostFetching={this.props.isRecentPostFetching} 
+                        isSearch={this.state.isSearch} posts={this.props.posts} recentPosts={this.props.recentPosts} 
+                        topPosts={this.props.topPosts} keyword={(event, keyword) => this.props.search(event, keyword)}/>
+
                         </div>
                     </div>
                 </section>
             );
-        }
-        
-        else{
-            return (
-                <div className="blog-content-wrapper container">
-                    Het
-                </div>
-            );
-        }
            
     }
 
@@ -139,7 +132,10 @@ const mapStateToProps = (state, ownProps) => {
         posts:          reducer.posts,
         topPosts:       reducer.topPosts,
         recentPosts:    reducer.recentPosts,
-        pageNumber:     reducer.page
+        pageNumber:     reducer.page,
+        isPostFetching: reducer.isPostFetching,
+        isTopPostFetching: reducer.isTopPostFetching,
+        isRecentPostFetching: reducer.isRecentPostFetching
     }
 }
 

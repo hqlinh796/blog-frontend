@@ -44,7 +44,7 @@ class BlogDetail extends Component {
 
     componentDidMount() {
         const postID = this.props.match.params.id;
-        console.log('id la: ' + postID);
+        console.log('did mount id la: ' + postID);
         this.props.fetchPost(postID);
 
         //haven't fetch right bar item
@@ -54,9 +54,15 @@ class BlogDetail extends Component {
         }
     }
 
-    componentDidUpdate(){
+    shouldComponentUpdate(nextState, nextProps){
         const postID = this.props.match.params.id;
         console.log('id la: ' + postID);
+        if (this.props.postDetail._id !== postID)
+            return true;
+        return false;
+    }
+    componentWillUpdate(){
+        const postID = this.props.match.params.id;
         this.props.fetchPost(postID);
     }
 

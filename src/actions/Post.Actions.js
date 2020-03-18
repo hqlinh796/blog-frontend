@@ -1,4 +1,5 @@
 const path = 'https://backend-blog796.herokuapp.com/post';
+//const path = 'http://localhost:5500/post';
 
 
 export function searchPost(keyword, page){
@@ -6,7 +7,7 @@ export function searchPost(keyword, page){
         keyword = escapeSpace(keyword);
         //convert space to %20
         console.log("truoc khi gui di: " + keyword);
-        fetch(path + '/search?keyword=' + keyword + '&page=' + page)
+        fetch(path + '/search?keyword=' + keyword + '&page=' + 0)
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
@@ -20,7 +21,10 @@ export function searchPost(keyword, page){
 
 export function fetchPost(page) {
     return dispatch => {
-        fetch(path + '?page=' + page)
+        dispatch({
+            type: 'FETCHING_POST'
+        })
+        fetch(path + '?page=' + 0)
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
@@ -28,11 +32,20 @@ export function fetchPost(page) {
                 type: 'FETCH_POST',
                 payload: postDataJSON.posts
             });
+            // setTimeout(() => {
+            //     dispatch({
+            //         type: 'FETCH_POST',
+            //         payload: postDataJSON.posts
+            //     });
+            // }, 2000);
         })
     }
 }
 
 export const fetchTopPost = () => (dispatch) => {
+    dispatch({
+        type: 'FETCHING_TOP_POST'
+    })
     fetch(path + '/top-post')
         .then(postData => postData.json())
         .then(postDataJSON => {
@@ -45,6 +58,9 @@ export const fetchTopPost = () => (dispatch) => {
 }
 
 export const fetchRecentPost = () => (dispatch) => {
+    dispatch({
+        type: 'FETCHING_RECENT_POST'
+    })
     fetch(path + '/recent-post')
         .then(postData => postData.json())
         .then(postDataJSON => {

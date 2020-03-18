@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 
-
-class BlogThumbnail extends Component {
+class BlogThumbnailSkeleton extends Component {
     
   
     //https://freetuts.net/tao-slug-tu-dong-bang-javascript-va-php-199.html
@@ -79,33 +79,35 @@ class BlogThumbnail extends Component {
         return (
             
             <div className="post-overview m-b-100">
-                <img src={this.props.cover }  alt="thumbnail-blog-detail" className="post-img-thumbnail" />
+                <div className="cover-skeleton">
+                    <Skeleton width={750} height={300}/>
+                </div>
                 <div className="post-text-detail p-t-70 p-b-40 p-lr-30">
                     <div className="date-post">
                         <div className="lh-13 txt-center">
-                            <p className="fs-23 f-bold">{this.getDate(this.props.date) }</p>
-                            <p className="fs-20">{this.getMonth(this.props.date) }</p>
+                            <p className="fs-23 f-bold"><Skeleton/></p>
+                            <p className="fs-20"><Skeleton/></p>
                         </div>
                     </div>
-                    <Link to={"/blog/" + this.toSlug(this.props.title) + "." + this.props.id} className="fs-23 f-bold fc-black a-hover-to-green">{this.props.title }</Link>
+                    <a className="fs-23 f-bold fc-black a-hover-to-green"><Skeleton/></a>
                     <p className="description-post fs-19 m-tb-20 lh-15 fc-2">
-                        {this.props.description }
+                        <Skeleton/>
                     </p>
                     <div className="topic-and-comment fc-2">
-                        <i className="fas fa-book-open" />
+                        
+                        <span><Skeleton/></span>
                         &nbsp;
-                        <span>{this.props.category}</span>
+                        
                         &nbsp;
-                        <span> | </span>
+                        
                         &nbsp;
-                        <i className="fas fa-comments" />
-                        &nbsp;
-                         <span>{this.props.numOfComments > 1 ? this.props.numOfComments + ' comments' : this.props.numOfComments + ' comment'}</span>
+                         <span><Skeleton/></span>
                     </div>
                 </div>
             </div>
+            
         );
     }
 }
 
-export default BlogThumbnail;
+export default BlogThumbnailSkeleton;

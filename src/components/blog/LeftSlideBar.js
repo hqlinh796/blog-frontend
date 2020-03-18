@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BlogThumbnail from './BlogThumbnail';
+import BlogThumbnailSkeleton from './BlogThumbnailSketelon';
 
 
 
@@ -48,8 +49,9 @@ class LeftSlideBar extends Component {
             while (result.length < 5 && i < totalPosts) {
                 const blogData = this.props.posts[i];
                 if (blogData.title.toLowerCase().indexOf(this.props.keyword.toLowerCase()) !== -1)
-                    result.push(<BlogThumbnail id={blogData._id} cover={blogData.cover} title={blogData.title} date={blogData.date}
-                         category={blogData.category} description={blogData.description} key={i}></BlogThumbnail>)
+                    result.push(<BlogThumbnail id={blogData._id} cover={blogData.cover} title={blogData.title}
+                        date={blogData.date} category={blogData.category}
+                        description={blogData.description} numOfComments={blogData.numOfComments} key={i} />)
                 i++;
             }
         //particular topic
@@ -58,8 +60,9 @@ class LeftSlideBar extends Component {
                 if (this.toSlug(posts[i].category) === topic) {
                     const blogData = this.props.posts[i];
                     if (blogData.title.toLowerCase().indexOf(this.props.keyword.toLowerCase()) !== -1)
-                        result.push(<BlogThumbnail id={blogData._id} cover={blogData.cover} title={blogData.title} date={blogData.date}
-                            category={blogData.category} description={blogData.description} key={i}></BlogThumbnail>)
+                        result.push(<BlogThumbnail id={blogData._id} cover={blogData.cover} title={blogData.title} 
+                            date={blogData.date} category={blogData.category} 
+                            description={blogData.description} numOfComments={blogData.numOfComments} key={i} />)
                 }
                 i++;
             }
@@ -69,11 +72,20 @@ class LeftSlideBar extends Component {
         
     }
 
+    showSkeletonBlog = () => {
+        let result = [], i = 0;
+        while (i < 5) {
+            result.push(<BlogThumbnailSkeleton key={i}></BlogThumbnailSkeleton>);
+            i++;
+        }
+        return result;
+    }
+
     render() {
         return (
             <div className="col col-lg-8 blog-post-wrapper">
-                {this.getListBlog(this.props.page)}
-                
+                {!this.props.isPostFetching && this.getListBlog(this.props.page)}
+                {this.props.isPostFetching && this.showSkeletonBlog()}
             </div>
         );
     }

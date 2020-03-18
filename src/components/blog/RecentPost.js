@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RecentPostItem from './RecentPostItem';
+import TopAndRecentPostSkeleton from './TopAndRecentPostSkeleton';
 
 class RecentPost extends Component {
 
@@ -23,14 +24,22 @@ class RecentPost extends Component {
                     <RecentPostItem thumbnail={data.cover} title={data.title} id={data.id} date={data.date} key={index} />)
     }
 
+    showRecentPostSkeleton = () => {
+        let i = 0, result = [];
+        for ( ; i < 5 ; i++)
+            result.push(
+                <TopAndRecentPostSkeleton key={i}/>
+            )
+        return result;
+    }
+
     render() {
         return (
             <div className="blog-slide-bar-recent-post m-t-50">
                 <h1 className="f-bold fs-22 m-b-50">Recent posts</h1>
-                {
-                    this.showRecentPosts(this.props.recentPosts)
-                }
                 
+                { !this.props.isRecentPostFetching && this.showRecentPosts(this.props.recentPosts) }
+                { this.props.isRecentPostFetching && this.showRecentPostSkeleton() }
 
             </div>
 
