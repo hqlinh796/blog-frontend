@@ -9,7 +9,9 @@ const PostInitialState = {
     page: 0,
     isPostFetching: false,
     isTopPostFetching: false,
-    isRecentPostFetching: false
+    isRecentPostFetching: false,
+    isPostDetailFetching: false,
+    isUpdate: false
 }
 const Post = (state = PostInitialState, action) => {
     switch (action.type) {
@@ -53,10 +55,16 @@ const Post = (state = PostInitialState, action) => {
                 recentPosts: action.payload,
                 isRecentPostFetching: false
             }
+        case 'FETCHING_POST_DETAIL':
+            return {
+                ...state,
+                isPostDetailFetching: true
+            }
         case 'FETCH_POST_DETAIL':
             return {
                 ...state,
-                postDetail: action.payload
+                postDetail: action.payload,
+                isPostDetailFetching: false
             }
         default:
             return state

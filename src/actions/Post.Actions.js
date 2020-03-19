@@ -73,6 +73,9 @@ export const fetchRecentPost = () => (dispatch) => {
 }
 
 export const fetchPostDetail = (postID) => dispatch => {
+    dispatch({
+        type: 'FETCHING_POST_DETAIL'
+    })
     fetch(path + '/' + postID)
     .then(postData => postData.json())
     .then(postDataJSON => {
