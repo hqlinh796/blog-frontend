@@ -9,6 +9,7 @@ class BlogThumbnail extends Component {
     //https://freetuts.net/tao-slug-tu-dong-bang-javascript-va-php-199.html
     toSlug = (str) => {
         // Chuyển hết sang chữ thường
+        str = str || '';
         str = str.toLowerCase();
 
         // xóa dấu

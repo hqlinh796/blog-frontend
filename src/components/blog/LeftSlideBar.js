@@ -35,37 +35,36 @@ class LeftSlideBar extends Component {
         return str;
     }
 
-    getListBlog = (page) => {
+    getListBlog = () => {
         
-        const numOfPostsPerPage = 2;
+        
         let result = [], 
-            i = page*numOfPostsPerPage, 
+            i = 0, 
             posts = this.props.posts,
             totalPosts = posts.length,
             topic = this.props.topic;
        
         //all topic
         if (topic === "")
-            while (result.length < 5 && i < totalPosts) {
+            while (i < totalPosts) {
                 const blogData = this.props.posts[i];
-                if (blogData.title.toLowerCase().indexOf(this.props.keyword.toLowerCase()) !== -1)
-                    result.push(<BlogThumbnail id={blogData._id} cover={blogData.cover} title={blogData.title}
+                result.push(<BlogThumbnail id={blogData._id} cover={blogData.cover} title={blogData.title}
                         date={blogData.date} category={blogData.category}
                         description={blogData.description} numOfComments={blogData.numOfComments} key={i} />)
                 i++;
             }
         //particular topic
         else
-            while (result.length < 5 && i < totalPosts) {
+            while (i < totalPosts) {
                 if (this.toSlug(posts[i].category) === topic) {
                     const blogData = this.props.posts[i];
-                    if (blogData.title.toLowerCase().indexOf(this.props.keyword.toLowerCase()) !== -1)
+                    
                         result.push(<BlogThumbnail id={blogData._id} cover={blogData.cover} title={blogData.title} 
                             date={blogData.date} category={blogData.category} 
                             description={blogData.description} numOfComments={blogData.numOfComments} key={i} />)
-                }
-                i++;
             }
+            i++;
+        }
         return result;
     }
     changePageNumber = newPage => {
@@ -74,18 +73,35 @@ class LeftSlideBar extends Component {
 
     showSkeletonBlog = () => {
         let result = [], i = 0;
-        while (i < 5) {
+        while (i < 2) {
             result.push(<BlogThumbnailSkeleton key={i}></BlogThumbnailSkeleton>);
             i++;
         }
         return result;
     }
 
+    componentDidMount(){
+        window.addEventListener('scroll', (e) => {
+            if (!this.props.hasMore || this.props.isPostFetching){
+                return false;
+            }
+            
+            const loadMore = document.getElementById('load-more');
+            const currentOffset = window.pageYOffset + window.innerHeight;
+            const loadMoreOffset = loadMore.offsetTop;
+            if (currentOffset + 100 >= loadMoreOffset){
+               this.props.fetchPost(this.props.page + 1);
+               //alert('load roi');
+            }
+        })
+    }
+
     render() {
         return (
             <div className="col col-lg-8 blog-post-wrapper">
-                {!this.props.isPostFetching && this.getListBlog(this.props.page)}
+                {this.getListBlog()}
                 {this.props.isPostFetching && this.showSkeletonBlog()}
+                <div id="load-more"></div>
             </div>
         );
     }

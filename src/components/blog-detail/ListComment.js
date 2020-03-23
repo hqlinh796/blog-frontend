@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import CommentData from '../../data/comments.json'
 import CommentItem from './CommentItem.js';
 
 class ListComment extends Component {

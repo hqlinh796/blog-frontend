@@ -1,12 +1,11 @@
-const path = 'https://backend-blog796.herokuapp.com/post';
-//const path = 'http://localhost:5500/post';
+//const path = 'https://backend-blog796.herokuapp.com/post';
+const path = 'http://localhost:5500/post';
 
 
 export function searchPost(keyword, page){
     return dispatch => {
         keyword = escapeSpace(keyword);
         //convert space to %20
-        console.log("truoc khi gui di: " + keyword);
         fetch(path + '/search?keyword=' + keyword + '&page=' + 0)
         .then(postData => postData.json())
         .then(postDataJSON => {
@@ -24,13 +23,13 @@ export function fetchPost(page) {
         dispatch({
             type: 'FETCHING_POST'
         })
-        fetch(path + '?page=' + 0)
+        fetch(path + '?page=' + page)
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
             dispatch({
                 type: 'FETCH_POST',
-                payload: postDataJSON.posts
+                payload: postDataJSON
             });
             // setTimeout(() => {
             //     dispatch({

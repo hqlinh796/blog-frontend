@@ -6,7 +6,8 @@ const PostInitialState = {
     postDetail: {},
     isSearch: false,
     keyword: "",
-    page: 0,
+    page: -1,
+    hasMore: true,
     isPostFetching: false,
     isTopPostFetching: false,
     isRecentPostFetching: false,
@@ -40,7 +41,9 @@ const Post = (state = PostInitialState, action) => {
         case 'FETCH_POST':
             return {
                 ...state,
-                posts: action.payload,
+                posts: [...state.posts, ...action.payload.posts],
+                hasMore: action.payload.hasMore,
+                page: action.payload.page,
                 isPostFetching: false
             }
         case 'FETCH_TOP_POST':

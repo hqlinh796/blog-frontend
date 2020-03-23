@@ -53,11 +53,7 @@ class BlogDetail extends Component {
             this.props.fetchTopPost();
         }
     }
-    componentWillReceiveProps(){
-        const postID = this.props.match.params.id;
-        //console.log("WILL RECEIVE PROPS " + nextPops.postDetail.title);
-        //this.props.fetchPost(postID);    
-    }
+    
     shouldComponentUpdate(nextPops, nextState){
         window.scrollTo(0, 500);
         const nextPostID = nextPops.match.params.id,

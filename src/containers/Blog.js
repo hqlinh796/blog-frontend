@@ -66,8 +66,8 @@ class Blog extends Component {
                             {this.showSearchResult()}
                         </div>
                         <div className="row">
-                        <LeftSlideBar isPostFetching={this.props.isPostFetching} page={0} posts={this.props.posts} 
-                        topic={this.getTopic()} keyword={this.state.keyword}/>
+                        <LeftSlideBar isPostFetching={this.props.isPostFetching} page={this.props.page} posts={this.props.posts} 
+                        hasMore={this.props.hasMore} topic={this.getTopic()} keyword={this.state.keyword} fetchPost={(nextPage) => this.props.fetchPost(nextPage)}/>
                         
                         <RightSlideBar isTopPostFetching={this.props.isTopPostFetching} isRecentPostFetching={this.props.isRecentPostFetching} 
                         isSearch={this.state.isSearch} posts={this.props.posts} recentPosts={this.props.recentPosts} 
@@ -90,16 +90,16 @@ class Blog extends Component {
         }
         return true;
     }
-    componentDidUpdate(){
-        console.log("blog dip update");
-    }
+   
     componentDidMount() {
-        this.props.fetchPost();
+        const nextPage = this.props.page + 1;
+        this.props.fetchPost(nextPage);
         //haven't fetch right bar item
         if (this.props.topPosts.length === 0){
             this.props.fetchRecentPost();
             this.props.fetchTopPost();
         }
+        window.scrollTo(0, 0);
     }
 
 }
@@ -109,12 +109,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         search: (event, keyword) => {
             event.preventDefault();
             if (keyword === '')
-                dispatch(fetchPost(ownProps.pageNumber));
+                dispatch(fetchPost(ownProps.page));
             else
                 dispatch(searchPost(keyword, ownProps.pageNumber));
         },
-        fetchPost: () => {
-            dispatch(fetchPost(ownProps.pageNumber));
+        fetchPost: (nextPage) => {
+            dispatch(fetchPost(nextPage));
         },
         fetchRecentPost: () => dispatch(
             fetchRecentPost()
@@ -130,9 +130,10 @@ const mapStateToProps = (state, ownProps) => {
     
     return {
         posts:          reducer.posts,
+        hasMore:        reducer.hasMore,
+        page:           reducer.page,
         topPosts:       reducer.topPosts,
         recentPosts:    reducer.recentPosts,
-        pageNumber:     reducer.page,
         isPostFetching: reducer.isPostFetching,
         isTopPostFetching: reducer.isTopPostFetching,
         isRecentPostFetching: reducer.isRecentPostFetching
