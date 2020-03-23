@@ -4,15 +4,18 @@ const path = 'https://backend-blog796.herokuapp.com/post';
 
 export function searchPost(keyword, page){
     return dispatch => {
+        dispatch({
+            type: 'FETCHING_POST'
+        })
         keyword = escapeSpace(keyword);
         //convert space to %20
-        fetch(path + '/search?keyword=' + keyword + '&page=' + 0)
+        fetch(path + '/search?keyword=' + keyword + '&page=' + page)
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
             dispatch({
                 type: 'SEARCH_POST',
-                payload: postDataJSON.posts
+                payload: postDataJSON
             });
         })
     }
@@ -84,6 +87,11 @@ export const fetchPostDetail = (postID) => dispatch => {
         })
     })
 }
+
+export const resetResult = ()  => ({
+        type: 'RESET_RESULT'
+    })
+
 
 
 const escapeSpace = (text) => text.replace(/\s/, '%20');

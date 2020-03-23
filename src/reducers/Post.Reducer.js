@@ -21,7 +21,11 @@ const Post = (state = PostInitialState, action) => {
                 ...state,
                 isSearch: true,
                 //keyword: action.payload,
-                posts: action.payload
+                posts: [...state.posts, ...action.payload.posts],
+                hasMore: action.payload.hasMore,
+                page: action.payload.page,
+                isPostFetching: false,
+                keyword: action.payload.keyword
             }
         case 'FETCHING_POST':
             return {
@@ -44,7 +48,9 @@ const Post = (state = PostInitialState, action) => {
                 posts: [...state.posts, ...action.payload.posts],
                 hasMore: action.payload.hasMore,
                 page: action.payload.page,
-                isPostFetching: false
+                isPostFetching: false,
+                keyword: '',
+                isSearch: false
             }
         case 'FETCH_TOP_POST':
             return {
@@ -68,6 +74,12 @@ const Post = (state = PostInitialState, action) => {
                 ...state,
                 postDetail: action.payload,
                 isPostDetailFetching: false
+            }
+        case 'RESET_RESULT':
+            return {
+                ...state,
+                posts: [],
+                page: 0
             }
         default:
             return state

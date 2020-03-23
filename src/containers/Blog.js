@@ -6,7 +6,7 @@ import RightSlideBar from '../components/blog/RightSlideBar';
 import SearchResult from '../components/blog/SearchResult';
 
 
-import {searchPost, fetchPost, fetchTopPost, fetchRecentPost} from '../actions/Post.Actions';
+import {searchPost, fetchPost, fetchTopPost, fetchRecentPost, resetResult} from '../actions/Post.Actions';
 
 
 const queryString = require('query-string');
@@ -55,6 +55,20 @@ class Blog extends Component {
             result = "";
         return result;
     }
+
+    search = (event, keyword) => {
+        event.preventDefault();
+        if (keyword === this.props.keyword)
+            return;
+        const nextPage = this.props.page + 1;
+        //reset posts array
+        this.props.resetResult();
+
+        if (keyword === '')
+            this.props.fetchPost(0);
+        else
+            this.props.search(keyword, 0);
+    }
     
     
     render() {
@@ -66,12 +80,13 @@ class Blog extends Component {
                             {this.showSearchResult()}
                         </div>
                         <div className="row">
-                        <LeftSlideBar isPostFetching={this.props.isPostFetching} page={this.props.page} posts={this.props.posts} 
-                        hasMore={this.props.hasMore} topic={this.getTopic()} keyword={this.state.keyword} fetchPost={(nextPage) => this.props.fetchPost(nextPage)}/>
+                        <LeftSlideBar isPostFetching={this.props.isPostFetching} page={this.props.page} posts={this.props.posts} isSearch={this.props.isSearch} 
+                        keyword={this.props.keyword} hasMore={this.props.hasMore} topic={this.getTopic()} fetchPost={(nextPage) => this.props.fetchPost(nextPage)}
+                        searchPost={(keyword, nextPage) => this.props.search(keyword, nextPage)} />
                         
                         <RightSlideBar isTopPostFetching={this.props.isTopPostFetching} isRecentPostFetching={this.props.isRecentPostFetching} 
-                        isSearch={this.state.isSearch} posts={this.props.posts} recentPosts={this.props.recentPosts} 
-                        topPosts={this.props.topPosts} keyword={(event, keyword) => this.props.search(event, keyword)}/>
+                        isSearch={this.props.isSearch} posts={this.props.posts} recentPosts={this.props.recentPosts} 
+                        topPosts={this.props.topPosts} keyword={(event, keyword) => this.search(event, keyword)}/>
 
                         </div>
                     </div>
@@ -79,6 +94,7 @@ class Blog extends Component {
             );
            
     }
+
 
     shouldComponentUpdate(nextProps, nextState) {
         if (this.state.keyword === nextState.keyword && nextState.keyword !== ""){
@@ -106,12 +122,8 @@ class Blog extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        search: (event, keyword) => {
-            event.preventDefault();
-            if (keyword === '')
-                dispatch(fetchPost(ownProps.page));
-            else
-                dispatch(searchPost(keyword, ownProps.pageNumber));
+        search: (keyword, page) => {
+            dispatch(searchPost(keyword, page));
         },
         fetchPost: (nextPage) => {
             dispatch(fetchPost(nextPage));
@@ -121,6 +133,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         ),
         fetchTopPost: () => dispatch(
             fetchTopPost()
+        ),
+        resetResult: () => dispatch(
+            resetResult()
         )
     }
 }
@@ -132,6 +147,8 @@ const mapStateToProps = (state, ownProps) => {
         posts:          reducer.posts,
         hasMore:        reducer.hasMore,
         page:           reducer.page,
+        keyword:        reducer.keyword,
+        isSearch:       reducer.isSearch,
         topPosts:       reducer.topPosts,
         recentPosts:    reducer.recentPosts,
         isPostFetching: reducer.isPostFetching,

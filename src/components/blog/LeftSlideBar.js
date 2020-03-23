@@ -89,8 +89,15 @@ class LeftSlideBar extends Component {
             const loadMore = document.getElementById('load-more');
             const currentOffset = window.pageYOffset + window.innerHeight;
             const loadMoreOffset = loadMore.offsetTop;
+
+
             if (currentOffset + 100 >= loadMoreOffset){
-               this.props.fetchPost(this.props.page + 1);
+                const keyword = this.props.keyword;
+                
+                if (this.props.isSearch)
+                    this.props.searchPost(keyword ,this.props.page + 1);
+                else
+                    this.props.fetchPost(this.props.page + 1);
                //alert('load roi');
             }
         })

@@ -18,7 +18,7 @@ class Search extends Component {
 
 
     render() {
-        console.log("search render");
+        //console.log("search render");
         return (
             <div className="blog-slide-bar-search">
                 <form>
@@ -29,15 +29,6 @@ class Search extends Component {
         );
     }
 
-    shouldComponentUpdate(nextProps, nextState){
-        if (nextState.keyword === this.state.keyword && nextState.keyword !== ""){
-            this.setState({
-                keyword: ""
-            })
-            return false;
-        }
-        return true;
-    }
 }
 
 export default Search;
