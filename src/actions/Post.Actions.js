@@ -1,5 +1,5 @@
-//const path = 'https://backend-blog796.herokuapp.com/post';
-const path = 'http://localhost:5500/post';
+const path = 'https://backend-blog796.herokuapp.com/post';
+//const path = 'http://localhost:5500/post';
 
 
 export function searchPost(keyword, page){
