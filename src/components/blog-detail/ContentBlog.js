@@ -12,23 +12,24 @@ class ContentBlog extends Component {
     }
 
     render() {
+        const {cover, title, date, category, author, content} = this.props.postDetail;
         return (
             <div className="post-detail fs-18">
-                <img src={this.props.cover} alt="" className="post-cover-image" />
+                <img src={cover} alt="" className="post-cover-image" />
                 <div className="p-lr-30 p-tb-40">
-                    <h1 className="fs-25 f-bold">{this.props.title}
+                    <h1 className="fs-25 f-bold">{title}
                     </h1>
                     <div className="date-and-topic fs-14 m-t-20">
-                        <span className="date-post-detail">{this.getFullDate(this.props.date)}</span>
+                        <span className="date-post-detail">{this.getFullDate(date)}</span>
                         <span>&nbsp; | &nbsp;</span>
-                        <span className="topic-post-detail">{this.props.category}</span>
+                        <span className="topic-post-detail">{category}</span>
                     </div>
                     <div className="cre-post fs-14">
                         <i className="fas fa-book-reader m-r-5 m-t-10 m-b-20"></i>
-                        <span className="">{this.props.author}</span>
+                        <span className="">{author}</span>
                     </div>
                     <div className="post-content fc-2 lh-15">
-                        {this.props.content}
+                        {content}
                     </div>
                 </div>
             </div>

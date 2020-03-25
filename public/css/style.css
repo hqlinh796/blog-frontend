@@ -464,6 +464,48 @@ textarea[name="content"]{
     overflow: hidden;
 }
 
+.tags a{
+    color: #28AE60;
+}
+.tags a:hover{
+    color: #19964d;
+}
+
+.related-thumbnail{
+    width: 100%;
+    object-fit: cover;
+    height: 70%;
+}
+
+.related-post-item {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+}
+
+.related-post-item a{
+    color: #000;
+}
+
+.related-post-item a:hover {
+    color: #6e6e6e;
+}
+
+.rate-wrapper {
+    background-color: #fff;
+    line-height: 20px;
+}
+.hover-rate {
+    color: #40c578;
+}
+
+.your-rate-wrapper {
+    border-top: 1px solid #e6e6e6;
+}
+.your-rate-wrapper i {
+    cursor: pointer;
+}
 
 @media only screen and (min-width: 1200px){
 

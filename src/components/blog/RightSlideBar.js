@@ -12,7 +12,7 @@ class RightSlideBar extends Component {
         return (
             <div className="col col-lg-4 blog-slide-bar-wrapper">
                 <Search keyword={(event, keyword) => this.props.keyword(event, keyword)} input={this.props.input}/>
-                <Category/>
+                <Category categories={this.props.categories}/>
                 <RecentPost isRecentPostFetching={this.props.isRecentPostFetching} recentPosts={this.props.recentPosts}/>
                 <TopPost isTopPostFetching={this.props.isTopPostFetching} topPosts={this.props.topPosts}/>
                 <Tag/>
@@ -26,9 +26,7 @@ class RightSlideBar extends Component {
             return false;
         return true;
     }
-    componentDidUpdate(){
-        console.log("right dip update");
-    }
+    
 }
 
 export default RightSlideBar;

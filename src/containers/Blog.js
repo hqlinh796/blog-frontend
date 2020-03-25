@@ -6,7 +6,7 @@ import RightSlideBar from '../components/blog/RightSlideBar';
 import SearchResult from '../components/blog/SearchResult';
 
 
-import {searchPost, fetchPost, fetchTopPost, fetchRecentPost, resetResult} from '../actions/Post.Actions';
+import {searchPost, fetchPost, fetchTopPost, fetchRecentPost, resetResult, fetchCategories} from '../actions/Post.Actions';
 
 
 const queryString = require('query-string');
@@ -25,11 +25,6 @@ class Blog extends Component {
     }
     
 
-    getPage = () => {
-        const queryStringObject = queryString.parse(this.props.location.search);
-        const pageTemp = queryStringObject.page || 0;
-        return pageTemp;
-    }
     search = (event, keyword) => {
         event.preventDefault();
         if (keyword !== ""){
@@ -86,7 +81,8 @@ class Blog extends Component {
                         
                         <RightSlideBar isTopPostFetching={this.props.isTopPostFetching} isRecentPostFetching={this.props.isRecentPostFetching} 
                         isSearch={this.props.isSearch} posts={this.props.posts} recentPosts={this.props.recentPosts} 
-                        topPosts={this.props.topPosts} keyword={(event, keyword) => this.search(event, keyword)}/>
+                        topPosts={this.props.topPosts} keyword={(event, keyword) => this.search(event, keyword)} 
+                        categories={this.props.categories}/>
 
                         </div>
                     </div>
@@ -109,12 +105,16 @@ class Blog extends Component {
    
     componentDidMount() {
         const nextPage = this.props.page + 1;
-        this.props.fetchPost(nextPage);
+        if(!this.props.posts)
+            this.props.fetchPost(nextPage);
         //haven't fetch right bar item
         if (this.props.topPosts.length === 0){
             this.props.fetchRecentPost();
             this.props.fetchTopPost();
         }
+        if (this.props.categories.length === 0)
+            this.props.fetchCategories();
+
         window.scrollTo(0, 0);
     }
 
@@ -122,9 +122,7 @@ class Blog extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        search: (keyword, page) => {
-            dispatch(searchPost(keyword, page));
-        },
+        search: (keyword, page) => dispatch(searchPost(keyword, page)),
         fetchPost: (nextPage) => {
             dispatch(fetchPost(nextPage));
         },
@@ -136,7 +134,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         ),
         resetResult: () => dispatch(
             resetResult()
-        )
+        ),
+        fetchCategories: () => dispatch(fetchCategories())
     }
 }
 
@@ -153,7 +152,8 @@ const mapStateToProps = (state, ownProps) => {
         recentPosts:    reducer.recentPosts,
         isPostFetching: reducer.isPostFetching,
         isTopPostFetching: reducer.isTopPostFetching,
-        isRecentPostFetching: reducer.isRecentPostFetching
+        isRecentPostFetching: reducer.isRecentPostFetching,
+        categories:     reducer.categories
     }
 }
 

@@ -1,5 +1,7 @@
-const path = 'https://backend-blog796.herokuapp.com/post';
-//const path = 'http://localhost:5500/post';
+const postPath = 'https://backend-blog796.herokuapp.com/post';
+const categoryPath = 'https://backend-blog796.herokuapp.com/category';
+//const postPath = 'http://localhost:5500/post';
+//const categoryPath = 'http://localhost:5500/category';
 
 
 export function searchPost(keyword, page){
@@ -9,7 +11,7 @@ export function searchPost(keyword, page){
         })
         keyword = escapeSpace(keyword);
         //convert space to %20
-        fetch(path + '/search?keyword=' + keyword + '&page=' + page)
+        fetch(postPath + '/search?keyword=' + keyword + '&page=' + page)
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
@@ -26,7 +28,7 @@ export function fetchPost(page) {
         dispatch({
             type: 'FETCHING_POST'
         })
-        fetch(path + '?page=' + page)
+        fetch(postPath + '?page=' + page)
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
@@ -48,7 +50,7 @@ export const fetchTopPost = () => (dispatch) => {
     dispatch({
         type: 'FETCHING_TOP_POST'
     })
-    fetch(path + '/top-post')
+    fetch(postPath + '/top-post')
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
@@ -63,7 +65,7 @@ export const fetchRecentPost = () => (dispatch) => {
     dispatch({
         type: 'FETCHING_RECENT_POST'
     })
-    fetch(path + '/recent-post')
+    fetch(postPath + '/recent-post')
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
@@ -78,7 +80,7 @@ export const fetchPostDetail = (postID) => dispatch => {
     dispatch({
         type: 'FETCHING_POST_DETAIL'
     })
-    fetch(path + '/' + postID)
+    fetch(postPath + '/' + postID)
     .then(postData => postData.json())
     .then(postDataJSON => {
         dispatch({
@@ -90,8 +92,17 @@ export const fetchPostDetail = (postID) => dispatch => {
 
 export const resetResult = ()  => ({
         type: 'RESET_RESULT'
+    });
+
+export const fetchCategories = () => dispatch => {
+    fetch(categoryPath)
+    .then(categoryData => categoryData.json())
+    .then(categoryJSON => {
+        dispatch({
+            type: 'FETCH_CATEGORIES',
+            payload: categoryJSON
+        })
     })
-
-
+}
 
 const escapeSpace = (text) => text.replace(/\s/, '%20');

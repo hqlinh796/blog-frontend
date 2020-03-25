@@ -77,31 +77,38 @@ class BlogThumbnail extends Component {
 
     render() {
         console.log("blog thumbnail render");
+        const {title, description, date, cover, tags, _id, category, numOfComments} = this.props.post;
         return (
             
             <div className="post-overview m-b-100">
-                <img src={this.props.cover }  alt="thumbnail-blog-detail" className="post-img-thumbnail" />
+                <img src={cover }  alt="thumbnail-blog-detail" className="post-img-thumbnail" />
                 <div className="post-text-detail p-t-70 p-b-40 p-lr-30">
                     <div className="date-post">
                         <div className="lh-13 txt-center">
-                            <p className="fs-23 f-bold">{this.getDate(this.props.date) }</p>
-                            <p className="fs-20">{this.getMonth(this.props.date) }</p>
+                            <p className="fs-23 f-bold">{this.getDate(date) }</p>
+                            <p className="fs-20">{this.getMonth(date) }</p>
                         </div>
                     </div>
-                    <Link to={"/blog/" + this.toSlug(this.props.title) + "." + this.props.id} className="fs-23 f-bold fc-black a-hover-to-green">{this.props.title }</Link>
+                    <Link to={"/blog/" + this.toSlug(title) + "." + _id} className="fs-23 f-bold fc-black a-hover-to-green">{title }</Link>
                     <p className="description-post fs-19 m-tb-20 lh-15 fc-2">
-                        {this.props.description }
+                        {description }
                     </p>
-                    <div className="topic-and-comment fc-2">
+                    <div className="topic-and-comment fc-2 m-b-10">
                         <i className="fas fa-book-open" />
                         &nbsp;
-                        <span>{this.props.category}</span>
+                        <span>{category}</span>
                         &nbsp;
                         <span> | </span>
                         &nbsp;
                         <i className="fas fa-comments" />
                         &nbsp;
-                         <span>{this.props.numOfComments > 1 ? this.props.numOfComments + ' comments' : this.props.numOfComments + ' comment'}</span>
+                         <span>{numOfComments > 1 ? numOfComments + ' comments' : numOfComments + ' comment'}</span>
+                    </div>
+                    <div className="tags">
+                        <span>Tags: </span>
+                        {tags.map(tag => {
+                        return <Link to="#">#{tag} </Link>
+                        })}
                     </div>
                 </div>
             </div>

@@ -6,6 +6,28 @@ import BlogThumbnailSkeleton from './BlogThumbnailSketelon';
 
 class LeftSlideBar extends Component {
     
+
+    handleScroll = (e) => {
+        if (!this.props.hasMore || this.props.isPostFetching){
+            return false;
+        }
+        
+        const loadMore = document.getElementById('load-more');
+        const currentOffset = window.pageYOffset + window.innerHeight;
+        const loadMoreOffset = loadMore.offsetTop;
+
+
+        if (currentOffset + 100 >= loadMoreOffset){
+            const keyword = this.props.keyword;
+            
+            if (this.props.isSearch)
+                this.props.searchPost(keyword ,this.props.page + 1);
+            else
+                this.props.fetchPost(this.props.page + 1);
+           //alert('load roi');
+        }
+    }
+
     toSlug = (str) => {
         // Chuyển hết sang chữ thường
         str = str.toLowerCase();
@@ -48,9 +70,7 @@ class LeftSlideBar extends Component {
         if (topic === "")
             while (i < totalPosts) {
                 const blogData = this.props.posts[i];
-                result.push(<BlogThumbnail id={blogData._id} cover={blogData.cover} title={blogData.title}
-                        date={blogData.date} category={blogData.category}
-                        description={blogData.description} numOfComments={blogData.numOfComments} key={i} />)
+                result.push(<BlogThumbnail post={blogData} key={i} />)
                 i++;
             }
         //particular topic
@@ -59,9 +79,7 @@ class LeftSlideBar extends Component {
                 if (this.toSlug(posts[i].category) === topic) {
                     const blogData = this.props.posts[i];
                     
-                        result.push(<BlogThumbnail id={blogData._id} cover={blogData.cover} title={blogData.title} 
-                            date={blogData.date} category={blogData.category} 
-                            description={blogData.description} numOfComments={blogData.numOfComments} key={i} />)
+                        result.push(<BlogThumbnail post={blogData} key={i} />)
             }
             i++;
         }
@@ -80,27 +98,11 @@ class LeftSlideBar extends Component {
         return result;
     }
 
+
     componentDidMount(){
-        window.addEventListener('scroll', (e) => {
-            if (!this.props.hasMore || this.props.isPostFetching){
-                return false;
-            }
-            
-            const loadMore = document.getElementById('load-more');
-            const currentOffset = window.pageYOffset + window.innerHeight;
-            const loadMoreOffset = loadMore.offsetTop;
+        
 
-
-            if (currentOffset + 100 >= loadMoreOffset){
-                const keyword = this.props.keyword;
-                
-                if (this.props.isSearch)
-                    this.props.searchPost(keyword ,this.props.page + 1);
-                else
-                    this.props.fetchPost(this.props.page + 1);
-               //alert('load roi');
-            }
-        })
+        window.addEventListener('scroll', this.handleScroll);
     }
 
     render() {
@@ -111,6 +113,9 @@ class LeftSlideBar extends Component {
                 <div id="load-more"></div>
             </div>
         );
+    }
+    componentWillUnmount(){
+        window.removeEventListener('scroll', this.handleScroll);
     }
 }
 

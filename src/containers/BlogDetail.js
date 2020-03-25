@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import LeftSlideBarBD from '../components/blog-detail/LeftSlideBarBD';
 import RightSlideBar from '../components/blog/RightSlideBar';
 
-import {searchPost, fetchPostDetail, fetchTopPost, fetchRecentPost} from '../actions/Post.Actions';
+import {searchPost, fetchPostDetail, fetchTopPost, fetchRecentPost, fetchCategories} from '../actions/Post.Actions';
+import {fetchRelatedPost} from '../actions/PostDetail.Actions'
 
 const queryString = require('query-string');
 
@@ -21,6 +22,11 @@ class BlogDetail extends Component {
         })
     }
 
+    clickToRate = (num) => {
+        //set LocalStorage
+
+        //send Rate
+    }
 
     getPage = () => {
         const queryStringObject = queryString.parse(this.props.location.search);
@@ -32,8 +38,12 @@ class BlogDetail extends Component {
             <section className="container-blog-detail-content p-tb-100">
                 <div className="blog-detail-content-wrapper container">
                     <div className="row">
-                        <LeftSlideBarBD isFetching={this.props.isPostDetailFetching} postDetail={this.props.postDetail} />
-                        <RightSlideBar isSearch={this.state.isSearch} posts={this.props.posts} recentPosts={this.props.recentPosts} topPosts={this.props.topPosts} keyword={(event, keyword) => this.props.search(event, keyword)}/>
+                        <LeftSlideBarBD isFetching={this.props.isPostDetailFetching} postDetail={this.props.postDetail} 
+                        relatedPosts={this.props.relatedPosts} clickToRate={(num) => this.clickToRate(num)}/>
+
+                        <RightSlideBar isSearch={this.state.isSearch} posts={this.props.posts} recentPosts={this.props.recentPosts} 
+                        topPosts={this.props.topPosts} keyword={(event, keyword) => this.props.search(event, keyword)}
+                        categories={this.props.categories}/>
                     </div>
                 </div>
             </section>
@@ -42,7 +52,7 @@ class BlogDetail extends Component {
         );
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const postID = this.props.match.params.id;
         console.log('did mount id la: ' + postID);
         this.props.fetchPost(postID);
@@ -52,6 +62,10 @@ class BlogDetail extends Component {
             this.props.fetchRecentPost();
             this.props.fetchTopPost();
         }
+        if (!this.props.categories.length)
+            this.props.fetchCategories();
+        
+        this.props.fetchRelatedPost(postID);
     }
     
     shouldComponentUpdate(nextPops, nextState){
@@ -60,6 +74,7 @@ class BlogDetail extends Component {
               currentPostID = this.props.match.params.id;
         if (nextPostID !== currentPostID){
             this.props.fetchPost(nextPostID);
+            this.props.fetchRelatedPost(nextPostID);
             return false;
         }   
         return true;
@@ -84,7 +99,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         ),
         fetchTopPost: () => dispatch(
             fetchTopPost()
-        )
+        ),
+        fetchCategories: () => dispatch(fetchCategories()),
+        fetchRelatedPost: (postID) => dispatch( fetchRelatedPost(postID))
     }
 }
 
@@ -93,11 +110,13 @@ const mapStateToProps = (state, ownProps) => {
     
     return {
         postDetail:     reducer.postDetail,
+        categories:     reducer.categories,
         topPosts:       reducer.topPosts,
         recentPosts:    reducer.recentPosts,
         pageNumber:     reducer.page,
         isPostDetailFetching: reducer.isPostDetailFetching,
-        isUpdate:       reducer.isUpdate
+        isUpdate:       reducer.isUpdate,
+        relatedPosts:   state.postDetailReducer.relatedPosts
     }
 }
 

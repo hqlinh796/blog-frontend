@@ -3,10 +3,13 @@ const PostInitialState = {
     posts: [],
     topPosts: [],
     recentPosts: [],
+    categories: [],
+
     postDetail: {},
-    isSearch: false,
     keyword: "",
     page: -1,
+
+    isSearch: false,
     hasMore: true,
     isPostFetching: false,
     isTopPostFetching: false,
@@ -80,6 +83,11 @@ const Post = (state = PostInitialState, action) => {
                 ...state,
                 posts: [],
                 page: 0
+            }
+        case 'FETCH_CATEGORIES':
+            return {
+                ...state,
+                categories: action.payload
             }
         default:
             return state

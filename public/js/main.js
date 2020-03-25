@@ -103,6 +103,37 @@
                 
             }
         })
+
+        // $('.your-rate-wrapper i').on('mouseover', function() {
+        //     let level = $('#level1');
+            
+        //     while (level.attr('id') !== $(this).attr('id')) {
+        //         level.addClass('hover-rate');
+        //         level = level.next();
+        //     } 
+        //     level.addClass('hover-rate');
+        //     if (level.attr('id') === 'level5')
+        //         return;
+
+        //     level = level.next();
+        //     while (level.attr('id') !== 'level5') {
+        //         level.removeClass('hover-rate');
+        //         level = level.next();
+        //     }
+        //     level.removeClass('hover-rate');
+
+        // })
+
+        // $('.your-rate-wrapper i').on('mouseout', function() {
+        //     let level = $('#level1');
+            
+        //     while (level.attr('id') !== 'level5') {
+        //         level.removeClass('hover-rate');
+        //         level = level.next();
+        //     } 
+        //     level.removeClass('hover-rate');
+
+        // })
         
     })
 
