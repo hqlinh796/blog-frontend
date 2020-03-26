@@ -28,7 +28,7 @@ class LeftSlideBarBD extends Component {
             <div className="left-slide-bar-blog-detail-wrapper bg-white p-b-50 col-lg-8 col">
                 { !this.props.isFetching && this.showPostDetail(postDetail) }
                 { this.props.isFetching && this.showPostDetailSkeleton() }
-                <Rate rate={postDetail.rate} clickToRate={(num) => this.props.clickToRate(num)}/>
+                <Rate rate={postDetail.rate} clickToRate={(num) => this.props.clickToRate(num)} id={this.props.id}/>
 
                 <RelatedPost relatedPosts={this.props.relatedPosts}/>
 

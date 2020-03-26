@@ -5,7 +5,6 @@ const PostInitialState = {
     recentPosts: [],
     categories: [],
 
-    postDetail: {},
     keyword: "",
     page: -1,
 
@@ -14,7 +13,7 @@ const PostInitialState = {
     isPostFetching: false,
     isTopPostFetching: false,
     isRecentPostFetching: false,
-    isPostDetailFetching: false,
+    
     isUpdate: false
 }
 const Post = (state = PostInitialState, action) => {
@@ -66,17 +65,6 @@ const Post = (state = PostInitialState, action) => {
                 ...state,
                 recentPosts: action.payload,
                 isRecentPostFetching: false
-            }
-        case 'FETCHING_POST_DETAIL':
-            return {
-                ...state,
-                isPostDetailFetching: true
-            }
-        case 'FETCH_POST_DETAIL':
-            return {
-                ...state,
-                postDetail: action.payload,
-                isPostDetailFetching: false
             }
         case 'RESET_RESULT':
             return {

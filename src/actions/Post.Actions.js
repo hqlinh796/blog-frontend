@@ -1,5 +1,5 @@
-const postPath = 'https://backend-blog796.herokuapp.com/post';
-const categoryPath = 'https://backend-blog796.herokuapp.com/category';
+ const postPath = 'https://backend-blog796.herokuapp.com/post';
+ const categoryPath = 'https://backend-blog796.herokuapp.com/category';
 //const postPath = 'http://localhost:5500/post';
 //const categoryPath = 'http://localhost:5500/category';
 
@@ -74,20 +74,6 @@ export const fetchRecentPost = () => (dispatch) => {
                 payload: postDataJSON.posts
             });
         })
-}
-
-export const fetchPostDetail = (postID) => dispatch => {
-    dispatch({
-        type: 'FETCHING_POST_DETAIL'
-    })
-    fetch(postPath + '/' + postID)
-    .then(postData => postData.json())
-    .then(postDataJSON => {
-        dispatch({
-            type: 'FETCH_POST_DETAIL',
-            payload: postDataJSON
-        })
-    })
 }
 
 export const resetResult = ()  => ({

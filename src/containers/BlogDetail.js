@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import LeftSlideBarBD from '../components/blog-detail/LeftSlideBarBD';
 import RightSlideBar from '../components/blog/RightSlideBar';
 
-import {searchPost, fetchPostDetail, fetchTopPost, fetchRecentPost, fetchCategories} from '../actions/Post.Actions';
-import {fetchRelatedPost} from '../actions/PostDetail.Actions'
+import {searchPost, fetchTopPost, fetchRecentPost, fetchCategories} from '../actions/Post.Actions';
+import {fetchRelatedPost, ratePost, fetchPostDetail} from '../actions/PostDetail.Actions'
 
 const queryString = require('query-string');
 
@@ -22,10 +22,39 @@ class BlogDetail extends Component {
         })
     }
 
-    clickToRate = (num) => {
-        //set LocalStorage
+    addRate = () => {
+        const {id} = this.props.match.params;
+        const vote = localStorage.getItem(`vote-${id}`);
+        if (vote) {
+            let level = document.getElementById('level1');
+            if (!level)
+                return;
+            while (level.id !== `level${vote}`) {
+                //if (level)
+                level.classList.add('rated');
+                level = level.nextElementSibling;
+            } 
+            level.classList.add('rated');
+            if (level.id === 'level5')
+                 return;
 
+            level = level.nextElementSibling;
+            while (level.id !== 'level5') {
+                level.classList.remove('rared');
+                level = level.nextElementSibling;
+            }
+            level.classList.remove('rated');
+        }
+    }
+
+    clickToRate = (num) => {
+        const postID = this.props.match.params.id;
+        //alert(postID);
+        //set LocalStorage
+        localStorage.setItem(`vote-${postID}`, num);
         //send Rate
+        
+        this.props.ratePost(postID, num);
     }
 
     getPage = () => {
@@ -39,7 +68,8 @@ class BlogDetail extends Component {
                 <div className="blog-detail-content-wrapper container">
                     <div className="row">
                         <LeftSlideBarBD isFetching={this.props.isPostDetailFetching} postDetail={this.props.postDetail} 
-                        relatedPosts={this.props.relatedPosts} clickToRate={(num) => this.clickToRate(num)}/>
+                        relatedPosts={this.props.relatedPosts} clickToRate={(num) => this.clickToRate(num)}
+                        id={this.props.match.params.id}/>
 
                         <RightSlideBar isSearch={this.state.isSearch} posts={this.props.posts} recentPosts={this.props.recentPosts} 
                         topPosts={this.props.topPosts} keyword={(event, keyword) => this.props.search(event, keyword)}
@@ -54,7 +84,7 @@ class BlogDetail extends Component {
 
     componentDidMount() {
         const postID = this.props.match.params.id;
-        console.log('did mount id la: ' + postID);
+        //console.log('did mount id la: ' + postID);
         this.props.fetchPost(postID);
 
         //haven't fetch right bar item
@@ -67,9 +97,22 @@ class BlogDetail extends Component {
         
         this.props.fetchRelatedPost(postID);
     }
+    componentDidUpdate() {
+        //get vote from local storage
+        this.removeRate();
+        this.addRate();
+    }
+    removeRate = () => {
+        let level = document.getElementById('level1');
+        while (level.id !== 'level5') {
+            level.classList.remove('rated');
+            level = level.nextElementSibling;
+        }
+        level.classList.remove('rated');
+    }
     
     shouldComponentUpdate(nextPops, nextState){
-        window.scrollTo(0, 500);
+        //window.scrollTo(0, 500);
         const nextPostID = nextPops.match.params.id,
               currentPostID = this.props.match.params.id;
         if (nextPostID !== currentPostID){
@@ -92,6 +135,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(searchPost(keyword, ownProps.pageNumber));
         },
         fetchPost: (postID) => {
+            
             dispatch(fetchPostDetail(postID))
         },
         fetchRecentPost: () => dispatch(
@@ -101,7 +145,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             fetchTopPost()
         ),
         fetchCategories: () => dispatch(fetchCategories()),
-        fetchRelatedPost: (postID) => dispatch( fetchRelatedPost(postID))
+        fetchRelatedPost: (postID) => dispatch( fetchRelatedPost(postID)),
+        ratePost: (postID, rate) => dispatch(ratePost(postID, rate))
     }
 }
 
@@ -109,7 +154,7 @@ const mapStateToProps = (state, ownProps) => {
     const reducer = state.postReducer;
     
     return {
-        postDetail:     reducer.postDetail,
+        postDetail:     state.postDetailReducer.postDetail,
         categories:     reducer.categories,
         topPosts:       reducer.topPosts,
         recentPosts:    reducer.recentPosts,

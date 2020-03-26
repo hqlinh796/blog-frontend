@@ -496,7 +496,7 @@ textarea[name="content"]{
     background-color: #fff;
     line-height: 20px;
 }
-.hover-rate {
+.hover-rate, .rated {
     color: #40c578;
 }
 

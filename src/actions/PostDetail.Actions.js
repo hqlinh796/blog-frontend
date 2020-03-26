@@ -16,4 +16,35 @@ export const fetchRelatedPost = (postID) => dispatch => {
     })
 }
 
+export const ratePost = (postID, rate) => dispatch => {
+    fetch(`${postPath}/rate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            postID: postID,
+            rate: rate
+        })
+    })
+    .then(() => {
+        dispatch({
+            type: 'RATE_POST',
+            payload: rate
+        })
+    })
+}
+
+export const fetchPostDetail = (postID) => dispatch => {
+    dispatch({
+        type: 'FETCHING_POST_DETAIL'
+    })
+    fetch(`${postPath}/${postID}`)
+    .then(postData => postData.json())
+    .then(postDataJSON => {
+        dispatch({
+            type: 'FETCH_POST_DETAIL',
+            payload: postDataJSON
+        })
+    })
+}
+
 const escapeSpace = (text) => text.replace(/\s/, '%20');
