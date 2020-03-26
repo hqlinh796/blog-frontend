@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
-class TopPostItem extends Component {
+class TopRateItem extends Component {
 
     toSlug = (str) => {
         // Chuyển hết sang chữ thường
@@ -50,4 +50,4 @@ class TopPostItem extends Component {
     }
 }
 
-export default TopPostItem;
+export default TopRateItem;

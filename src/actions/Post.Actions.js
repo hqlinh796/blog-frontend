@@ -1,5 +1,5 @@
- const postPath = 'https://backend-blog796.herokuapp.com/post';
- const categoryPath = 'https://backend-blog796.herokuapp.com/category';
+const postPath = 'https://backend-blog796.herokuapp.com/post';
+const categoryPath = 'https://backend-blog796.herokuapp.com/category';
 //const postPath = 'http://localhost:5500/post';
 //const categoryPath = 'http://localhost:5500/category';
 
@@ -46,17 +46,17 @@ export function fetchPost(page) {
     }
 }
 
-export const fetchTopPost = () => (dispatch) => {
+export const fetchTopRate = () => (dispatch) => {
     dispatch({
-        type: 'FETCHING_TOP_POST'
+        type: 'FETCHING_TOP_RATE'
     })
-    fetch(postPath + '/top-post')
+    fetch(postPath + '/top-rate')
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
             dispatch({
-                type: 'FETCH_TOP_POST',
-                payload: postDataJSON.posts
+                type: 'FETCH_TOP_RATE',
+                payload: postDataJSON
             });
         })
 }
@@ -71,7 +71,22 @@ export const fetchRecentPost = () => (dispatch) => {
             //console.log(postDataJSON.posts);
             dispatch({
                 type: 'FETCH_RECENT_POST',
-                payload: postDataJSON.posts
+                payload: postDataJSON
+            });
+        })
+}
+
+export const fetchTopView = () => (dispatch) => {
+    dispatch({
+        type: 'FETCHING_TOP_VIEW'
+    })
+    fetch(postPath + '/top-view')
+        .then(postData => postData.json())
+        .then(postDataJSON => {
+            //console.log(postDataJSON.posts);
+            dispatch({
+                type: 'FETCH_TOP_VIEW',
+                payload: postDataJSON
             });
         })
 }

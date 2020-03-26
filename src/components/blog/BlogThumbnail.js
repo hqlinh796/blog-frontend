@@ -106,8 +106,8 @@ class BlogThumbnail extends Component {
                     </div>
                     <div className="tags">
                         <span>Tags: </span>
-                        {tags.map(tag => {
-                        return <Link to="#">#{tag} </Link>
+                        {tags.map((tag, index) => {
+                        return <Link to="#" key={index}>#{tag} </Link>
                         })}
                     </div>
                 </div>

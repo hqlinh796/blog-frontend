@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Search from './Search';
 import RecentPost from './RecentPost';
-import TopPost from './TopPost';
+import TopRate from './TopRate';
 import Tag from './Tag';
 import Category from './Category';
+import TopView from './TopView';
 
 
 class RightSlideBar extends Component {
@@ -14,7 +15,8 @@ class RightSlideBar extends Component {
                 <Search keyword={(event, keyword) => this.props.keyword(event, keyword)} input={this.props.input}/>
                 <Category categories={this.props.categories}/>
                 <RecentPost isRecentPostFetching={this.props.isRecentPostFetching} recentPosts={this.props.recentPosts}/>
-                <TopPost isTopPostFetching={this.props.isTopPostFetching} topPosts={this.props.topPosts}/>
+                <TopRate isTopRateFetching={this.props.isTopRateFetching} topRates={this.props.topRates}/>
+                <TopView isTopViewFetching={this.props.isTopViewFetching} topViews={this.props.topViews} />
                 <Tag/>
         </div>
 

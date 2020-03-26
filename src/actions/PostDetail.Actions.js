@@ -1,5 +1,5 @@
 const postPath = 'https://backend-blog796.herokuapp.com/post';
-const categoryPath = 'https://backend-blog796.herokuapp.com/category';
+//const categoryPath = 'https://backend-blog796.herokuapp.com/category';
 //const postPath = 'http://localhost:5500/post';
 //const categoryPath = 'http://localhost:5500/category';
 
@@ -47,4 +47,4 @@ export const fetchPostDetail = (postID) => dispatch => {
     })
 }
 
-const escapeSpace = (text) => text.replace(/\s/, '%20');
+//const escapeSpace = (text) => text.replace(/\s/, '%20');

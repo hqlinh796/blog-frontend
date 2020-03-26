@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import LeftSlideBarBD from '../components/blog-detail/LeftSlideBarBD';
 import RightSlideBar from '../components/blog/RightSlideBar';
 
-import {searchPost, fetchTopPost, fetchRecentPost, fetchCategories} from '../actions/Post.Actions';
+import {searchPost, fetchTopRate, fetchRecentPost, fetchTopView, fetchCategories} from '../actions/Post.Actions';
 import {fetchRelatedPost, ratePost, fetchPostDetail} from '../actions/PostDetail.Actions'
 
 const queryString = require('query-string');
@@ -47,6 +47,15 @@ class BlogDetail extends Component {
         }
     }
 
+    removeRate = () => {
+        let level = document.getElementById('level1');
+        while (level.id !== 'level5') {
+            level.classList.remove('rated');
+            level = level.nextElementSibling;
+        }
+        level.classList.remove('rated');
+    }
+
     clickToRate = (num) => {
         const postID = this.props.match.params.id;
         //alert(postID);
@@ -72,7 +81,7 @@ class BlogDetail extends Component {
                         id={this.props.match.params.id}/>
 
                         <RightSlideBar isSearch={this.state.isSearch} posts={this.props.posts} recentPosts={this.props.recentPosts} 
-                        topPosts={this.props.topPosts} keyword={(event, keyword) => this.props.search(event, keyword)}
+                        topRates={this.props.topRates} keyword={(event, keyword) => this.props.search(event, keyword)}
                         categories={this.props.categories}/>
                     </div>
                 </div>
@@ -88,7 +97,7 @@ class BlogDetail extends Component {
         this.props.fetchPost(postID);
 
         //haven't fetch right bar item
-        if (this.props.topPosts.length === 0){
+        if (this.props.topRates.length === 0){
             this.props.fetchRecentPost();
             this.props.fetchTopPost();
         }
@@ -99,17 +108,10 @@ class BlogDetail extends Component {
     }
     componentDidUpdate() {
         //get vote from local storage
-        this.removeRate();
-        this.addRate();
+        //this.removeRate();
+        //this.addRate();
     }
-    removeRate = () => {
-        let level = document.getElementById('level1');
-        while (level.id !== 'level5') {
-            level.classList.remove('rated');
-            level = level.nextElementSibling;
-        }
-        level.classList.remove('rated');
-    }
+    
     
     shouldComponentUpdate(nextPops, nextState){
         //window.scrollTo(0, 500);
@@ -141,9 +143,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         fetchRecentPost: () => dispatch(
             fetchRecentPost()
         ),
-        fetchTopPost: () => dispatch(
-            fetchTopPost()
+        fetchTopRate: () => dispatch(
+            fetchTopRate()
         ),
+        fetchTopView: () => dispatch( fetchTopView()),
         fetchCategories: () => dispatch(fetchCategories()),
         fetchRelatedPost: (postID) => dispatch( fetchRelatedPost(postID)),
         ratePost: (postID, rate) => dispatch(ratePost(postID, rate))
@@ -156,8 +159,9 @@ const mapStateToProps = (state, ownProps) => {
     return {
         postDetail:     state.postDetailReducer.postDetail,
         categories:     reducer.categories,
-        topPosts:       reducer.topPosts,
+        topRates:       reducer.topRates,
         recentPosts:    reducer.recentPosts,
+        topViews:       reducer.topViews,
         pageNumber:     reducer.page,
         isPostDetailFetching: reducer.isPostDetailFetching,
         isUpdate:       reducer.isUpdate,

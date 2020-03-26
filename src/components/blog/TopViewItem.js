@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
-class RelatedPostItem extends Component {
+class TopViewItem extends Component {
 
     toSlug = (str) => {
         // Chuyển hết sang chữ thường
-        str = str || '';
         str = str.toLowerCase();
 
         // xóa dấu
@@ -34,14 +33,22 @@ class RelatedPostItem extends Component {
     }
 
     render() {
-        const {_id, title, cover} = this.props.relatedPost;
         return (
-            <div className="col col-md-4 related-post-item">
-                <img alt={title} className="related-thumbnail m-b-10" src={cover}></img>
-                <Link to={'/blog/' + this.toSlug(title) + '.' + _id}>{title}</Link>
-            </div>
+            <div className="top-post-detail flex flex-a-c m-b-25">
+                <img src={this.props.thumbnail} alt="" />
+                <div className="top-post-detail-text m-l-20 lh-15">
+                    <Link className="fs-18 fc-black a-hover-to-green" to={'/blog/' + this.toSlug(this.props.title) + '.' + this.props.id} title={this.props.title}>
+                        {this.props.title}
+                    </Link>
+                    <p className="fc-2 fs-14">
+                        
+                        <span>{this.props.countView}</span>
+                        <span>{this.props.countView <= 1 ? ' view' : ' views'}</span>
+                    </p>
+                </div>
+            </div>   
         );
     }
 }
 
-export default RelatedPostItem;
+export default TopViewItem;

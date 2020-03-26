@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RecentPostItem from './RecentPostItem';
-import TopAndRecentPostSkeleton from './TopAndRecentPostSkeleton';
+import RightBarItemSkeleton from './RightBarItemSkeleton';
 
 class RecentPost extends Component {
 
@@ -28,7 +28,7 @@ class RecentPost extends Component {
         let i = 0, result = [];
         for ( ; i < 5 ; i++)
             result.push(
-                <TopAndRecentPostSkeleton key={i}/>
+                <RightBarItemSkeleton key={i}/>
             )
         return result;
     }

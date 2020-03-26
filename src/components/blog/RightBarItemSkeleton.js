@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+
 import Skeleton from 'react-loading-skeleton';
 
-class TopAndRecentPostSkeleton extends Component {
+class RightBarItemSkeleton extends Component {
 
     render() {
         return (
@@ -11,9 +11,9 @@ class TopAndRecentPostSkeleton extends Component {
                     <Skeleton width={100} height={100}/>
                 </div>
                 <div className="recent-post-detail-text m-l-20 lh-15">
-                    <a className="fs-18 fc-black a-hover-to-green">
+                    <p className="fs-18 fc-black a-hover-to-green">
                         <Skeleton/>
-                    </a>
+                    </p>
                     <p className="fc-2 fs-14"><Skeleton/></p>
                 </div>
             </div>
@@ -22,4 +22,4 @@ class TopAndRecentPostSkeleton extends Component {
     }
 }
 
-export default TopAndRecentPostSkeleton;
+export default RightBarItemSkeleton;

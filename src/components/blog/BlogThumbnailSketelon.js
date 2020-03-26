@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import Skeleton from 'react-loading-skeleton';
 
 
 class BlogThumbnailSkeleton extends Component {
@@ -89,7 +88,7 @@ class BlogThumbnailSkeleton extends Component {
                             <p className="fs-20"><Skeleton/></p>
                         </div>
                     </div>
-                    <a className="fs-23 f-bold fc-black a-hover-to-green"><Skeleton/></a>
+                    <p className="fs-23 f-bold fc-black a-hover-to-green"><Skeleton/></p>
                     <p className="description-post fs-19 m-tb-20 lh-15 fc-2">
                         <Skeleton/>
                     </p>

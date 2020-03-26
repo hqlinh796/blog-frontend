@@ -1,8 +1,9 @@
 
 const PostInitialState = {
     posts: [],
-    topPosts: [],
+    topRates: [],
     recentPosts: [],
+    topViews: [],
     categories: [],
 
     keyword: "",
@@ -11,9 +12,9 @@ const PostInitialState = {
     isSearch: false,
     hasMore: true,
     isPostFetching: false,
-    isTopPostFetching: false,
+    isTopRateFetching: false,
     isRecentPostFetching: false,
-    
+    isTopViewFetchinh: false,
     isUpdate: false
 }
 const Post = (state = PostInitialState, action) => {
@@ -34,15 +35,20 @@ const Post = (state = PostInitialState, action) => {
                 ...state,
                 isPostFetching: true
             }
-        case 'FETCHING_TOP_POST':
+        case 'FETCHING_TOP_RATE':
             return {
                 ...state,
-                isTopPostFetching: true
+                isTopRateFetching: true
             }
         case 'FETCHING_RECENT_POST':
             return {
                 ...state,
                 isRecentPostFetching: true
+            }
+        case 'FETCHING_TOP_VIEW':
+            return {
+                ...state,
+                isTopViewFetching: true
             }
         case 'FETCH_POST':
             return {
@@ -54,17 +60,23 @@ const Post = (state = PostInitialState, action) => {
                 keyword: '',
                 isSearch: false
             }
-        case 'FETCH_TOP_POST':
+        case 'FETCH_TOP_RATE':
             return {
                 ...state,
-                topPosts: action.payload,
-                isTopPostFetching: false
+                topRates: action.payload,
+                isTopRateFetching: false
             }
         case 'FETCH_RECENT_POST':
             return {
                 ...state,
                 recentPosts: action.payload,
                 isRecentPostFetching: false
+            }
+        case 'FETCH_TOP_VIEW':
+            return {
+                ...state,
+                topViews: action.payload,
+                isTopViewFetching: false
             }
         case 'RESET_RESULT':
             return {
