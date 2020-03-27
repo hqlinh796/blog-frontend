@@ -1,0 +1,19 @@
+.blog-slide-bar-tag div{
+    border: 1px solid #eeeeee;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.blog-slide-bar-tag div a{
+    color: #6e6e6e;
+}
+.blog-slide-bar-tag div:hover{
+    background-color: #28AE60;
+    border: 1px solid #28AE60;
+    transition-duration: 0.5s;
+}
+.blog-slide-bar-tag div:hover a{
+    color: #fff;
+    transition-duration: 0.5s;
+}

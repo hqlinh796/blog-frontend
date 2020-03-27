@@ -1,0 +1,29 @@
+.pre-and-next-post-wrapper{
+    background-color: #fff;
+}
+.pre-and-next-post-wrapper > div{
+    border: 1px solid #f1f1f1;
+    border-left: 0;
+    border-right: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.related-post-item {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+}
+
+.related-post-item a{
+    color: #000;
+}
+
+.related-post-item a:hover {
+    color: #6e6e6e;
+}
+.related-thumbnail{
+    width: 100%;
+    object-fit: cover;
+    height: 70%;
+}

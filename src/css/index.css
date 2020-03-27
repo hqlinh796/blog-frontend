@@ -1,0 +1,39 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+.button{padding: 15px; padding-left: 30px; padding-right: 30px;}
+.button-green{background-color: #28AE60; border: none; transition: 0.5s;}
+.button-green a{color: #fff}
+.button-green:hover {background-color: #40c578}
+
+.button-no-color{background-color: rgba(0, 0 ,0, 0); padding: 14px; padding-left: 29px; padding-right: 29px; transition: 0.5s;}
+.button-no-color:hover{background-color: #28AE60; border: 1px solid #28AE60; transition: 0.5s;}
+.button-no-color:hover a{color: #fff; transition: 0.5s;}
+
+/* BORDER */
+.border-white{border: 1px solid #fff;}
+.border-green{border: 1px solid #28AE60}
+.border-gray{border: 1px solid #eeeeee}
+.circle{border-radius: 50%;}
+.fc-1{color: #28AE60;}
+.fc-2{color: #6e6e6e}
+.bg-green{
+    transition: 0.6s ease;
+}
+.bg-green:hover{
+    background-color: #28AE60;
+    border: 1px solid #28AE60;
+}
+a.link-white-hover:hover{color: rgb(238, 238, 238);}
+.a-hover-to-green:hover{color: #28AE60}
+.button2:hover{
+    background-color: #fff;
+    color: #28AE60;
+}
+
+.dis-show{
+    display: block !important;
+    opacity: 1;
+    border-top: 1px solid #fff;
+}

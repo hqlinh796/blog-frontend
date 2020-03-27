@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
-import HomeSlide from '../components/home/HomeSlide';
-import Slide2 from '../components/share/Slide2'
+import HomeSlide from '../components/homeslide/Index';
+import Slide from '../components/slide/Index'
 
 
 class HeaderRoute extends Component {
@@ -12,12 +12,12 @@ class HeaderRoute extends Component {
                         <HomeSlide/>
                     </Route>
                     <Route path="/blog/:slug.:id">
-                        <Slide2 title="Blog detail"/>
+                        <Slide title="Blog detail"/>
                     </Route>
-                    <Route path={"/blog/:topic"} component={Slide2}/>
+                    <Route path={"/blog/:topic"} component={Slide}/>
                     
                     <Route path="/contact">
-                        <Slide2 title="Contact me"/>
+                        <Slide title="Contact me"/>
                     </Route>
                 </Switch>
         );

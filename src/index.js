@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './css/reset.css';
+import './css/util.css';
 import './css/index.css';
-import App from './components/App';
+
+import App from './components/app/App';
 import {Provider} from 'react-redux';
-import store from './Store';
+import store from './store/Store';
 
 import * as serviceWorker from './serviceWorker';
 

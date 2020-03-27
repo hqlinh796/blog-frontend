@@ -1,0 +1,21 @@
+form.contact-me button:hover{
+    color: #fff;
+ }
+ .name-and-email input[name="name"], .name-and-email input[name="email"]{
+    width: 40%;
+    padding: 20px;
+    height: 10px;
+    border: 1px solid #f1f1f1;
+}
+input[name="topic"]{
+    padding: 20px;
+    height: 10px;
+    border: 1px solid #f1f1f1;
+    box-sizing: border-box;
+}
+textarea[name="content"]{
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #f1f1f1;
+    padding: 20px;
+ }

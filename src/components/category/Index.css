@@ -1,0 +1,19 @@
+.blog-slide-bar-category{
+    padding: 40px;
+    background-color: #fff;
+}
+.blog-slide-bar-category h1, .blog-slide-bar-category a{
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 20px;
+}
+
+.blog-slide-bar-category a{
+    margin-top: 20px;
+    display: block;
+}
+
+
+.blog-slide-bar-category a:last-child{
+    border-bottom: 0;
+    padding-bottom: 10;
+}

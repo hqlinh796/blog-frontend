@@ -1,7 +1,7 @@
-const postPath = 'https://backend-blog796.herokuapp.com/post';
-const categoryPath = 'https://backend-blog796.herokuapp.com/category';
-//const postPath = 'http://localhost:5500/post';
-//const categoryPath = 'http://localhost:5500/category';
+//const postPath = 'https://backend-blog796.herokuapp.com/post';
+//const categoryPath = 'https://backend-blog796.herokuapp.com/category';
+const postPath = 'http://localhost:5500/post';
+const categoryPath = 'http://localhost:5500/category';
 
 
 export function searchPost(keyword, page){

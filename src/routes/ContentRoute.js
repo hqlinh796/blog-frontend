@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
 
-import Blog from '../containers/Blog';
-import BlogDetail from '../containers/BlogDetail';
-import Contact from '../containers/Contact';
-import HomeMain from '../containers/HomeMain';
+import Blog from '../containers/blog/Index';
+import BlogDetail from '../containers/blogdetail/Index';
+import Contact from '../containers/contact/Index';
+import HomeMain from '../containers/home/Index';
 
 
 class ContentRoute extends Component {

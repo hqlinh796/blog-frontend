@@ -1,0 +1,11 @@
+.right-bar-item-text a{
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.right-bar-item img{
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+}

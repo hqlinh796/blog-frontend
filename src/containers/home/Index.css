@@ -1,0 +1,142 @@
+.title-content{font-size: 40px; color: #000;}
+.service-bg-1{background-image: url("/img/bg1.jpg");}
+.service-bg-2{background-image: url("/img/bg2.jpg");}
+.service-bg-3{background-image: url("/img/bg3.jpg");}
+
+.service-bg{
+    background-repeat: none;
+    background-size: cover;
+    width: 100%;
+    background-position: center;
+    background-origin: content-box;
+}
+.bg-blur{background-color: rgba(110, 110, 110, 0.5);width: 100%; height: 100%;}
+.service-img-wrapper{padding-top: 100px; padding-bottom: 100px;}
+.img-service{width: 30px; height: 30px;}
+.img-service img{ object-fit: contain; object-position: center;}
+
+
+
+.img-content2{
+    height: 500px;
+}
+.img-content2 img{width: 100%; height: 100%;}
+
+
+
+.content3-wrapper{
+    background-color: #f5fbff;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+
+
+.img-content4-wrapper{
+    height: 300px;
+    overflow: hidden;
+}
+.img-content4-wrapper > div{
+    overflow: hidden;
+    height: 300px;
+    width: 100%;
+}
+.img-content4-wrapper img{
+    height: 100%;
+    transition: transform .5s ease;
+}
+.img-content4-wrapper:hover img{
+    transform: scale(1.2);
+}
+.content4-hover{
+    top: 0;
+    left: -50%;
+    transition: ease-in-out 0.7s;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.img-content4-wrapper:hover div .content4-hover{
+    background-color: rgba(40, 174, 96, 0.7);
+    opacity: 1;
+    left: 0;
+}
+.content4-wrapper{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+
+.content5-wrapper{
+    background-image: url("/img/background-slide.jpg");
+    background-size: cover;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.content5 > div > div > img{
+    height: 70px;
+    width: 70px;
+}
+
+
+
+.content6 > div > div{
+    height: 400px;
+}
+.content6-content{
+    width: 100%;
+    overflow: hidden;
+}
+.content6-content > div{
+    width: 400%;
+    display: flex;
+    transition: 0.3s ease-in-out;
+}
+.content6-content > div > div{
+    width: 25%;
+}
+
+
+
+.avatar-content7{
+    height: 70px;
+    width: 70px;
+    opacity: 0.6;
+}
+.content7-content-wrapper{
+    overflow: hidden;
+    width: 100%;
+}
+.content7-content{
+    width: 300%;
+    transition: 0.2s ease-in-out;
+}
+.content7-content > div{
+    width: calc(100%/3);
+}
+
+
+
+.content8-wrapper{
+    background-color: #28AE60;
+}
+
+
+.arrow-pre, .arrow-next{
+    height: 30px; 
+    width: 30px;
+}
+.arrow-pre:hover, .arrow-next:hover{
+    background-color: #28AE60;
+}
+.arrow-pre:hover i, .arrow-next:hover i{
+    color: #fff;
+}
+
+
+.img-selected{
+    transform: scale(1.5);
+    opacity: 1;
+    transition: 0.05s ease-out;
+}

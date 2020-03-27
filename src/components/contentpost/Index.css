@@ -1,0 +1,8 @@
+.post-detail{
+    background-color: #fff;
+}
+.post-cover-image{
+    height: 365px;
+    width: 100%;
+    object-fit: cover;
+}

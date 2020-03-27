@@ -1,6 +1,6 @@
-const postPath = 'https://backend-blog796.herokuapp.com/post';
+//const postPath = 'https://backend-blog796.herokuapp.com/post';
 //const categoryPath = 'https://backend-blog796.herokuapp.com/category';
-//const postPath = 'http://localhost:5500/post';
+const postPath = 'http://localhost:5500/post';
 //const categoryPath = 'http://localhost:5500/category';
 
 export const fetchRelatedPost = (postID) => dispatch => {

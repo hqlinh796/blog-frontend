@@ -1,0 +1,15 @@
+.blog-slide-bar-search{
+    padding: 40px;
+    background-color: #fff;
+}
+.blog-slide-bar-search form input, .blog-slide-bar-search form button{
+    height: 50px;
+}
+.blog-slide-bar-search form input{
+    box-sizing: border-box;
+    border: 1px solid #eeeeee;
+    color: #6e6e6e;
+}
+.blog-slide-bar-search form button:hover{
+    color: #fff;
+}

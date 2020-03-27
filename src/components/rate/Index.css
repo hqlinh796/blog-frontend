@@ -1,0 +1,14 @@
+.rate-wrapper {
+    background-color: #fff;
+    line-height: 20px;
+}
+.hover-rate, .rated {
+    color: #40c578;
+}
+
+.your-rate-wrapper {
+    border-top: 1px solid #e6e6e6;
+}
+.your-rate-wrapper i {
+    cursor: pointer;
+}
