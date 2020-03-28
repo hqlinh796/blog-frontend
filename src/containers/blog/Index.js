@@ -5,16 +5,12 @@ import Page from '../../components/page/Index';
 import RightBar from '../../components/rightbar/Index';
 import './Index.css';
 //import SearchResult from '../components/blog/SearchResult';
-
+import RecentPost from '../../components/recentpost/Index'
 
 import {
     searchPost, 
     fetchPost, 
-    fetchTopRate, 
-    fetchRecentPost, 
-    resetResult, 
-    fetchCategories, 
-    fetchTopView
+    resetResult
 } from '../../actions/Post.Actions';
 
 
@@ -76,14 +72,8 @@ class Blog extends Component {
             page,
             keyword,
             isSearch,
-            topRates,
-            recentPosts,
-            topViews,
-            isPostFetching,
-            isTopRateFetching,
-            isRecentPostFetching,
-            isTopViewFetching,
-            categories
+            
+            isPostFetching
         } = this.props;
         const {
             search,
@@ -99,14 +89,10 @@ class Blog extends Component {
                         keyword={keyword} hasMore={hasMore} topic={this.getTopic()} fetchPost={(nextPage) => fetchPost(nextPage)}
                         searchPost={(keyword, nextPage) => search(keyword, nextPage)} />
                         
-                        <RightBar 
-                        isTopRateFetching={isTopRateFetching}       topRates={topRates}
-                        isRecentPostFetching={isRecentPostFetching} recentPosts={recentPosts} 
-                        isTopViewFetching={isTopViewFetching}       topViews={topViews}                    
-                        isSearch={isSearch}                         keyword={(event, keyword) => this.search(event, keyword)} 
-                    
+                        <RightBar         
+                        isSearch={isSearch} keyword={(event, keyword) => this.search(event, keyword)} 
                         posts={posts} 
-                        categories={categories}/>
+                        />
 
                         </div>
                     </div>
@@ -131,14 +117,6 @@ class Blog extends Component {
         const nextPage = this.props.page + 1;
         if(!this.props.posts)
             this.props.fetchPost(nextPage);
-        //haven't fetch right bar item
-        if (this.props.topRates.length === 0){
-            this.props.fetchRecentPost();
-            this.props.fetchTopRate();
-            this.props.fetchTopView();
-        }
-        if (this.props.categories.length === 0)
-            this.props.fetchCategories();
 
         window.scrollTo(0, 0);
     }
@@ -151,17 +129,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         fetchPost: (nextPage) => {
             dispatch(fetchPost(nextPage));
         },
-        fetchRecentPost: () => dispatch(
-            fetchRecentPost()
-        ),
-        fetchTopRate: () => dispatch(
-            fetchTopRate()
-        ),
-        fetchTopView: () => dispatch (fetchTopView()),
+        
         resetResult: () => dispatch(
             resetResult()
         ),
-        fetchCategories: () => dispatch(fetchCategories())
+        
     }
 }
 
@@ -174,14 +146,7 @@ const mapStateToProps = (state, ownProps) => {
         page:           reducer.page,
         keyword:        reducer.keyword,
         isSearch:       reducer.isSearch,
-        topRates:       reducer.topRates,
-        recentPosts:    reducer.recentPosts,
-        topViews:       reducer.topViews,
         isPostFetching: reducer.isPostFetching,
-        isTopRateFetching: reducer.isTopPostFetching,
-        isRecentPostFetching: reducer.isRecentPostFetching,
-        isTopViewFetching:  reducer.isTopViewFetching,
-        categories:     reducer.categories
     }
 }
 

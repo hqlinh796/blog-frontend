@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import Item from './Item';
 import ItemSkeleton from '../rightbaritem/Skeleton';
 import '../rightbar/Index.css';
 
+import {fetchTopRates} from '../../actions/RightBar.Actions';
 class TopRate extends Component {
 
     showTopRates = (topRatesArray) => {
-        if (topRatesArray.length > 0) {
+        if (topRatesArray.length) {
             return topRatesArray.map((data, index) => 
                 <Item data={data} key={index}/>
             )
@@ -34,6 +36,26 @@ class TopRate extends Component {
 
         );
     }
+
+    componentDidMount(){
+        if (!this.props.topRates.length)
+            this.props.fetchTopRates();
+    }
 }
 
-export default TopRate;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        topRates: state.rightbarReducer.topRates,
+        isTopRateFetching: state.rightbarReducer.isTopRateFetching
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        fetchTopRates: () => {
+            dispatch(fetchTopRates())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopRate)

@@ -5,7 +5,7 @@ import Post from '../../components/post/Index';
 import RightBar from '../../components/rightbar/Index';
 import './Index.css';
 
-import {searchPost, fetchTopRate, fetchRecentPost, fetchTopView, fetchCategories} from '../../actions/Post.Actions';
+import {searchPost} from '../../actions/Post.Actions';
 import {fetchRelatedPost, ratePost, fetchPostDetail} from '../../actions/PostDetail.Actions'
 
 import './Index.css';
@@ -80,11 +80,8 @@ class BlogDetail extends Component {
                         <RightBar 
                         isSearch={this.state.isSearch} 
                         posts={this.props.posts} 
-                        recentPosts={this.props.recentPosts} 
-                        topRates={this.props.topRates} 
-                        topViews={this.props.topViews}
                         keyword={(event, keyword) => this.props.search(event, keyword)}
-                        categories={this.props.categories}/>
+                        />
                     </div>
                 </div>
             </section>
@@ -98,14 +95,6 @@ class BlogDetail extends Component {
         //console.log('did mount id la: ' + postID);
         this.props.fetchPost(postID);
 
-        //haven't fetch right bar item
-        if (this.props.topRates.length === 0){
-            this.props.fetchRecentPost();
-            this.props.fetchTopRate();
-            this.props.fetchTopView();
-        }
-        if (!this.props.categories.length)
-            this.props.fetchCategories();
         
         this.props.fetchRelatedPost(postID);
     }
@@ -138,14 +127,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             
             dispatch(fetchPostDetail(postID))
         },
-        fetchRecentPost: () => dispatch(
-            fetchRecentPost()
-        ),
-        fetchTopRate: () => dispatch(
-            fetchTopRate()
-        ),
-        fetchTopView: () => dispatch( fetchTopView()),
-        fetchCategories: () => dispatch(fetchCategories()),
+        
         fetchRelatedPost: (postID) => dispatch( fetchRelatedPost(postID)),
         ratePost: (postID, rate) => dispatch(ratePost(postID, rate))
     }
@@ -156,10 +138,6 @@ const mapStateToProps = (state, ownProps) => {
     
     return {
         postDetail:     state.postDetailReducer.postDetail,
-        categories:     reducer.categories,
-        topRates:       reducer.topRates,
-        recentPosts:    reducer.recentPosts,
-        topViews:       reducer.topViews,
         pageNumber:     reducer.page,
         isPostDetailFetching: reducer.isPostDetailFetching,
         isUpdate:       reducer.isUpdate,

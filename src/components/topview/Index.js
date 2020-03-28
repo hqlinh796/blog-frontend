@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import Item from './Item';
 import ItemSkeleton from '../rightbaritem/Skeleton';
 import '../rightbar/Index.css';
+
+import {fetchTopViews} from '../../actions/RightBar.Actions';
 
 class TopView extends Component {
 
@@ -35,6 +38,28 @@ class TopView extends Component {
 
         );
     }
+    componentDidMount(){
+        if (!this.props.topViews.length){
+            console.log("mount");
+            this.props.fetchTopViews();
+        }
+            
+    }
 }
 
-export default TopView;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        topViews: state.rightbarReducer.topViews,
+        isTopViewFetching: state.rightbarReducer.isTopViewFetching
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        fetchTopViews: () => {
+            dispatch(fetchTopViews())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopView)

@@ -1,11 +1,11 @@
 
-const PostDetailInitialState = {
+const postDetailInitialState = {
     relatedPosts: [],
     postDetail: {},
     isPostDetailFetching: false,
 }
 
-const PostDetial = (state = PostDetailInitialState, action) => {
+const postDetialReducer = (state = postDetailInitialState, action) => {
     switch (action.type) {
         case 'FETCHING_POST_DETAIL':
             return {
@@ -37,4 +37,4 @@ const PostDetial = (state = PostDetailInitialState, action) => {
     }
 }
 
-export default PostDetial;
+export default postDetialReducer;

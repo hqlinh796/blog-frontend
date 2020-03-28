@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import '../category/Index.css';
 
+import './Index.css';
 import CategoryItem from './Item';
+import {fetchCategories} from '../../actions/RightBar.Actions';
 
 
 class Category extends Component {
@@ -36,7 +38,24 @@ class Category extends Component {
 
         );
     }
+    componentDidMount(){
+        if (!this.props.categories.length)
+            this.props.fetchCategories();
+    }
     
 }
 
-export default Category;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        categories: state.rightbarReducer.categories
+    }}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        fetchCategories: () => {
+            dispatch(fetchCategories())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category)

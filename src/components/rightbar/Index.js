@@ -13,10 +13,10 @@ class RightSlideBar extends Component {
         return (
             <div className="col col-lg-4 blog-slide-bar-wrapper">
                 <Search keyword={(event, keyword) => this.props.keyword(event, keyword)} input={this.props.input}/>
-                <Category categories={this.props.categories}/>
-                <TopView isTopViewFetching={this.props.isTopViewFetching} topViews={this.props.topViews} />
-                <RecentPost isRecentPostFetching={this.props.isRecentPostFetching} recentPosts={this.props.recentPosts}/>
-                <TopRate isTopRateFetching={this.props.isTopRateFetching} topRates={this.props.topRates}/>
+                <Category />
+                <TopView />
+                <RecentPost />
+                <TopRate />
                 <Tag/>
         </div>
 

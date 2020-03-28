@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+
 import RecentPostItem from './Item';
 import RightBarItemSkeleton from '../rightbaritem/Skeleton';
+import {fetchRecentPosts} from '../../actions/RightBar.Actions';
+import '../rightbar/Index.css';
 
 class RecentPost extends Component {
 
     showRecentPosts = (recentPostArray) => {
-        if (recentPostArray.length > 0)
+        if (recentPostArray.length)
             return recentPostArray.map((data, index) =>
                     <RecentPostItem data={data} key={index} />)
     }
@@ -31,6 +35,26 @@ class RecentPost extends Component {
 
         );
     }
+
+    componentDidMount(){
+        if (!this.props.recentPosts.length)
+            this.props.fetchRecentPosts();
+    }
 }
 
-export default RecentPost;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        recentPosts: state.rightbarReducer.recentPosts,
+        isRecentPostFetching: state.rightbarReducer.isRecentPostFetching
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        fetchRecentPosts: () => {
+            dispatch(fetchRecentPosts())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecentPost)

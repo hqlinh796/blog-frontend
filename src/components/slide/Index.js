@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import '../homeslide/Index.css';
 
-class Slide2 extends Component {
+class Slide extends Component {
     
     
 
@@ -35,8 +35,8 @@ class Slide2 extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        categories: state.postReducer.categories
+        categories: state.rightbarReducer.categories
     }
 }
 
-export default connect(mapStateToProps)(Slide2);
+export default connect(mapStateToProps)(Slide);
