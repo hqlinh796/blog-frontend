@@ -138,10 +138,11 @@ const mapStateToProps = (state, ownProps) => {
     
     return {
         postDetail:     state.postDetailReducer.postDetail,
+        isPostDetailFetching: state.postDetailReducer.isPostDetailFetching,
+        relatedPosts:   state.postDetailReducer.relatedPosts,
+
         pageNumber:     reducer.page,
-        isPostDetailFetching: reducer.isPostDetailFetching,
-        isUpdate:       reducer.isUpdate,
-        relatedPosts:   state.postDetailReducer.relatedPosts
+        isUpdate:       reducer.isUpdate
     }
 }
 

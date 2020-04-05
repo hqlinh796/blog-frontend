@@ -10,7 +10,7 @@ class ContentBlogSkeleton extends Component {
                 <div className="cover-skeleton">
                     <Skeleton width={750} height={300}/>
                 </div>
-                <div className="p-lr-30 p-tb-40">
+                <div className="p-tb-40">
                     <h1 className="fs-25 f-bold">
                         <Skeleton />
                     </h1>

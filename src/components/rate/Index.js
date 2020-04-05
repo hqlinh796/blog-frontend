@@ -80,7 +80,7 @@ class Rate extends Component {
 
     render() {
         return (
-            <div className="rate-wrapper p-lr-30 p-tb-10">
+            <div className="rate-wrapper p-tb-10">
                 <div className="your-rate-wrapper p-t-20">
                     <span>Your rate: </span>
                     <i className="fas fa-star" id="level1" onClick={() => this.props.clickToRate(1)}

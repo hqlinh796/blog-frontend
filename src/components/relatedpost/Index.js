@@ -12,7 +12,7 @@ class RelatedPost extends Component {
 
     render() {
         return (
-            <div className="pre-and-next-post-wrapper p-lr-30 p-tb-40">
+            <div className="pre-and-next-post-wrapper p-tb-40">
                 <div>
                     <h3 className="m-tb-10">Related posts</h3>
                     <div className="pre-and-next-post row p-t-10">

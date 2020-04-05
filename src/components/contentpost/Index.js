@@ -17,7 +17,7 @@ class ContentBlog extends Component {
         return (
             <div className="post-detail fs-18">
                 <img src={cover} alt="" className="post-cover-image" />
-                <div className="p-lr-30 p-tb-40">
+                <div className="p-tb-40">
                     <h1 className="fs-25 f-bold">{title}
                     </h1>
                     <div className="date-and-topic fs-14 m-t-20">
