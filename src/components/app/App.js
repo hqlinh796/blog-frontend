@@ -16,11 +16,11 @@ import Messenger from '../messenger/Index';
 function App() {
   return (
     <Router>
+        <Messenger />
         <Header />
         <ContentRoute />
         <Footer />
         <BackToTop />
-        <Messenger />
     </Router>   
   );
 }
