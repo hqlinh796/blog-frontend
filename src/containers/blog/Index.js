@@ -18,7 +18,7 @@ import {
 class Blog extends Component {
     constructor(props) {
         //console.log(props.match.params);
-        console.log("blog constructor");
+        
         super(props);
         this.state = ({
             isSearch: false,
@@ -83,17 +83,23 @@ class Blog extends Component {
             return (
                 <section className="container-blog-content p-t-100">
                     <div className="blog-content-wrapper container">
-                        
                         <div className="row">
-                        <Page isPostFetching={isPostFetching} page={page} posts={posts} isSearch={isSearch} 
-                        keyword={keyword} hasMore={hasMore} topic={this.getTopic()} fetchPost={(nextPage) => fetchPost(nextPage)}
+                        <Page 
+                        isPostFetching={isPostFetching} 
+                        page={page} 
+                        posts={posts} 
+                        isSearch={isSearch} 
+                        keyword={keyword} 
+                        hasMore={hasMore} 
+                        topic={this.getTopic()} 
+                        fetchPost={(nextPage) => fetchPost(nextPage)}
                         searchPost={(keyword, nextPage) => search(keyword, nextPage)} />
                         
                         <RightBar         
-                        isSearch={isSearch} keyword={(event, keyword) => this.search(event, keyword)} 
+                        isSearch={isSearch} 
+                        keyword={(event, keyword) => this.search(event, keyword)} 
                         posts={posts} 
                         />
-
                         </div>
                     </div>
                 </section>
@@ -115,10 +121,9 @@ class Blog extends Component {
    
     componentDidMount() {
         const nextPage = this.props.page + 1;
-        if(!this.props.posts)
+        if(!this.props.posts.length)
             this.props.fetchPost(nextPage);
-
-        window.scrollTo(0, 0);
+        
     }
 
 }

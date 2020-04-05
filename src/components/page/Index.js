@@ -5,10 +5,11 @@ import PostThumbnailSkeleton from '../postthumbnail/Skeleton';
 import {toSlug} from '../../utils/helpers';
 
 
-class LeftSlideBar extends Component {
+class Page extends Component {
     
 
     handleScroll = (e) => {
+       
         if (!this.props.hasMore || this.props.isPostFetching){
             return false;
         }
@@ -16,9 +17,10 @@ class LeftSlideBar extends Component {
         const loadMore = document.getElementById('load-more');
         const currentOffset = window.pageYOffset + window.innerHeight;
         const loadMoreOffset = loadMore.offsetTop;
-
+       
 
         if (currentOffset + 100 >= loadMoreOffset){
+            
             const keyword = this.props.keyword;
             
             if (this.props.isSearch)
@@ -85,8 +87,9 @@ class LeftSlideBar extends Component {
     }
     
     componentWillUnmount(){
+        
         window.removeEventListener('scroll', this.handleScroll);
     }
 }
 
-export default LeftSlideBar;
+export default Page;

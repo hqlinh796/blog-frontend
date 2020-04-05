@@ -1,10 +1,8 @@
 
 const PostInitialState = {
     posts: [],
-
     keyword: "",
     page: -1,
-
     isSearch: false,
     hasMore: true,
     isPostFetching: false,

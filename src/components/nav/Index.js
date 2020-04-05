@@ -56,10 +56,9 @@ class Nav extends Component {
                                     <div className="link-nav">
                                         <ul className="flex">
                                             <li><NavLink exact to="/" className="link fc-white link-white-hover">Home</NavLink></li>
-
                                             <li><NavLink to="/blog/tat-ca" className="link fc-white link-white-hover">Blogs</NavLink></li>
-
                                             <li><NavLink exact to="/contact" className="link fc-white link-white-hover">Contact</NavLink></li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
