@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 
 const Comment = props => {
     useEffect(() => {
-        window.FB.XFBML.parse();
+        if (window.FB)
+            window.FB.XFBML.parse();
       });
 
     return (

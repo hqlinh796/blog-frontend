@@ -14,10 +14,9 @@ class BlogDetail extends Component {
     
     constructor(props) {
         //console.log(props.match.params);
-        console.log("blog constructor");
+        //console.log("blog constructor");
         super(props);
         this.state = ({
-            
             isSearch: false,
             keyword: ""
         })
@@ -73,9 +72,12 @@ class BlogDetail extends Component {
             <section className="container-blog-detail-content p-tb-100">
                 <div className="blog-detail-content-wrapper container">
                     <div className="row">
-                        <Post isFetching={this.props.isPostDetailFetching} postDetail={this.props.postDetail} 
-                        relatedPosts={this.props.relatedPosts} clickToRate={(num) => this.clickToRate(num)}
-                        id={this.props.match.params.id}/>
+                        <Post 
+                        isFetching={this.props.isPostDetailFetching} 
+                        postDetail={this.props.postDetail} 
+                        relatedPosts={this.props.relatedPosts} 
+                        clickToRate={(num) => this.clickToRate(num)}
+                        id={this.props.match.params.id} />
 
                         <RightBar 
                         isSearch={this.state.isSearch} 
@@ -108,7 +110,10 @@ class BlogDetail extends Component {
             this.props.fetchPost(nextPostID);
             this.props.fetchRelatedPost(nextPostID);
             return false;
-        }   
+        }
+        window.scroll(0, 500);
+        this.removeRate();
+        this.addRate();   
         return true;
     }
 

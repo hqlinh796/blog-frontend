@@ -47,7 +47,7 @@ class PostThumbnail extends Component {
 
     render() {
         
-        const {title, description, date, cover, tags, _id, category, numOfComments} = this.props.post;
+        const {title, description, date, cover, tags, _id, category} = this.props.post;
         return (
             
             <div className="post-overview m-b-100">
@@ -72,7 +72,7 @@ class PostThumbnail extends Component {
                         &nbsp;
                         <i className="fas fa-comments" />
                         &nbsp;
-                         <span>{numOfComments > 1 ? numOfComments + ' comments' : numOfComments + ' comment'}</span>
+                        
                     </div>
                     <div className="tags">
                         <span>Tags: </span>

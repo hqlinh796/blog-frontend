@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import Page from '../../components/page/Index';
 import RightBar from '../../components/rightbar/Index';
 import './Index.css';
-//import SearchResult from '../components/blog/SearchResult';
-import RecentPost from '../../components/recentpost/Index'
+
+
 
 import {
     searchPost, 
@@ -27,21 +28,21 @@ class Blog extends Component {
     }
     
 
-    search = (event, keyword) => {
-        event.preventDefault();
-        if (keyword !== ""){
-            this.setState({
-                keyword: keyword,
-                isSearch: true
-            })
-            return;
-        }
-        this.setState({
-            keyword: keyword,
-            isSearch: false
-        })
+    // search = (event, keyword) => {
+    //     event.preventDefault();
+    //     if (keyword !== ""){
+    //         this.setState({
+    //             keyword: keyword,
+    //             isSearch: true
+    //         })
+    //         return;
+    //     }
+    //     this.setState({
+    //         keyword: keyword,
+    //         isSearch: false
+    //     })
 
-    }
+    // }
 
     getTopic = () => {
         let result = this.props.match.params.topic;
@@ -64,6 +65,11 @@ class Blog extends Component {
             this.props.search(keyword, 0);
     }
     
+    handleSortByChange = (e) => {
+        const sortBy = e.target.value;
+        this.props.fetchPost(0, sortBy);
+    }
+
     
     render() {
         const {
@@ -84,6 +90,26 @@ class Blog extends Component {
                 <section className="container-blog-content p-t-100">
                     <div className="blog-content-wrapper container">
                         <div className="row">
+                            <div className="col col-sm-8 p-tb-30 flex flex-j-sb">
+                                <div>
+                                    <Link to="/" className="fs-20 fc-black a-hover-to-green">
+                                        <i class="fas fa-home" />
+                                        &nbsp; Home </Link> >
+                                    <Link to="/blog/tat-ca" className="fs-20 fc-black a-hover-to-green"> Blog </Link> >
+                                </div>
+                                <div>
+                                    <label htmlFor="sort-by">Sort by &nbsp;</label>
+                                    <select name="" id="sort-by" onChange={(e) => this.handleSortByChange(e)}>
+                                        <option value="date">Date</option>
+                                        <option value="title">Title</option>
+                                        <option value="views">View</option>
+                                        <option value="rating">Rating</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div className="row">
                         <Page 
                         isPostFetching={isPostFetching} 
                         page={page} 
@@ -92,7 +118,7 @@ class Blog extends Component {
                         keyword={keyword} 
                         hasMore={hasMore} 
                         topic={this.getTopic()} 
-                        fetchPost={(nextPage) => fetchPost(nextPage)}
+                        fetchPost={(nextPage, sortBy) => fetchPost(nextPage, sortBy)}
                         searchPost={(keyword, nextPage) => search(keyword, nextPage)} />
                         
                         <RightBar         
@@ -131,8 +157,8 @@ class Blog extends Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         search: (keyword, page) => dispatch(searchPost(keyword, page)),
-        fetchPost: (nextPage) => {
-            dispatch(fetchPost(nextPage));
+        fetchPost: (nextPage, sortBy) => {
+            dispatch(fetchPost(nextPage, sortBy));
         },
         
         resetResult: () => dispatch(

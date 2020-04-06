@@ -16,19 +16,19 @@ export const fetchRelatedPost = (postID) => dispatch => {
     })
 }
 
-export const ratePost = (postID, rate) => dispatch => {
+export const ratePost = (postID, rating) => dispatch => {
     fetch(`${postPath}/rate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             postID: postID,
-            rate: rate
+            rating: rating
         })
     })
     .then(() => {
         dispatch({
             type: 'RATE_POST',
-            payload: rate
+            payload: rating
         })
     })
 }

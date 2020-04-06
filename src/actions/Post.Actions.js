@@ -1,5 +1,5 @@
 const postPath = 'https://backend-blog796.herokuapp.com/post';
-const categoryPath = 'https://backend-blog796.herokuapp.com/category';
+//const categoryPath = 'https://backend-blog796.herokuapp.com/category';
 //const postPath = 'http://localhost:5500/post';
 //const categoryPath = 'http://localhost:5500/category';
 
@@ -23,12 +23,14 @@ export function searchPost(keyword, page){
     }
 }
 
-export function fetchPost(page) {
+export function fetchPost(page, sortBy) {
     return dispatch => {
         dispatch({
             type: 'FETCHING_POST'
         })
-        fetch(postPath + '?page=' + page)
+        if (!sortBy)
+            sortBy = 'time';
+        fetch(`${postPath}?page=${page}&sort=${sortBy}`)
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
@@ -36,12 +38,7 @@ export function fetchPost(page) {
                 type: 'FETCH_POST',
                 payload: postDataJSON
             });
-            // setTimeout(() => {
-            //     dispatch({
-            //         type: 'FETCH_POST',
-            //         payload: postDataJSON.posts
-            //     });
-            // }, 2000);
+           
         })
     }
 }

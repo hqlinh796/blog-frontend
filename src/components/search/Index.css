@@ -1,5 +1,6 @@
 .blog-slide-bar-search{
     padding: 40px;
+    padding-top: 0;
     background-color: #fff;
 }
 .blog-slide-bar-search form input, .blog-slide-bar-search form button{

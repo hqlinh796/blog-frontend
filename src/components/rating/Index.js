@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../rate/Index.css';
+import './Index.css';
 
-class Rate extends Component {
+class Rating extends Component {
 
     mouseOver = (id) => {
         this.removeRate();
@@ -82,7 +82,7 @@ class Rate extends Component {
         return (
             <div className="rate-wrapper p-tb-10">
                 <div className="your-rate-wrapper p-t-20">
-                    <span>Your rate: </span>
+                    <span>Your rating: </span>
                     <i className="fas fa-star" id="level1" onClick={() => this.props.clickToRate(1)}
                     onMouseOver={() => this.mouseOver('level1')} onMouseOut={() => this.mouseOut()}/>
 
@@ -99,12 +99,12 @@ class Rate extends Component {
                     onMouseOver={() => this.mouseOver('level5')} onMouseOut={() => this.mouseOut()}/>
                 </div>
                 <div className="rate">
-                    <span>Rate: {this.calulateAverage(this.props.rate || [0])} </span>
-                    <span>({this.props.rate ? this.props.rate.length : 0} votes)</span>
+                    <span>Rate: {this.calulateAverage(this.props.rating || [0])} </span>
+                    <span>({this.props.rating ? this.props.rating.length : 0} votes)</span>
                 </div>
             </div>
         );
     }
 }
 
-export default Rate;
+export default Rating;

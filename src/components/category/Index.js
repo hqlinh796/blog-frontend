@@ -28,7 +28,7 @@ class Category extends Component {
     render() {
         return (
             <div className="blog-slide-bar-category m-t-50">
-                <h1 className="f-bold fs-22 m-b-50">Category</h1>
+                <h1 className="f-bold fs-22 m-b-50">Categories</h1>
                 <div>
                     <Link to={"/blog/tat-ca"} className="fs-18 fc-2 a-hover-to-green">Tất cả ({this.getTotalPosts(this.props.categories)})</Link>
                 </div>

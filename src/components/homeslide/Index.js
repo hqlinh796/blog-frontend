@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import '../homeslide/Index.css';
 
+import {setCover} from '../../actions/Header.Actions';
+
 class HomeSlide extends Component {
+
   render() {
     return (
       <div className="slide-wrapper container">
@@ -27,6 +31,19 @@ class HomeSlide extends Component {
       </div>
     );
   }
+  componentDidUpdate(){
+    this.props.setCover('https://image.freepik.com/free-photo/composition-fresh-orange-juice-with-yellow-background_23-2148037173.jpg');
+    return true;
+  }
+
 }
 
-export default HomeSlide;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    setCover: (url) => {
+      dispatch(setCover(url))
+    }
+  }
+}
+
+export default connect(mapDispatchToProps)(HomeSlide)

@@ -1,8 +1,8 @@
 const rightbarInitialState = {
-    isTopRateFetching: false,
+    isTopRatingFetching: false,
     isTopViewFetching: false,
     isRecentPostFetching: false,
-    topRates: [],
+    topRatings: [],
     topViews: [],
     recentPosts: [],
     categories: []
@@ -10,10 +10,10 @@ const rightbarInitialState = {
 
 const rightbarReducer = (state = rightbarInitialState, action) => {
     switch (action.type) {
-        case 'FETCHING_TOP_RATE':
+        case 'FETCHING_TOP_RATING':
             return {
                 ...state,
-                isTopRateFetching: true
+                isTopRatingFetching: true
             }
         case 'FETCHING_RECENT_POST':
             return {
@@ -25,11 +25,11 @@ const rightbarReducer = (state = rightbarInitialState, action) => {
                 ...state,
                 isTopViewFetching: true
             }
-        case 'FETCH_TOP_RATE':
+        case 'FETCH_TOP_RATING':
             return {
                 ...state,
-                topRates: action.payload,
-                isTopRateFetching: false
+                topRatings: action.payload,
+                isTopRatingFetching: false
             }
         case 'FETCH_RECENT_POST':
             return {

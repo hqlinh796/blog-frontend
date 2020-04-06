@@ -3,16 +3,16 @@ const categoryPath = 'https://backend-blog796.herokuapp.com/category';
 //const postPath = 'http://localhost:5500/post';
 //const categoryPath = 'http://localhost:5500/category';
 
-export const fetchTopRates = () => (dispatch) => {
+export const fetchTopRatings = () => (dispatch) => {
     dispatch({
-        type: 'FETCHING_TOP_RATE'
+        type: 'FETCHING_TOP_RATING'
     })
-    fetch(postPath + '/top-rate')
+    fetch(postPath + '/top-rating')
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
             dispatch({
-                type: 'FETCH_TOP_RATE',
+                type: 'FETCH_TOP_RATING',
                 payload: postDataJSON
             });
         })

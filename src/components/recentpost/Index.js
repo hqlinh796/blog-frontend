@@ -26,7 +26,7 @@ class RecentPost extends Component {
     render() {
         return (
             <div className="blog-slide-bar-recent-post right-bar m-t-50">
-                <h1 className="f-bold fs-22 m-b-50">Recent posts</h1>
+                <h1 className="f-bold fs-22 m-b-50">Recent Posts</h1>
                 
                 { !this.props.isRecentPostFetching && this.showRecentPosts(this.props.recentPosts) }
                 { this.props.isRecentPostFetching && this.showRecentPostSkeleton() }

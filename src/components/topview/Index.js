@@ -29,7 +29,7 @@ class TopView extends Component {
     render() {
         return (
             <div className="blog-slide-bar-top-post right-bar m-t-50">
-                <h1 className="f-bold fs-22 m-b-50">Top View</h1>
+                <h1 className="f-bold fs-22 m-b-50">Top Views</h1>
                 
                 { !this.props.isTopViewFetching && this.showTopViews(this.props.topViews) }
                 { this.props.isTopViewFetching && this.showTopViewSkeleton() }
@@ -40,7 +40,6 @@ class TopView extends Component {
     }
     componentDidMount(){
         if (!this.props.topViews.length){
-            console.log("mount");
             this.props.fetchTopViews();
         }
             

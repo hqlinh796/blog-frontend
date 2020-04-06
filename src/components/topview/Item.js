@@ -8,7 +8,7 @@ class TopViewItem extends Component {
     
 
     render() {
-        const {title, cover, _id, countView} = this.props.data;
+        const {title, cover, _id, views} = this.props.data;
         return (
             <div className="top-post-detail right-bar-item flex flex-a-c m-b-25">
                 <img src={cover} alt="" />
@@ -18,8 +18,8 @@ class TopViewItem extends Component {
                     </Link>
                     <p className="fc-2 fs-14">
                         
-                        <span>{countView}</span>
-                        <span>{countView <= 1 ? ' view' : ' views'}</span>
+                        <span>{views}</span>
+                        <span>{views <= 1 ? ' view' : ' views'}</span>
                     </p>
                 </div>
             </div>   

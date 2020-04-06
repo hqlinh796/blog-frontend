@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import {toSlug} from '../../utils/helpers';
 import '../rightbaritem/Index.css';
-class TopRateItem extends Component {
+class TopRatingItem extends Component {
 
     render() {
-        const {title, cover, _id, rate} = this.props.data;
+        const {title, cover, _id, rating} = this.props.data;
         return (
             <div className="top-post-detail right-bar-item flex flex-a-c m-b-25">
                 <img src={cover} alt="" />
@@ -15,7 +15,7 @@ class TopRateItem extends Component {
                     </Link>
                     <p className="fc-2 fs-14">
                         <i className="fas fa-star fc-1" />
-                        <span>{rate}</span>
+                        <span>{rating}</span>
                     </p>
                 </div>
             </div>   
@@ -23,4 +23,4 @@ class TopRateItem extends Component {
     }
 }
 
-export default TopRateItem;
+export default TopRatingItem;
