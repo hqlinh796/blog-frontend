@@ -24,9 +24,9 @@ class Page extends Component {
             const keyword = this.props.keyword;
             
             if (this.props.isSearch)
-                this.props.searchPost(keyword ,this.props.page + 1);
+                this.props.searchPost(keyword ,this.props.page + 1, this.props.sortBy);
             else
-                this.props.fetchPost(this.props.page + 1);
+                this.props.fetchPost(this.props.page + 1, this.props.sortBy);
            //alert('load roi');
         }
     }

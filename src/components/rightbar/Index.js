@@ -12,7 +12,7 @@ class RightSlideBar extends Component {
     render() {
         return (
             <div className="col col-lg-4 blog-slide-bar-wrapper">
-                <Search keyword={(event, keyword) => this.props.keyword(event, keyword)} input={this.props.input}/>
+                <Search />
                 <Category />
                 <TopView />
                 <RecentPost />
@@ -22,12 +22,7 @@ class RightSlideBar extends Component {
 
         );
     }
-    shouldComponentUpdate(nextProps, nextState){
-        console.log(nextProps.isSearch);
-        if (nextProps.isSearch)
-            return false;
-        return true;
-    }
+    
     
 }
 

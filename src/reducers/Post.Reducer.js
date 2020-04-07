@@ -1,6 +1,7 @@
 
 const PostInitialState = {
     posts: [],
+    sortBy: 'date',
     keyword: "",
     page: -1,
     isSearch: false,
@@ -10,16 +11,24 @@ const PostInitialState = {
 }
 const postReducer = (state = PostInitialState, action) => {
     switch (action.type) {
+        case 'CHANGE_KEYWORD':
+            return {
+                ...state,
+                keyword: action.payload,
+                isSearch: true
+            }
+        case 'CHANGE_SORT_BY':
+            return {
+                ...state,
+                sortBy: action.payload
+            }
         case 'SEARCH_POST':
             return {
                 ...state,
-                isSearch: true,
-                //keyword: action.payload,
                 posts: [...state.posts, ...action.payload.posts],
                 hasMore: action.payload.hasMore,
                 page: action.payload.page,
-                isPostFetching: false,
-                keyword: action.payload.keyword
+                isPostFetching: false
             }
         case 'FETCHING_POST':
             return {

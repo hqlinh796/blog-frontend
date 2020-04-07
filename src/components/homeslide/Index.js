@@ -31,9 +31,9 @@ class HomeSlide extends Component {
       </div>
     );
   }
-  componentDidUpdate(){
+  
+  componentDidMount() {
     this.props.setCover('https://image.freepik.com/free-photo/composition-fresh-orange-juice-with-yellow-background_23-2148037173.jpg');
-    return true;
   }
 
 }
@@ -46,4 +46,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapDispatchToProps)(HomeSlide)
+export default connect(null, mapDispatchToProps)(HomeSlide)

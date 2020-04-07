@@ -1,7 +1,4 @@
-const postPath = 'https://backend-blog796.herokuapp.com/post';
-const categoryPath = 'https://backend-blog796.herokuapp.com/category';
-//const postPath = 'http://localhost:5500/post';
-//const categoryPath = 'http://localhost:5500/category';
+import {postPath, categoryPath} from './path';
 
 export const fetchTopRatings = () => (dispatch) => {
     dispatch({

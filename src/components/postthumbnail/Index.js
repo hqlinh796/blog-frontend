@@ -55,8 +55,8 @@ class PostThumbnail extends Component {
                 <div className="post-text-detail p-t-70 p-b-40 p-lr-30">
                     <div className="date-post">
                         <div className="lh-13 txt-center">
-                            <p className="fs-23 f-bold">{this.getDate(date) }</p>
-                            <p className="fs-20">{this.getMonth(date) }</p>
+                            <p className="fs-23 f-bold">{this.getDate(parseInt(date)) }</p>
+                            <p className="fs-20">{this.getMonth(parseInt(date)) }</p>
                         </div>
                     </div>
                     <Link to={"/blog/" + toSlug(title) + "." + _id} className="fs-23 f-bold fc-black a-hover-to-green">{title }</Link>

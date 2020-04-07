@@ -1,6 +1,4 @@
-export const setCover = (url) =>  {
-    return {
+export const setCover = (url) =>  ({
         type: 'SET_COVER',
         payload: url
-    }
-}
+})

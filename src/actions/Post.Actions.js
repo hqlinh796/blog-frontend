@@ -1,20 +1,27 @@
-const postPath = 'https://backend-blog796.herokuapp.com/post';
-//const categoryPath = 'https://backend-blog796.herokuapp.com/category';
-//const postPath = 'http://localhost:5500/post';
-//const categoryPath = 'http://localhost:5500/category';
+import {postPath} from './path';
 
 
-export function searchPost(keyword, page){
+export const changeKeyword = (keyword) => ({
+    type: 'CHANGE_KEYWORD',
+    payload: keyword
+})
+
+export const changeSortBy = (sortBy) => ({
+    type: 'CHANGE_SORT_BY',
+    payload: sortBy
+})
+
+export function searchPost(keyword, page, sortBy){
     return dispatch => {
         dispatch({
             type: 'FETCHING_POST'
         })
         keyword = escapeSpace(keyword);
         //convert space to %20
-        fetch(postPath + '/search?keyword=' + keyword + '&page=' + page)
+        fetch(`${postPath}/search?keyword=${keyword}&page=${page}&sort=${sortBy}`)
         .then(postData => postData.json())
         .then(postDataJSON => {
-            //console.log(postDataJSON.posts);
+            
             dispatch({
                 type: 'SEARCH_POST',
                 payload: postDataJSON

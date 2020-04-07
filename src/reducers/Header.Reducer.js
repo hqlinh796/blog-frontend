@@ -14,3 +14,5 @@ const headerReducer = (state = headerInitialState, action) => {
             return state;
     }
 }
+
+export default headerReducer;

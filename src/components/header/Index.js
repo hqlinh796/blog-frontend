@@ -5,23 +5,21 @@ import {connect} from 'react-redux';
 import './Index.css';
 
 class Header extends Component {
+    
     render() {
+        const {cover} = this.props;
         return (
-            <header className="container-header-v2 fc-white">
+            <header className="container-header-v2 fc-white" style={{backgroundImage: `url(${cover ? cover : ''})`}} >
                 <Nav/>
                 <HeaderRoute/>
             </header>
         );
     }
-
-    componentDidMount(){
-        console.log('match: ' + this.props.match);
-    }
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        category: state.rightbarReducer.categories
+        cover: state.headerReducer.cover
     }
 }
 

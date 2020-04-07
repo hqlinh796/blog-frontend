@@ -11,7 +11,8 @@ import './Index.css';
 import {
     searchPost, 
     fetchPost, 
-    resetResult
+    resetResult,
+    changeSortBy
 } from '../../actions/Post.Actions';
 
 
@@ -26,23 +27,7 @@ class Blog extends Component {
             keyword: ""
         })
     }
-    
 
-    // search = (event, keyword) => {
-    //     event.preventDefault();
-    //     if (keyword !== ""){
-    //         this.setState({
-    //             keyword: keyword,
-    //             isSearch: true
-    //         })
-    //         return;
-    //     }
-    //     this.setState({
-    //         keyword: keyword,
-    //         isSearch: false
-    //     })
-
-    // }
 
     getTopic = () => {
         let result = this.props.match.params.topic;
@@ -51,23 +36,29 @@ class Blog extends Component {
         return result;
     }
 
-    search = (event, keyword) => {
-        event.preventDefault();
-        if (keyword === this.props.keyword)
-            return;
-        //const nextPage = this.props.page + 1;
-        //reset posts array
-        this.props.resetResult();
+    // search = (event, keyword) => {
+    //     event.preventDefault();
+    //     if (keyword === this.props.keyword)
+    //         return;
+    //     //const nextPage = this.props.page + 1;
+    //     //reset posts array
+    //     this.props.resetResult();
 
-        if (keyword === '')
-            this.props.fetchPost(0);
-        else
-            this.props.search(keyword, 0);
-    }
+    //     if (keyword === '')
+    //         this.props.fetchPost(0, this.state.sortBy);
+    //     else
+    //         this.props.search(keyword, 0, this.state.sortBy);
+    // }
     
     handleSortByChange = (e) => {
         const sortBy = e.target.value;
-        this.props.fetchPost(0, sortBy);
+        this.props.changeSortBy(sortBy);
+        this.props.resetResult();
+        if (this.props.isSearch)
+            this.props.search(this.props.keyword, 0, sortBy);
+        else
+            this.props.fetchPost(0, sortBy);
+        
     }
 
     
@@ -78,7 +69,6 @@ class Blog extends Component {
             page,
             keyword,
             isSearch,
-            
             isPostFetching
         } = this.props;
         const {
@@ -93,7 +83,7 @@ class Blog extends Component {
                             <div className="col col-sm-8 p-tb-30 flex flex-j-sb">
                                 <div>
                                     <Link to="/" className="fs-20 fc-black a-hover-to-green">
-                                        <i class="fas fa-home" />
+                                        <i className="fas fa-home" />
                                         &nbsp; Home </Link> >
                                     <Link to="/blog/tat-ca" className="fs-20 fc-black a-hover-to-green"> Blog </Link> >
                                 </div>
@@ -110,22 +100,21 @@ class Blog extends Component {
                             
                         </div>
                         <div className="row">
-                        <Page 
-                        isPostFetching={isPostFetching} 
-                        page={page} 
-                        posts={posts} 
-                        isSearch={isSearch} 
-                        keyword={keyword} 
-                        hasMore={hasMore} 
-                        topic={this.getTopic()} 
-                        fetchPost={(nextPage, sortBy) => fetchPost(nextPage, sortBy)}
-                        searchPost={(keyword, nextPage) => search(keyword, nextPage)} />
+                            <Page
+                                isPostFetching={isPostFetching}
+                                page={page}
+                                posts={posts}
+                                isSearch={isSearch}
+                                keyword={keyword}
+                                hasMore={hasMore}
+                                topic={this.getTopic()}
+                                sortBy={this.props.sortBy}
+                                fetchPost={(nextPage, sortBy) => fetchPost(nextPage, sortBy)}
+                                searchPost={(keyword, nextPage, sortBy) => search(keyword, nextPage, sortBy)} />
                         
-                        <RightBar         
-                        isSearch={isSearch} 
-                        keyword={(event, keyword) => this.search(event, keyword)} 
-                        posts={posts} 
-                        />
+                            <RightBar
+                                
+                                posts={posts} />
                         </div>
                     </div>
                 </section>
@@ -135,20 +124,22 @@ class Blog extends Component {
 
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.keyword === nextState.keyword && nextState.keyword !== ""){
-            this.setState({
-                keyword: "",
-                isSearch: false
-            })
-            return false;
-        }
+        // if (this.state.keyword === nextState.keyword && nextState.keyword !== ""){
+        //     this.setState({
+        //         keyword: "",
+        //         isSearch: false
+        //     })
+        //     return false;
+        // }
+        
+
         return true;
     }
    
     componentDidMount() {
         const nextPage = this.props.page + 1;
         if(!this.props.posts.length)
-            this.props.fetchPost(nextPage);
+            this.props.fetchPost(nextPage, this.state.sortBy);
         
     }
 
@@ -156,7 +147,7 @@ class Blog extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        search: (keyword, page) => dispatch(searchPost(keyword, page)),
+        search: (keyword, page, sortBy) => dispatch(searchPost(keyword, page, sortBy)),
         fetchPost: (nextPage, sortBy) => {
             dispatch(fetchPost(nextPage, sortBy));
         },
@@ -164,6 +155,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         resetResult: () => dispatch(
             resetResult()
         ),
+        changeSortBy: (sortBy) => {
+            dispatch(changeSortBy(sortBy))
+        }
         
     }
 }
@@ -178,6 +172,7 @@ const mapStateToProps = (state, ownProps) => {
         keyword:        reducer.keyword,
         isSearch:       reducer.isSearch,
         isPostFetching: reducer.isPostFetching,
+        sortBy:         reducer.sortBy
     }
 }
 

@@ -11,10 +11,9 @@ class HeaderRoute extends Component {
                     <Route exact path="/">
                         <HomeSlide/>
                     </Route>
-                    <Route path="/blog/:slug.:id">
-                        <Slide title="Blog detail"/>
-                    </Route>
-                    <Route path={"/blog/:topic"} component={Slide}/>
+                    <Route path="/blog/:slug.:id" component={Slide}/>
+                   
+                    <Route path="/blog/:topic" component={Slide}/>
                     
                     <Route path="/contact">
                         <Slide title="Contact me"/>
