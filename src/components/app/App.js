@@ -7,6 +7,7 @@ import Header from '../header/Index';
 import ContentRoute from '../../routes/ContentRoute';
 import Footer from '../footer/Index';
 import BackToTop from '../backtotop/Index';
+import Messenger from '../messenger/Index';
 
 
 
@@ -17,6 +18,7 @@ function App() {
         <ContentRoute />
         <Footer />
         <BackToTop />
+        <Messenger />
     </Router>   
   );
 }

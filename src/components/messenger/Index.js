@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
-class Messenger extends Component {
-    render() {
+const Messenger = props => {
+     
         return (
-            <div>
-                
-            </div>
+            <MessengerCustomerChat
+                pageId="110885300571206"
+                appId="577342806204805"
+            />
         );
-    }
-
-   
     
 }
 
