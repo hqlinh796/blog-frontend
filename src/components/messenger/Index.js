@@ -1,30 +1,33 @@
-import React, {useState} from 'react';
+import React, { Component } from 'react';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 
-const Messenger = props => {
-     const [isShow, setShow] = useState(true);
+class Messenger extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = ({
+            isShow: true
+        })
+    }
+    
+    handleClick = () => this.setState({
+        isShow: !this.state.isShow
+    })
+
+    render() {
         return (
             <MessengerCustomerChat
                 pageId="110885300571206"
                 appId="577342806204805"
-                shouldShowDialog={isShow}
-                onClick={() => {
-                    alert('click');
-                    setShow(!isShow);
-                }}
+                shouldShowDialog={this.state.isShow}
             />
         );
+    }
+    componentDidMount() {
+        const btn = document.getElementById('facebook');
+        btn.addEventListener('click', () => this.handleClick());
+    }
 }
-
-// import { FacebookProvider, SendToMessenger } from 'react-facebook';
- 
-// export const Messenger = () => {
-//     return (
-//       <FacebookProvider appId="577342806204805">
-//         <SendToMessenger messengerAppId="577342806204805" pageId="110885300571206"/>
-//       </FacebookProvider>    
-//     );
-// }
 
 export default Messenger;
