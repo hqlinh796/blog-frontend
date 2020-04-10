@@ -9,9 +9,7 @@ import {fetchCategories} from '../../actions/RightBar.Actions';
 
 class Category extends Component {
 
-    getCategoryItem = categoryData => {
-        
-    }
+    
     
     getTotalPosts = (data) => {
         return data.reduce((total, categoryItem) => {

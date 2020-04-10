@@ -46,7 +46,6 @@ class BlogThumbnailSkeleton extends Component {
     }
 
     render() {
-        console.log("blog thumbnail render");
         return (
             
             <div className="post-overview m-b-100">

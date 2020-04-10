@@ -7,9 +7,10 @@ import {setCover} from '../../actions/Header.Actions';
 class HomeSlide extends Component {
 
   render() {
+    
     return (
       <div className="slide-wrapper container">
-        <div className="slide-v2 p-t-100 row m-lr-auto flex flex-a-c">
+        <div className="slide-v2 row m-lr-auto flex flex-a-c">
           <div className="content-slide col-12 col">
             <div className="title-slide m-b-20">
               <h1 className="fs-50">Hi, </h1>
@@ -19,7 +20,7 @@ class HomeSlide extends Component {
             <div className="description-slide m-b-20">
               <p className="fs-25 lheight-30">Working as a web developer, i'm interested in <br />
                 creating websites and extension tools.
-          </p>
+              </p>
             </div>
             <div className="button-slide">
               <button className="button button-green m-r-20 m-b-30"><a href="/" className="link">Contact me</a></button>
@@ -30,6 +31,7 @@ class HomeSlide extends Component {
         </div>
       </div>
     );
+   
   }
   
   componentDidMount() {
@@ -45,5 +47,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
   }
 }
+
 
 export default connect(null, mapDispatchToProps)(HomeSlide)

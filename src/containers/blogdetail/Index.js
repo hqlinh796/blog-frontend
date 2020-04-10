@@ -95,7 +95,7 @@ class BlogDetail extends Component {
     componentDidMount() {
         const postID = this.props.match.params.id;
         //console.log('did mount id la: ' + postID);
-        this.props.fetchPost(postID);
+        this.props.fetchPostDetail(postID);
 
         
         this.props.fetchRelatedPost(postID);
@@ -107,7 +107,7 @@ class BlogDetail extends Component {
         const nextPostID = nextPops.match.params.id,
               currentPostID = this.props.match.params.id;
         if (nextPostID !== currentPostID){
-            this.props.fetchPost(nextPostID);
+            this.props.fetchPostDetail(nextPostID);
             this.props.fetchRelatedPost(nextPostID);
             return false;
         }
@@ -128,7 +128,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             event.preventDefault();
             dispatch(searchPost(keyword, ownProps.pageNumber));
         },
-        fetchPost: (postID) => {
+        fetchPostDetail: (postID) => {
             
             dispatch(fetchPostDetail(postID))
         },

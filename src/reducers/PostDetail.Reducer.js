@@ -28,7 +28,7 @@ const postDetialReducer = (state = postDetailInitialState, action) => {
                 ...state,
                 postDetail: {
                     ...state.postDetail,
-                    rate: [...state.postDetail.rate, action.payload]
+                    rating: [...state.postDetail.rating, action.payload]
                 }
             }
     

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import '../nav/Index.css';
+import logo from './logo.png'
 
 class Nav extends Component {
 
@@ -23,7 +24,7 @@ class Nav extends Component {
                                 <div className="main-nav flex flex-j-sb flex-a-c">
                                     <div className="logo">
                                         <div className="logo-img dis-inline-block">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Oikya_Front_Logo.png" alt="logo for web" />
+                                            <img src={logo} alt="logo" />
                                         </div>
                                     </div>
                                     <div className="link-nav">
@@ -61,7 +62,7 @@ class Nav extends Component {
                         <div className="main-nav flex flex-j-sb flex-a-c">
                             <div className="logo">
                                 <div className="logo-img dis-inline-block">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Oikya_Front_Logo.png" alt="logo for web" />
+                                    <img src={logo} alt="logo" />
                                 </div>
                             </div>
                             <div className="link-nav">
@@ -87,7 +88,7 @@ class Nav extends Component {
                         <div className="main-nav flex flex-j-sb flex-a-c">
                             <div className="logo">
                                 <div className="logo-img dis-inline-block">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Oikya_Front_Logo.png" alt="logo for web" />
+                                    <img src={logo} alt="logo" />
                                 </div>
                             </div>
                             <div className="link-nav">
@@ -152,7 +153,7 @@ class Nav extends Component {
                     <div className="flex flex-a-c">
                         <div className="logo col col-6">
                             <div className="logo-img2 dis-inline-block">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Oikya_Front_Logo.png" alt="logo for web" />
+                                <img src={logo} alt="logo" />
                             </div>
                         </div>
                         <div className="toggle-menu-icon txt-right col col-6" onClick={this.handleToggleMenuClick}>

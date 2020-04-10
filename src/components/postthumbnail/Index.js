@@ -45,9 +45,14 @@ class PostThumbnail extends Component {
         
     }
 
+    calcurateAverageRating = (ratings) => {
+        const total = ratings.reduce((total, rating) => total += rating);
+        return Math.round(total * 100 /ratings.length)/100;
+    }
+
     render() {
         
-        const {title, description, date, cover, tags, _id, category} = this.props.post;
+        const {title, description, date, cover, tags, _id, category, rating} = this.props.post;
         return (
             
             <div className="post-overview m-b-100">
@@ -70,9 +75,9 @@ class PostThumbnail extends Component {
                         &nbsp;
                         <span> | </span>
                         &nbsp;
-                        <i className="fas fa-comments" />
+                        <i className="fas fa-star" />
                         &nbsp;
-                        
+                        {this.calcurateAverageRating(rating)}
                     </div>
                     <div className="tags">
                         <span>Tags: </span>

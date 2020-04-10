@@ -40,7 +40,7 @@ class Slide extends Component {
                 <div className="slide-wrapper">
                     <div className="slide-v2 row m-lr-auto flex flex-a-c flex-j-c">
                         <div className="content-slide txt-center col col-lg-12">
-                            <h1 className="fs-40">{this.props.categories.length && this.getTitle()}</h1>
+                            <h1 className="fs-40">{this.props.categories.length ? this.getTitle() : ''}</h1>
                         </div>
                     </div>
                 </div>

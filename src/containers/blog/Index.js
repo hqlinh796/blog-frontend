@@ -18,46 +18,29 @@ import {
 
 
 class Blog extends Component {
+    
     constructor(props) {
-        //console.log(props.match.params);
-        
         super(props);
         this.state = ({
-            isSearch: false,
-            keyword: ""
+            category: 'tat-ca'
         })
     }
-
-
+    
     getTopic = () => {
         let result = this.props.match.params.topic;
         if (result === "tat-ca")
             result = "";
         return result;
     }
-
-    // search = (event, keyword) => {
-    //     event.preventDefault();
-    //     if (keyword === this.props.keyword)
-    //         return;
-    //     //const nextPage = this.props.page + 1;
-    //     //reset posts array
-    //     this.props.resetResult();
-
-    //     if (keyword === '')
-    //         this.props.fetchPost(0, this.state.sortBy);
-    //     else
-    //         this.props.search(keyword, 0, this.state.sortBy);
-    // }
     
     handleSortByChange = (e) => {
         const sortBy = e.target.value;
         this.props.changeSortBy(sortBy);
         this.props.resetResult();
         if (this.props.isSearch)
-            this.props.search(this.props.keyword, 0, sortBy);
+            this.props.search(this.props.keyword, 0, sortBy, this.state.category);
         else
-            this.props.fetchPost(0, sortBy);
+            this.props.fetchPost(0, sortBy, this.state.category);
         
     }
 
@@ -109,8 +92,9 @@ class Blog extends Component {
                                 hasMore={hasMore}
                                 topic={this.getTopic()}
                                 sortBy={this.props.sortBy}
-                                fetchPost={(nextPage, sortBy) => fetchPost(nextPage, sortBy)}
-                                searchPost={(keyword, nextPage, sortBy) => search(keyword, nextPage, sortBy)} />
+                                fetchPost={(nextPage, sortBy, category) => fetchPost(nextPage, sortBy, category)}
+                                searchPost={(keyword, nextPage, sortBy) => search(keyword, nextPage, sortBy)} 
+                                />
                         
                             <RightBar
                                 
@@ -123,23 +107,29 @@ class Blog extends Component {
     }
 
 
-    shouldComponentUpdate(nextProps, nextState) {
-        // if (this.state.keyword === nextState.keyword && nextState.keyword !== ""){
-        //     this.setState({
-        //         keyword: "",
-        //         isSearch: false
-        //     })
-        //     return false;
-        // }
-        
-
-        return true;
+    componentDidUpdate(preProps, preState) {
+        const currentTopic = this.props.match.params.topic
+        if (preProps.match.params.topic !== currentTopic) {
+            this.props.resetResult();
+            const category = currentTopic === 'tat-ca' ? '' : currentTopic;
+            this.setState({
+                category: category
+            })
+            this.props.fetchPost(0, this.props.sortBy, category);
+        }
     }
    
     componentDidMount() {
         const nextPage = this.props.page + 1;
-        if(!this.props.posts.length)
-            this.props.fetchPost(nextPage, this.state.sortBy);
+        const {topic} = this.props.match.params;
+        if (topic) {
+            const category = topic === 'tat-ca' ? '' : topic;
+            this.setState({
+                category: category
+            })
+            if(!this.props.posts.length)
+                this.props.fetchPost(nextPage, this.props.sortBy, category);
+        }
         
     }
 
@@ -148,8 +138,8 @@ class Blog extends Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         search: (keyword, page, sortBy) => dispatch(searchPost(keyword, page, sortBy)),
-        fetchPost: (nextPage, sortBy) => {
-            dispatch(fetchPost(nextPage, sortBy));
+        fetchPost: (nextPage, sortBy, category) => {
+            dispatch(fetchPost(nextPage, sortBy, category));
         },
         
         resetResult: () => dispatch(
@@ -172,7 +162,8 @@ const mapStateToProps = (state, ownProps) => {
         keyword:        reducer.keyword,
         isSearch:       reducer.isSearch,
         isPostFetching: reducer.isPostFetching,
-        sortBy:         reducer.sortBy
+        sortBy:         reducer.sortBy,
+        categories:     state.rightbarReducer.categories
     }
 }
 

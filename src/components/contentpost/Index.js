@@ -14,6 +14,7 @@ class ContentBlog extends Component {
 
     render() {
         const {cover, title, date, category, author, content} = this.props.postDetail;
+        console.log(category);
         return (
             <div className="post-detail fs-18">
                 <img src={cover} alt="" className="post-cover-image" />

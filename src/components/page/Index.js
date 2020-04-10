@@ -22,11 +22,13 @@ class Page extends Component {
         if (currentOffset + 100 >= loadMoreOffset){
             
             const keyword = this.props.keyword;
-            
+            const category = this.props.topic === 'tat-ca' ? '' : this.props.topic;
             if (this.props.isSearch)
-                this.props.searchPost(keyword ,this.props.page + 1, this.props.sortBy);
-            else
-                this.props.fetchPost(this.props.page + 1, this.props.sortBy);
+                this.props.searchPost(keyword ,this.props.page + 1, this.props.sortBy, category);
+            else {
+                this.props.fetchPost(this.props.page + 1, this.props.sortBy, category);
+            }
+                
            //alert('load roi');
         }
     }
@@ -39,40 +41,24 @@ class Page extends Component {
         let result = [], 
             i = 0, 
             posts = this.props.posts,
-            totalPosts = posts.length,
-            topic = this.props.topic;
-       
-        //all topic
-        if (topic === "")
+            totalPosts = posts.length;
             while (i < totalPosts) {
                 const blogData = this.props.posts[i];
                 result.push(<PostThumbnail post={blogData} key={i} />)
                 i++;
             }
-        //particular topic
-        else
-            while (i < totalPosts) {
-                if (toSlug(posts[i].category) === topic) {
-                    const blogData = this.props.posts[i];
-                    
-                        result.push(<PostThumbnail post={blogData} key={i} />)
-            }
-            i++;
-        }
         return result;
     }
    
 
     showSkeletonBlog = () => {
-        let result = [], i = 0;
-        while (i < 2) {
-            result.push(<PostThumbnailSkeleton key={i}></PostThumbnailSkeleton>);
-            i++;
-        }
-        return result;
+        return (
+            <PostThumbnailSkeleton key={1}></PostThumbnailSkeleton>
+        )
     }
 
     render() {
+        
         return (
             <div className="col col-lg-8 blog-post-wrapper">
                 {this.getListBlog()}

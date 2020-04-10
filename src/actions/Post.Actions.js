@@ -30,14 +30,14 @@ export function searchPost(keyword, page, sortBy){
     }
 }
 
-export function fetchPost(page, sortBy) {
+export function fetchPost(page, sortBy, category) {
     return dispatch => {
         dispatch({
             type: 'FETCHING_POST'
         })
         if (!sortBy)
             sortBy = 'time';
-        fetch(`${postPath}?page=${page}&sort=${sortBy}`)
+        fetch(`${postPath}?page=${page}&sort=${sortBy}&category=${category}`)
         .then(postData => postData.json())
         .then(postDataJSON => {
             //console.log(postDataJSON.posts);
