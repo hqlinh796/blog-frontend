@@ -1,18 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 
-const Messenger = props => {
-     const [isShow, setShow] = useState(true);
+const Messenger = () => {
         return (
             <MessengerCustomerChat
                 pageId="110885300571206"
                 appId="577342806204805"
-                shouldShowDialog={isShow}
-                onClick={() => setShow(!isShow)}
+                shouldShowDialog={true}
             />
         );
-    
 }
 
 export default Messenger;
