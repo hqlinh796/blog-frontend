@@ -96,9 +96,7 @@ class Blog extends Component {
                                 searchPost={(keyword, nextPage, sortBy) => search(keyword, nextPage, sortBy)} 
                                 />
                         
-                            <RightBar
-                                
-                                posts={posts} />
+                            <RightBar />
                         </div>
                     </div>
                 </section>

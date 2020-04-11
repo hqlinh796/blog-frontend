@@ -12,7 +12,7 @@ const Comment = props => {
         //     {/* <div className="fb-comments" data-href={props.location} data-width="100%" data-numposts="5"></div> */}
         // </div>
         <FacebookProvider appId="367756390407097" className="p-tb-10">
-            <Comments href={props.location} />
+            <Comments href={props.location} width="100%" numPosts="10"/>
       </FacebookProvider>
     );
 };

@@ -17,7 +17,7 @@ class RecentPostItem extends Component {
         const {title, cover, _id, date} = this.props.data;
         return (
             <div className="recent-post-detail right-bar-item flex flex-a-c m-b-25">
-                <img src={cover} alt="" />
+                <img src={cover} alt="" style={{height: '80px', width: '80px'}}/>
                 <div className="right-bar-item-text m-l-20 lh-15">
                     <Link className="fs-18 fc-black a-hover-to-green" to={'/blog/' + toSlug(title) + '.' + _id} title={title}>
                         {title}

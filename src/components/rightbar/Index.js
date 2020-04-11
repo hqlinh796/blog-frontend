@@ -10,6 +10,7 @@ import TopView from '../topview/Index';
 class RightSlideBar extends Component {
     
     render() {
+        console.log('right bar render');
         return (
             <div className="col col-lg-4 blog-slide-bar-wrapper">
                 <Search />

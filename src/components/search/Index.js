@@ -20,12 +20,11 @@ class Search extends Component {
 
 
     render() {
-        //console.log("search render");
+        console.log("search render");
         return (
             <div className="blog-slide-bar-search">
                 <form>
                     <input autoComplete="off" name="keyword" type="text" 
-                    value={this.props.keyword}
                     onChange={(e) => this.handleOnChangeInput(e)} 
                     placeholder="Search keyword . . ." 
                     className="dis-block width-100 m-b-20 p-lr-10" />
@@ -35,6 +34,7 @@ class Search extends Component {
             </div>
         );
     }
+
 
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import '../nav/Index.css';
 import logo from './logo.png'
 
@@ -10,7 +10,8 @@ class Nav extends Component {
         super(props);
         this.state = ({
             isShowFixNav: false,
-            isShowCollapseNav: false
+            isShowCollapseNav: false,
+            isShowModal: false
         })
     }
 
@@ -33,6 +34,7 @@ class Nav extends Component {
                                             <li><NavLink to="/blog/tat-ca" className="link fc-black link-white-hover">Blogs</NavLink></li>
 
                                             <li><NavLink exact to="/contact" className="link fc-black link-white-hover">Contact</NavLink></li>
+                                            <li><Link onClick={() => this.clickSearch()}><i className="fas fa-search link fc-black link-white-hover" /></Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -67,7 +69,7 @@ class Nav extends Component {
                                     <li><NavLink exact to="/" className="link fc-white link-white-hover">Home</NavLink></li>
                                     <li><NavLink to="/blog/tat-ca" className="link fc-white link-white-hover">Blogs</NavLink></li>
                                     <li><NavLink exact to="/contact" className="link fc-white link-white-hover">Contact</NavLink></li>
-                                    
+                                    <li><Link onClick={() => this.clickSearch()}><i className="fas fa-search link fc-white link-white-hover" /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -89,11 +91,12 @@ class Nav extends Component {
                                 </div>
                             </div>
                             <div className="link-nav">
+                                
                                 <ul className="flex">
                                     <li><NavLink exact to="/" className="link fc-white link-white-hover">Home</NavLink></li>
                                     <li><NavLink to="/blog/tat-ca" className="link fc-white link-white-hover">Blogs</NavLink></li>
                                     <li><NavLink exact to="/contact" className="link fc-white link-white-hover">Contact</NavLink></li>
-                                    
+                                    <li><Link onClick={() => this.clickSearch()}><i className="fas fa-search link fc-white link-white-hover" /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -116,6 +119,38 @@ class Nav extends Component {
                     isShowFixNav: false
                 })
         }
+    }
+
+    clickSearch = () => {
+        this.setState({
+            isShowModal: true
+        })
+    }
+
+    disappearModal = () => this.setState({
+        isShowModal: false
+    })
+
+    handleInputSubmit = (e) => {
+        e.preventDefault();
+        //search
+    }
+
+    showModal = () => {
+        if (this.state.isShowModal)
+            return (
+                <div id="search-modal" >
+                    <form onSubmit={this.handleInputSubmit}>
+                        <input type="text" placeholder="Type keyword . . . " autoFocus
+                        onBlur={this.disappearModal}  
+                          />
+                    </form>
+                </div>
+            )
+        return (
+            <div id="search-modal" style={{opacity: '0', zIndex: '-100'}}>
+            </div>   
+        )
     }
         
     render() {
@@ -160,6 +195,7 @@ class Nav extends Component {
                 </div>
                {this.showCollapseNav(this.state.isShowCollapseNav)}
                 {this.showFixNav(this.state.isShowFixNav)}
+                {this.showModal()}
             </div>
         );
     }
