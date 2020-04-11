@@ -15,9 +15,8 @@ class Nav extends Component {
     }
 
     showFixNav = isShow => {
-        if (isShow){
             return (
-                <div className="fix-main-nav fix-main-nav-show">
+                <div className="fix-main-nav fix-main-nav-show" style={{top: this.state.isShowFixNav ? '0' : '-80px'}}>
                     <div className="container">
                         <div className="row ">
                             <nav className="col col-lg-12">
@@ -42,8 +41,6 @@ class Nav extends Component {
                     </div>
                 </div>
             )
-        }
-            
     } 
 
     handleToggleMenuClick = () => {
