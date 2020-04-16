@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ContentBlog from '../contentpost/Index';
 import RelatedPost from '../relatedpost/Index';
 import ContentBlogSkeleton from '../contentpost/Skeleton';
@@ -28,7 +28,9 @@ class Post extends Component {
     render() {    
         const {postDetail} = this.props;
         return (
-            <div className="left-slide-bar-blog-detail-wrapper p-b-50 col-lg-8 col">
+            <Fragment>
+                <div className="col col-lg-2"></div>
+                <div className="left-slide-bar-blog-detail-wrapper p-b-50 col-lg-8 col">
                 { !this.props.isFetching && this.showPostDetail(postDetail) }
                 { this.props.isFetching && this.showPostDetailSkeleton() }
                 <Rating 
@@ -38,6 +40,7 @@ class Post extends Component {
                 relatedPosts={this.props.relatedPosts} />
                 <Comment location={this.getLocation()}/>
              </div>
+            </Fragment>
         );
     }
 }

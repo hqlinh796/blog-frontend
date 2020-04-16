@@ -14,19 +14,17 @@ class ContentBlog extends Component {
 
     render() {
         const {cover, title, date, category, author, content} = this.props.postDetail;
-        console.log(category);
         return (
             <div className="post-detail fs-18">
                 <img src={cover} alt="" className="post-cover-image" />
                 <div className="p-tb-40">
                     <h1 className="fs-25 f-bold">{title}
                     </h1>
-                    <div className="date-and-topic fs-14 m-t-20">
+                    <div className="date-and-topic fs-16 m-t-20">
                         <span className="date-post-detail">{this.getFullDate(date)}</span>
                         <span>&nbsp; | &nbsp;</span>
                         <span className="topic-post-detail">{category}</span>
-                    </div>
-                    <div className="cre-post fs-14">
+                        <span>&nbsp; | &nbsp;</span>
                         <i className="fas fa-book-reader m-r-5 m-t-10 m-b-20"></i>
                         <span className="">{author}</span>
                     </div>

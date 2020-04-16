@@ -2,25 +2,13 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 import Post from '../../components/post/Index';
-import RightBar from '../../components/rightbar/Index';
 import './Index.css';
 
-import {searchPost} from '../../actions/Post.Actions';
 import {fetchRelatedPost, ratePost, fetchPostDetail} from '../../actions/PostDetail.Actions'
 
 import './Index.css';
 
 class BlogDetail extends Component {
-    
-    constructor(props) {
-        //console.log(props.match.params);
-        //console.log("blog constructor");
-        super(props);
-        this.state = ({
-            isSearch: false,
-            keyword: ""
-        })
-    }
 
     addRate = () => {
         const {id} = this.props.match.params;
@@ -78,12 +66,6 @@ class BlogDetail extends Component {
                         relatedPosts={this.props.relatedPosts} 
                         clickToRate={(num) => this.clickToRate(num)}
                         id={this.props.match.params.id} />
-
-                        <RightBar 
-                        isSearch={this.state.isSearch} 
-                        posts={this.props.posts} 
-                        keyword={(event, keyword) => this.props.search(event, keyword)}
-                        />
                     </div>
                 </div>
             </section>
@@ -124,10 +106,6 @@ class BlogDetail extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        search: (event, keyword) => {
-            event.preventDefault();
-            dispatch(searchPost(keyword, ownProps.pageNumber));
-        },
         fetchPostDetail: (postID) => {
             
             dispatch(fetchPostDetail(postID))
@@ -144,10 +122,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         postDetail:     state.postDetailReducer.postDetail,
         isPostDetailFetching: state.postDetailReducer.isPostDetailFetching,
-        relatedPosts:   state.postDetailReducer.relatedPosts,
-
-        pageNumber:     reducer.page,
-        isUpdate:       reducer.isUpdate
+        relatedPosts:   state.postDetailReducer.relatedPosts
     }
 }
 
