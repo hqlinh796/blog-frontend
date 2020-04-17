@@ -6,7 +6,6 @@ import logo from './logo.png'
 class Nav extends Component {
 
     constructor(props) {
-        console.log('da con');
         super(props);
         this.state = ({
             isShowFixNav: false,

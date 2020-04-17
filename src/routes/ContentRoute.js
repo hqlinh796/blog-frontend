@@ -14,6 +14,7 @@ class ContentRoute extends Component {
                 <Route exact path="/" component={HomeMain} />
                 <Route exact path="/blog/:slug.:id" component={BlogDetail} />
                 <Route exact path="/blog/:topic" component={Blog} />
+                
                 <Route path="/contact" component={Contact} />
             </Switch>
         );

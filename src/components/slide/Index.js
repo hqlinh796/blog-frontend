@@ -4,35 +4,33 @@ import '../homeslide/Index.css';
 
 import {setCover} from '../../actions/Header.Actions';
 
+const urlCoverBlog = 'https://images.unsplash.com/photo-1528697203043-733dafdaa316?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80';
+
 class Slide extends Component {
     
-    
+   
 
-    getTitle = () => {
-        let topic = this.props.match.params.topic;
-        if (!topic) {
-            topic = this.props.topic;
-            const category = this.props.categories.filter(categoryItem => categoryItem.name === topic)[0];
-            if (category) {
-                this.props.setCover(category.cover);
-                return category.name;
-            }
+    setTitle = () => {
+        if (this.props.match.params.id) {
+            if (!this.props.topic)
+                return;
+            const category = this.props.categories.filter(category => category.name === this.props.topic)[0];
+            this.props.setCover(category.cover);
+            return this.props.topic;
         }
             
-        
-        
-        if (topic === "tat-ca") {
-            this.props.setCover("https://images.unsplash.com/photo-1528697203043-733dafdaa316?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
-            return "Tất cả";  
-        }
+        let topic = this.props.match.params.topic;
 
+        //topic = this.props.topic;
         const category = this.props.categories.filter(categoryItem => categoryItem.slug === topic)[0];
         if (category) {
-            
             this.props.setCover(category.cover);
             return category.name;
+        } else {
+            this.props.setCover(urlCoverBlog);
+            return 'Tất cả';
         }
-            
+        
     }
 
     render() {
@@ -40,22 +38,33 @@ class Slide extends Component {
                 <div className="slide-wrapper">
                     <div className="slide-v2 row m-lr-auto flex flex-a-c flex-j-c">
                         <div className="content-slide txt-center col col-lg-12">
-                            <h1 className="fs-40">{this.props.categories.length ? this.getTitle() : ''}</h1>
+                            <h1 className="fs-40">{this.props.categories.length ? this.setTitle() : ''}</h1>
                         </div>
                     </div>
                 </div>
         );
     }
     shouldComponentUpdate(nextProps) {
-        if (this.props.match.params.topic) {
-            const currentTopic = this.props.match.params.topic,
-                  nextTopic = nextProps.match.params.topic;
-            if (currentTopic === nextTopic && this.props.categories.length)
-                return false;
+        
+        const currentTopic = this.props.match.params.topic;
+        console.log(`${this.props.match.params.topic} ${nextProps.match.params.topic}`);
+        if (currentTopic) {
+            if (currentTopic !== nextProps.match.params.topic || !this.props.categories.length)
+                return true;
         }
         
-        return true;
+        // if (this.props.cover !== nextProps.cover)
+        //     return true;
+        if (nextProps.topic !== this.props.topic)
+            return true;
+        
+        return false;
+        
+        
     }
+
+
+    
   
 }
 
@@ -71,7 +80,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const mapStateToProps = (state, ownProps) => {
     return {
         categories: state.rightbarReducer.categories,
-        topic: state.postDetailReducer.postDetail.category
+        topic: state.postDetailReducer.postDetail.category,
+        cover: state.headerReducer.cover
     }
 }
 

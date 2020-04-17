@@ -31,7 +31,11 @@ const postDetialReducer = (state = postDetailInitialState, action) => {
                     rating: [...state.postDetail.rating, action.payload]
                 }
             }
-    
+        case'RESET_POST_DETAIL':
+            return {
+                ...state,
+                postDetail: {}
+            }
         default:
             return state;
     }

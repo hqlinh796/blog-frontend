@@ -8,6 +8,7 @@ import ContentRoute from '../../routes/ContentRoute';
 import Footer from '../footer/Index';
 import BackToTop from '../backtotop/Index';
 import Messenger from '../messenger/Index';
+import LoadingBar from '../loadingbar/Index';
 
 
 

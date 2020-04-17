@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import Post from '../../components/post/Index';
 import './Index.css';
 
-import {fetchRelatedPost, ratePost, fetchPostDetail} from '../../actions/PostDetail.Actions'
+import {fetchRelatedPost, ratePost, fetchPostDetail, resetPostDetail} from '../../actions/PostDetail.Actions'
 
 import './Index.css';
 
@@ -99,6 +99,10 @@ class BlogDetail extends Component {
         return true;
     }
 
+    componentWillUnmount() {
+        this.props.resetPostDetail();
+    }
+
     
     
 
@@ -112,7 +116,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         
         fetchRelatedPost: (postID) => dispatch( fetchRelatedPost(postID)),
-        ratePost: (postID, rate) => dispatch(ratePost(postID, rate))
+        ratePost: (postID, rate) => dispatch(ratePost(postID, rate)),
+        resetPostDetail: () => dispatch(resetPostDetail())
     }
 }
 

@@ -44,4 +44,8 @@ export const fetchPostDetail = (postID) => dispatch => {
     })
 }
 
+export const resetPostDetail = () => ({
+    type: 'RESET_POST_DETAIL'
+})
+
 //const escapeSpace = (text) => text.replace(/\s/, '%20');
