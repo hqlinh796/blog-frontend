@@ -36,16 +36,28 @@ const Blog = (props) => {
         resetResult
     } = props;
 
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState(() => {
+        const {topic} = props.match.params;
+        const category = topic === 'tat-ca' ? '' : topic;
+        return category;
+    });
     
     useEffect(() => {
         const {topic} = props.match.params;
-        const category = topic === 'tat-ca' ? '' : topic;
-        setCategory(category);
+        if (topic === category)
+            return;
+        const categoryTemp = topic === 'tat-ca' ? '' : topic;
+        setCategory(categoryTemp);
     })
 
     useEffect(() => {
+        resetResult();
+        fetchPost(0, 'date', category);
+    }, [category])
+
+    useEffect(() => {
         document.title = 'Blog - Linhtinh';
+        
         if (!props.recentPosts.length) {
             props.fetchRecentPosts();
             props.fetchTopRatings();

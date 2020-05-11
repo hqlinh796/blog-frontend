@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+
 import { Link } from 'react-router-dom';
 
 import './Index.css';
 import CategoryItem from './Item';
-import { fetchCategories } from '../../actions/RightBar.Actions';
+
 
 
 const Category = (props) => {

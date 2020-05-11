@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+
 import Item from './Item';
 import ItemSkeleton from '../rightbaritem/Skeleton';
 import '../rightbar/Index.css';
 
-import {fetchTopRatings} from '../../actions/RightBar.Actions';
 const TopRate = (props) => {
 
     const showTopRatings = (topRatingsArray) => {
@@ -28,8 +27,7 @@ const TopRate = (props) => {
             <div className="blog-slide-bar-top-rate right-bar m-t-50">
                 <h1 className="f-bold fs-22 m-b-50">Top Ratings</h1>
                 
-                { props.data && showTopRatings(props.data) }
-                { !props.data && showTopRatingSkeleton() }
+                { props.data.length  ? showTopRatings(props.data) : showTopRatingSkeleton()}
 
             </div>
 

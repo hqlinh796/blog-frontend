@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+
 import Item from './Item';
 import ItemSkeleton from '../rightbaritem/Skeleton';
 import '../rightbar/Index.css';
 
-import {fetchTopViews} from '../../actions/RightBar.Actions';
+
 
 const TopView = (props) => {
 
@@ -25,14 +25,12 @@ const TopView = (props) => {
             )
         return result;
     }
-
     
         return (
             <div className="blog-slide-bar-top-post right-bar m-t-50">
                 <h1 className="f-bold fs-22 m-b-50">Top Views</h1>
                 
-                { props.data && showTopViews(props.data) }
-                { !props.data && showTopViewSkeleton() }
+                { props.data.length ? showTopViews(props.data) : showTopViewSkeleton()}
 
             </div>
 

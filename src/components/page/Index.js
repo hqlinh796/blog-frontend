@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PostThumbnail from '../postthumbnail/Index';
 import PostThumbnailSkeleton from '../postthumbnail/Skeleton';
 
-import {toSlug} from '../../utils/helpers';
-
 
 class Page extends Component {
     
@@ -16,7 +14,6 @@ class Page extends Component {
 
         if (currentOffset + 100 >= loadMoreOffset){
             
-            const keyword = this.props.keyword;
             //const category = this.props.topic === 'tat-ca' ? '' : this.props.topic;
             this.props.fetchMorePost();
             return;

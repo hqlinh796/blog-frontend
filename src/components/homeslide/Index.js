@@ -14,7 +14,7 @@ const HomeSlide = () => {
             </div>
             <div className="description-slide m-b-20">
               <p className="fs-25 lheight-30">Working as a web developer, i'm interested in <br />
-                creating websites and extension tools.
+                creating websites and chrome extensions.
               </p>
             </div>
             <div className="button-slide">

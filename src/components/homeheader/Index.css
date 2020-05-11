@@ -1,8 +1,8 @@
 .container-header-v2{
-    height: 600px;
     width: 100%;
     background-repeat: none;
     background-size: cover;
     background-position: center;
     align-items: center;
+    background-image: url('/img/home_cover.jpg');
 }

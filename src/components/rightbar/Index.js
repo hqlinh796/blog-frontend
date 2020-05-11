@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import RecentPost from '../recentpost/Index';
 import TopRate from '../toprate/Index';

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import {connect} from 'react-redux';
 
 import Post from '../../components/post/Index';
@@ -7,12 +7,10 @@ import './Index.css';
 import {fetchRelatedPost, ratePost, fetchPostDetail, resetPostDetail} from '../../actions/PostDetail.Actions'
 
 import './Index.css';
-import Messenger from '../../components/messenger/Index';
 import Footer from '../../components/footer/Index';
 import BackToTop from '../../components/backtotop/Index';
-import { Fragment } from 'react';
 import Nav from '../../components/nav/Index';
-import { useEffect } from 'react';
+
 
 const BlogDetail = (props) => {
 
@@ -26,39 +24,39 @@ const BlogDetail = (props) => {
     }, [])
 
 
-    const addRate = () => {
-        const {id} = props.match.params;
-        const vote = localStorage.getItem(`vote-${id}`);
-        if (vote) {
-            let level = document.getElementById('level1');
-            if (!level)
-                return;
-            while (level.id !== `level${vote}`) {
-                //if (level)
-                level.classList.add('rated');
-                level = level.nextElementSibling;
-            } 
-            level.classList.add('rated');
-            if (level.id === 'level5')
-                 return;
+    // const addRate = () => {
+    //     const {id} = props.match.params;
+    //     const vote = localStorage.getItem(`vote-${id}`);
+    //     if (vote) {
+    //         let level = document.getElementById('level1');
+    //         if (!level)
+    //             return;
+    //         while (level.id !== `level${vote}`) {
+    //             //if (level)
+    //             level.classList.add('rated');
+    //             level = level.nextElementSibling;
+    //         } 
+    //         level.classList.add('rated');
+    //         if (level.id === 'level5')
+    //              return;
 
-            level = level.nextElementSibling;
-            while (level.id !== 'level5') {
-                level.classList.remove('rared');
-                level = level.nextElementSibling;
-            }
-            level.classList.remove('rated');
-        }
-    }
+    //         level = level.nextElementSibling;
+    //         while (level.id !== 'level5') {
+    //             level.classList.remove('rared');
+    //             level = level.nextElementSibling;
+    //         }
+    //         level.classList.remove('rated');
+    //     }
+    // }
 
-    const removeRate = () => {
-        let level = document.getElementById('level1');
-        while (level.id !== 'level5') {
-            level.classList.remove('rated');
-            level = level.nextElementSibling;
-        }
-        level.classList.remove('rated');
-    }
+    // const removeRate = () => {
+    //     let level = document.getElementById('level1');
+    //     while (level.id !== 'level5') {
+    //         level.classList.remove('rated');
+    //         level = level.nextElementSibling;
+    //     }
+    //     level.classList.remove('rated');
+    // }
 
     const clickToRate = (num) => {
         const postID = props.match.params.id;
@@ -96,7 +94,7 @@ const BlogDetail = (props) => {
 
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         fetchPostDetail: (postID) => {
             dispatch(fetchPostDetail(postID))
@@ -107,13 +105,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    const reducer = state.postReducer;
+const mapStateToProps = (state) => {
+    const postDetailReducer = state.postDetailReducer;
     
     return {
-        postDetail:     state.postDetailReducer.postDetail,
-        isPostDetailFetching: state.postDetailReducer.isPostDetailFetching,
-        relatedPosts:   state.postDetailReducer.relatedPosts
+        postDetail:     postDetailReducer.postDetail,
+        isPostDetailFetching: postDetailReducer.isPostDetailFetching,
+        relatedPosts:   postDetailReducer.relatedPosts
     }
 }
 

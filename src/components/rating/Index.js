@@ -99,7 +99,7 @@ class Rating extends Component {
                     onMouseOver={() => this.mouseOver('level5')} onMouseOut={() => this.mouseOut()}/>
                 </div>
                 <div className="rate">
-                    <span>Rate: {this.calulateAverage(this.props.rating || [0])} </span>
+                    <span>Ratings: {this.calulateAverage(this.props.rating || [0])} </span>
                     <span>({this.props.rating ? this.props.rating.length : 0} votes)</span>
                 </div>
             </div>

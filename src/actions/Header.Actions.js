@@ -1,6 +1,6 @@
-import { showLoading, hideLoading } from 'react-redux-loading-bar';
+//import { showLoading, hideLoading } from 'react-redux-loading-bar';
 export const setCover = (url) =>  dispatch => {
-        dispatch(showLoading());
+        //dispatch(showLoading());
         dispatch({
                 type: 'SET_COVER',
                 payload: url

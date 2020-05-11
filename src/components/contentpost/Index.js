@@ -1,41 +1,30 @@
-import React, { Component } from 'react';
-import '../contentpost/Index.css';
+import React from 'react';
+import './Index.css';
 
-class ContentBlog extends Component {
+const ContentBlog = (props) => {
       
-
-    getFullDate = (timestamp) => {
-        const date = new Date(timestamp);
-        const day = date.getDate(),
-              month = date.getMonth() + 1,
-              year = date.getFullYear();
-        return day + '/' + month + '/' + year;
-    }
-
-    render() {
-        const {cover, title, date, category, author, content} = this.props.postDetail;
+    
+        const {content, tags} = props.postDetail;
         return (
             <div className="post-detail fs-18">
-                <img src={cover} alt="" className="post-cover-image" />
-                <div className="p-tb-40">
-                    <h1 className="fs-25 f-bold">{title}
-                    </h1>
-                    <div className="date-and-topic fs-16 m-t-20">
-                        <span className="date-post-detail">{this.getFullDate(date)}</span>
-                        <span>&nbsp; | &nbsp;</span>
-                        <span className="topic-post-detail">{category}</span>
-                        <span>&nbsp; | &nbsp;</span>
-                        <i className="fas fa-book-reader m-r-5 m-t-10 m-b-20"></i>
-                        <span className="">{author}</span>
-                    </div>
-                    <div className="post-content fc-2 lh-15">
-                        {content}
+                <div className="p-b-30">
+                    <div className="post-content lh-15">
+                        <p>
+                            {content}
+                        </p>
+                        <p>
+                            {content}
+                        </p>
+                        <h3 className="dis-inline-block m-t-15 f-bold">Tags: &nbsp; </h3>
+                        {tags && tags.map((tag, index) =>
+                            <a href="##" className="fc-1" key={index}>#{tag} </a>
+                        )}
                     </div>
                 </div>
             </div>
 
         );
-    }
+    
 }
 
 export default ContentBlog;

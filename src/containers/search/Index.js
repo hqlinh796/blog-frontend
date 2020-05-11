@@ -40,7 +40,7 @@ const Blog = (props) => {
             keyword = parsed.keyword;
         //const category = topic === 'tat-ca' ? '' : topic;
         setKeyword(keyword);
-    })
+    }, [props.location.search])
 
     
     useEffect(() => {

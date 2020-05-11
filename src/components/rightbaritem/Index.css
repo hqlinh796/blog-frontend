@@ -6,4 +6,6 @@
 }
 .right-bar-item img{
     object-fit: cover;
+    width: 80px !important;
+    height: 80px !important;
 }

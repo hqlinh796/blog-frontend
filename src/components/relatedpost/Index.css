@@ -13,6 +13,14 @@
     display: flex;
     align-items: center;
     text-align: justify;
+    
+    
+}
+.related-post-item > div {
+    overflow: hidden;
+    height: 180px;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .related-post-item a{
@@ -25,5 +33,10 @@
 .related-thumbnail{
     width: 100%;
     object-fit: cover;
-    height: 70%;
+    height: 100%;
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+}
+.related-thumbnail:hover {
+    transform: scale(1.3);
 }

@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { NavLink, Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 import '../nav/Index.css';
 import logo from './logo.png'
-import { useState } from 'react';
-import { useEffect } from 'react';
+
 
 
 const Nav = (props) => {

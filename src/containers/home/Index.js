@@ -4,7 +4,7 @@ import Messenger from '../../components/messenger/Index';
 import Footer from '../../components/footer/Index';
 import BackToTop from '../../components/backtotop/Index';
 import HomeHeader from '../../components/homeheader/Index';
-import LoadingBar, {hideLoading} from 'react-redux-loading-bar';
+//import LoadingBar, {hideLoading} from 'react-redux-loading-bar';
 import {setCover} from '../../actions/Header.Actions';
 import './Index.css';
 
@@ -339,9 +339,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        hideLoadingBar: () => {
-            dispatch(hideLoading())
-        },
+        // hideLoadingBar: () => {
+        //     dispatch(hideLoading())
+        // },
         setCover: (url) => {
             dispatch(setCover(url))
         }

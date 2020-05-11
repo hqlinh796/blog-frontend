@@ -1,8 +1,16 @@
 .post-detail{
     background-color: #fff;
+    margin-top: 450px;
 }
 .post-cover-image{
     height: 365px;
     width: 100%;
     object-fit: cover;
+}
+.post-content {
+    text-align: justify;
+    color: #272727;
+}
+.post-content p {
+    margin-top: 10px;
 }
