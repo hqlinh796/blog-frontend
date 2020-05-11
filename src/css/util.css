@@ -285,9 +285,13 @@
 .flex-j-sa{
     justify-content: space-around;
 }
+.flex-j-e {
+    justify-content: end;
+}
 .flex-a-c{
     align-items: center;
 }
+
 
 .flex-j-s{
     justify-content: flex-start;

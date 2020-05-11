@@ -1,6 +1,7 @@
 .blog-slide-bar-category{
     padding: 40px;
     background-color: #fff;
+    padding-top: 0;
 }
 .blog-slide-bar-category h1, .blog-slide-bar-category a{
     border-bottom: 1px solid #ececec;

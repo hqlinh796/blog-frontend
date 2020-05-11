@@ -5,9 +5,9 @@ import ItemSkeleton from '../rightbaritem/Skeleton';
 import '../rightbar/Index.css';
 
 import {fetchTopRatings} from '../../actions/RightBar.Actions';
-class TopRate extends Component {
+const TopRate = (props) => {
 
-    showTopRatings = (topRatingsArray) => {
+    const showTopRatings = (topRatingsArray) => {
         if (topRatingsArray.length) {
             return topRatingsArray.map((data, index) => 
                 <Item data={data} key={index}/>
@@ -15,7 +15,7 @@ class TopRate extends Component {
         }
     }
 
-    showTopRatingSkeleton = () => {
+    const showTopRatingSkeleton = () => {
         let i = 0, result = [];
         for ( ; i < 5 ; i++)
             result.push(
@@ -24,38 +24,18 @@ class TopRate extends Component {
         return result;
     }
 
-    render() {
         return (
             <div className="blog-slide-bar-top-rate right-bar m-t-50">
                 <h1 className="f-bold fs-22 m-b-50">Top Ratings</h1>
                 
-                { !this.props.isTopRatingFetching && this.showTopRatings(this.props.topRatings) }
-                { this.props.isTopRatingFetching && this.showTopRatingSkeleton() }
+                { props.data && showTopRatings(props.data) }
+                { !props.data && showTopRatingSkeleton() }
 
             </div>
 
         );
-    }
 
-    componentDidMount(){
-        if (!this.props.topRatings.length)
-            this.props.fetchTopRatings();
-    }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        topRatings: state.rightbarReducer.topRatings,
-        isTopRatingFetching: state.rightbarReducer.isTopRatingFetching
-    }
-}
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        fetchTopRatings: () => {
-            dispatch(fetchTopRatings())
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopRate)
+export default TopRate;

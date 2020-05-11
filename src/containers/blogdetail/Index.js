@@ -7,11 +7,27 @@ import './Index.css';
 import {fetchRelatedPost, ratePost, fetchPostDetail, resetPostDetail} from '../../actions/PostDetail.Actions'
 
 import './Index.css';
+import Messenger from '../../components/messenger/Index';
+import Footer from '../../components/footer/Index';
+import BackToTop from '../../components/backtotop/Index';
+import { Fragment } from 'react';
+import Nav from '../../components/nav/Index';
+import { useEffect } from 'react';
 
-class BlogDetail extends Component {
+const BlogDetail = (props) => {
 
-    addRate = () => {
-        const {id} = this.props.match.params;
+
+
+    useEffect(() => {
+        window.scroll(0, 100);
+        const postID = props.match.params.id;
+        props.fetchPostDetail(postID);
+        props.fetchRelatedPost(postID);
+    }, [])
+
+
+    const addRate = () => {
+        const {id} = props.match.params;
         const vote = localStorage.getItem(`vote-${id}`);
         if (vote) {
             let level = document.getElementById('level1');
@@ -35,7 +51,7 @@ class BlogDetail extends Component {
         }
     }
 
-    removeRate = () => {
+    const removeRate = () => {
         let level = document.getElementById('level1');
         while (level.id !== 'level5') {
             level.classList.remove('rated');
@@ -44,66 +60,38 @@ class BlogDetail extends Component {
         level.classList.remove('rated');
     }
 
-    clickToRate = (num) => {
-        const postID = this.props.match.params.id;
+    const clickToRate = (num) => {
+        const postID = props.match.params.id;
         //alert(postID);
         //set LocalStorage
         localStorage.setItem(`vote-${postID}`, num);
         //send Rate
         
-        this.props.ratePost(postID, num);
+        props.ratePost(postID, num);
     }
 
  
-    render() {
-        return (  
+    
+    return (
+        <Fragment>
+            <Nav />
+            {/* <Messenger /> */}
             <section className="container-blog-detail-content p-tb-100">
                 <div className="blog-detail-content-wrapper container">
                     <div className="row">
-                        <Post 
-                        isFetching={this.props.isPostDetailFetching} 
-                        postDetail={this.props.postDetail} 
-                        relatedPosts={this.props.relatedPosts} 
-                        clickToRate={(num) => this.clickToRate(num)}
-                        id={this.props.match.params.id} />
+                        <Post
+                            isFetching={props.isPostDetailFetching}
+                            postDetail={props.postDetail}
+                            relatedPosts={props.relatedPosts}
+                            clickToRate={(num) => clickToRate(num)}
+                            id={props.match.params.id} />
                     </div>
                 </div>
             </section>
-            
-            
-        );
-    }
-
-    componentDidMount() {
-        const postID = this.props.match.params.id;
-        //console.log('did mount id la: ' + postID);
-        this.props.fetchPostDetail(postID);
-
-        
-        this.props.fetchRelatedPost(postID);
-    }
-    
-    
-    shouldComponentUpdate(nextPops, nextState){
-        //window.scrollTo(0, 500);
-        const nextPostID = nextPops.match.params.id,
-              currentPostID = this.props.match.params.id;
-        if (nextPostID !== currentPostID){
-            this.props.fetchPostDetail(nextPostID);
-            this.props.fetchRelatedPost(nextPostID);
-            return false;
-        }
-        window.scroll(0, 500);
-        this.removeRate();
-        this.addRate();   
-        return true;
-    }
-
-    componentWillUnmount() {
-        this.props.resetPostDetail();
-    }
-
-    
+            <Footer />
+            <BackToTop />
+        </Fragment>
+    );
     
 
 }
@@ -111,10 +99,8 @@ class BlogDetail extends Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         fetchPostDetail: (postID) => {
-            
             dispatch(fetchPostDetail(postID))
         },
-        
         fetchRelatedPost: (postID) => dispatch( fetchRelatedPost(postID)),
         ratePost: (postID, rate) => dispatch(ratePost(postID, rate)),
         resetPostDetail: () => dispatch(resetPostDetail())

@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Fragment } from 'react';
+import queryString from 'query-string'
 
 import Messenger from '../../components/messenger/Index';
 import Footer from '../../components/footer/Index';
 import BackToTop from '../../components/backtotop/Index';
+import SearchText from '../../components/searchtext/Index';
 import Page from '../../components/page/Index';
 import RightBar from '../../components/rightbar/Index';
 import Nav from '../../components/nav/Index';
 
-import './Index.css';
-
-import {fetchPost, resetResult} from '../../actions/Post.Actions';
-import {fetchRecentPosts, fetchCategories, fetchTopRatings, fetchTopViews} from '../../actions/RightBar.Actions';
-
-
-
+import { searchPost, resetResult, changeSortBy } from '../../actions/Post.Actions';
+import { fetchRecentPosts, fetchCategories, fetchTopRatings, fetchTopViews } from '../../actions/RightBar.Actions';
 
 
 
@@ -31,21 +28,28 @@ const Blog = (props) => {
         recentPosts
     } = props;
     const {
-        search,
-        fetchPost,
+        searchPost,
         resetResult
     } = props;
 
     const [category, setCategory] = useState('');
-    
-    useEffect(() => {
-        const {topic} = props.match.params;
-        const category = topic === 'tat-ca' ? '' : topic;
-        setCategory(category);
-    })
+    const [keyword, setKeyword] = useState('');
 
     useEffect(() => {
-        document.title = 'Blog - Linhtinh';
+        const parsed = queryString.parse(props.location.search),
+            keyword = parsed.keyword;
+        //const category = topic === 'tat-ca' ? '' : topic;
+        setKeyword(keyword);
+    })
+
+    
+    useEffect(() => {
+        resetResult();
+        searchPost(keyword, 0, 'date', category)
+    }, [keyword, category])
+
+    useEffect(() => {
+        document.title = `Search for ${keyword}`;
         if (!props.recentPosts.length) {
             props.fetchRecentPosts();
             props.fetchTopRatings();
@@ -53,11 +57,10 @@ const Blog = (props) => {
             props.fetchCategories();
         }
     }, [])
-    
 
     const fetchMorePost = () => {
         if (hasMore && !isPostFetching)
-            fetchPost(page + 1, 'date', category);
+            searchPost(keyword, page + 1, 'date', category);
     }
 
 
@@ -65,21 +68,24 @@ const Blog = (props) => {
         <Fragment>
             <Nav />
             <Messenger />
-            <section className="container-blog-content p-t-100">
+            <section className="container-blog-content p-t-50">
                 <div className="blog-content-wrapper container">
+                    <div className="row">
+                        <SearchText keyword={keyword} />
+                    </div>
                     <div className="row">
                         <Page
                             isPostFetching={isPostFetching}
                             page={page}
                             posts={posts}
                             fetchMorePost={fetchMorePost}
-                            searchPost={(keyword, nextPage, sortBy) => search(keyword, nextPage, sortBy)}
+
                         />
-                        <RightBar
+                        <RightBar 
                             recentPosts = {recentPosts}
+                            categories = {categories}
                             topRatings = {topRatings}
                             topViews = {topViews}
-                            categories = {categories}
                         />
                     </div>
                 </div>
@@ -92,12 +98,16 @@ const Blog = (props) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        fetchPost: (nextPage, sortBy, category) => {
-            dispatch(fetchPost(nextPage, sortBy, category));
+        searchPost: (keyword, nextPage, sortBy, category) => {
+            dispatch(searchPost(keyword, nextPage, sortBy, category));
         },
+
         resetResult: () => dispatch(
             resetResult()
         ),
+        changeSortBy: (sortBy) => {
+            dispatch(changeSortBy(sortBy))
+        },
         fetchRecentPosts: () => {
             dispatch(fetchRecentPosts());
         },
@@ -110,21 +120,21 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         fetchCategories: () => {
             dispatch(fetchCategories());
         },
-        
+
+
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     const {postReducer, rightbarReducer} = state;
-    
+
     return {
-        posts:          postReducer.posts,
-        hasMore:        postReducer.hasMore,
-        page:           postReducer.page,
-        keyword:        postReducer.keyword,
-        isSearch:       postReducer.isSearch,
+        posts: postReducer.posts,
+        hasMore: postReducer.hasMore,
+        page: postReducer.page,
+        keyword: postReducer.keyword,
+        isSearch: postReducer.isSearch,
         isPostFetching: postReducer.isPostFetching,
-        
 
         recentPosts:    rightbarReducer.recentPosts,
         topRatings:     rightbarReducer.topRatings,

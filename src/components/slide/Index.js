@@ -16,7 +16,7 @@ class Slide extends Component {
                 return;
             const category = this.props.categories.filter(category => category.name === this.props.topic)[0];
             this.props.setCover(category.cover);
-            return this.props.topic;
+            //return this.props.topic;
         }
             
         let topic = this.props.match.params.topic;
@@ -25,10 +25,10 @@ class Slide extends Component {
         const category = this.props.categories.filter(categoryItem => categoryItem.slug === topic)[0];
         if (category) {
             this.props.setCover(category.cover);
-            return category.name;
+            //return category.name;
         } else {
             this.props.setCover(urlCoverBlog);
-            return 'Tất cả';
+            //return 'Tất cả';
         }
         
     }

@@ -6,10 +6,10 @@ import '../rightbar/Index.css';
 
 import {fetchTopViews} from '../../actions/RightBar.Actions';
 
-class TopView extends Component {
+const TopView = (props) => {
 
 
-    showTopViews = (TopViewsArray) => {
+    const showTopViews = (TopViewsArray) => {
         if (TopViewsArray.length) {
             return TopViewsArray.map((data, index) => 
                 <Item data={data} key={index}/>
@@ -17,7 +17,7 @@ class TopView extends Component {
         }
     }
 
-    showTopViewSkeleton = () => {
+    const showTopViewSkeleton = () => {
         let i = 0, result = [];
         for ( ; i < 5 ; i++)
             result.push(
@@ -26,39 +26,18 @@ class TopView extends Component {
         return result;
     }
 
-    render() {
+    
         return (
             <div className="blog-slide-bar-top-post right-bar m-t-50">
                 <h1 className="f-bold fs-22 m-b-50">Top Views</h1>
                 
-                { !this.props.isTopViewFetching && this.showTopViews(this.props.topViews) }
-                { this.props.isTopViewFetching && this.showTopViewSkeleton() }
+                { props.data && showTopViews(props.data) }
+                { !props.data && showTopViewSkeleton() }
 
             </div>
 
         );
-    }
-    componentDidMount(){
-        if (!this.props.topViews.length){
-            this.props.fetchTopViews();
-        }
-            
-    }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        topViews: state.rightbarReducer.topViews,
-        isTopViewFetching: state.rightbarReducer.isTopViewFetching
-    }
-}
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        fetchTopViews: () => {
-            dispatch(fetchTopViews())
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopView)
+export default TopView;

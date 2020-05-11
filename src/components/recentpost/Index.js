@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-
 import RecentPostItem from './Item';
 import RightBarItemSkeleton from '../rightbaritem/Skeleton';
-import {fetchRecentPosts} from '../../actions/RightBar.Actions';
 import '../rightbar/Index.css';
 
-class RecentPost extends Component {
+const RecentPost = (props) => {
 
-    showRecentPosts = (recentPostArray) => {
+    const showRecentPosts = (recentPostArray) => {
         if (recentPostArray.length)
             return recentPostArray.map((data, index) =>
                     <RecentPostItem data={data} key={index} />)
     }
 
-    showRecentPostSkeleton = () => {
+    const showRecentPostSkeleton = () => {
         let i = 0, result = [];
         for ( ; i < 5 ; i++)
             result.push(
@@ -23,38 +20,19 @@ class RecentPost extends Component {
         return result;
     }
 
-    render() {
+    
         return (
             <div className="blog-slide-bar-recent-post right-bar m-t-50">
                 <h1 className="f-bold fs-22 m-b-50">Recent Posts</h1>
                 
-                { !this.props.isRecentPostFetching && this.showRecentPosts(this.props.recentPosts) }
-                { this.props.isRecentPostFetching && this.showRecentPostSkeleton() }
+                { props.data && showRecentPosts(props.data) }
+                { !props.data && showRecentPostSkeleton() }
 
             </div>
 
         );
-    }
 
-    componentDidMount(){
-        if (!this.props.recentPosts.length)
-            this.props.fetchRecentPosts();
-    }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        recentPosts: state.rightbarReducer.recentPosts,
-        isRecentPostFetching: state.rightbarReducer.isRecentPostFetching
-    }
-}
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        fetchRecentPosts: () => {
-            dispatch(fetchRecentPosts())
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RecentPost)
+export default RecentPost;

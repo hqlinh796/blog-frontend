@@ -16,7 +16,7 @@ export function searchPost(keyword, page, sortBy){
         dispatch({
             type: 'FETCHING_POST'
         })
-        keyword = escapeSpace(keyword);
+        keyword = escapeSpace(keyword || '');
         //convert space to %20
         fetch(`${postPath}/search?keyword=${keyword}&page=${page}&sort=${sortBy}`)
         .then(postData => postData.json())

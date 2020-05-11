@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Search from '../search/Index';
+
 import RecentPost from '../recentpost/Index';
 import TopRate from '../toprate/Index';
 import Tag from '../tag/Index';
@@ -7,24 +7,19 @@ import Category from '../category/Index';
 import TopView from '../topview/Index';
 
 
-class RightSlideBar extends Component {
+
+const RightSlideBar = (props) => {
+    const {categories, recentPosts, topRatings, topViews} = props;
     
-    render() {
-        console.log('right bar render');
-        return (
-            <div className="col col-lg-4 blog-slide-bar-wrapper">
-                <Search />
-                <Category />
-                <TopView />
-                <RecentPost />
-                <TopRate />
-                <Tag/>
+    return (
+        <div className="col col-lg-4 blog-slide-bar-wrapper">
+            <Category data = {categories}/>
+            <TopView data = {topViews}/>
+            <RecentPost data = {recentPosts}/>
+            <TopRate data = {topRatings}/>
+            <Tag />
         </div>
 
-        );
-    }
-    
-    
+    );
 }
-
 export default RightSlideBar;
