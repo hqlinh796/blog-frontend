@@ -7,7 +7,6 @@ const Messenger = () => {
             <MessengerCustomerChat
                 pageId="110885300571206"
                 appId="577342806204805"
-                shouldShowDialog={true}
             />
         );
 }

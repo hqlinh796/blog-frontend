@@ -25,8 +25,13 @@
     
 }
 
+.post-detail-title {
+    font-size: 40px;
+}
+
 .date-and-topic {
     font-weight: 200;
+    font-size: 16px;
 }
 .date-and-topic img {
     height: 17px;
@@ -35,4 +40,19 @@
     margin-right: 5px;
     margin-left: 10px;
     display: inline-block;
+}
+
+@media screen and (max-width: 575px) {
+    .post-detail-cover > div {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .post-detail-title {
+        font-size: 25px;
+        line-height: 30px;
+    }
+    .date-and-topic {
+        font-size: 12px;
+    }
 }

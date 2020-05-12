@@ -24,7 +24,7 @@ const HomeHeader = (props) => {
     return (
         <header className="container-header-v2 fc-white" style={{height: height}}>
             {/* <LoadingBar style={{ backgroundColor: '#28AE60', height: '7px', position: 'fixed', top: '0', zIndex: '100000' }} /> */}
-            <Nav />
+            <Nav color={props.color}/>
             <HomeSlide />
         </header>
     )

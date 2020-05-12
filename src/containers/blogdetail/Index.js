@@ -72,7 +72,7 @@ const BlogDetail = (props) => {
     
     return (
         <Fragment>
-            <Nav />
+            <Nav color={'fc-white'}/>
             {/* <Messenger /> */}
             <section className="container-blog-detail-content p-tb-100">
                 <div className="blog-detail-content-wrapper container">

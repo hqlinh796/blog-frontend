@@ -1,32 +1,35 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import LikeFacebook from '../likefacebook';
+import ShareFacebook from '../sharefacebook';
 import './Index.css';
 
-class Rating extends Component {
 
-    mouseOver = (id) => {
-        this.removeRate();
+const Rating = (props) => {
+
+    const mouseOver = (id) => {
+        removeRate();
         let level = document.getElementById('level1');
-            if (!level)
-                return;
-            while (level.id !== id) {
-                //if (level)
-                level.classList.add('hover-rate');
-                level = level.nextElementSibling;
-            } 
+        if (!level)
+            return;
+        while (level.id !== id) {
+            //if (level)
             level.classList.add('hover-rate');
-            if (level.id === 'level5')
-                 return;
-
             level = level.nextElementSibling;
-            while (level.id !== 'level5') {
-                level.classList.remove('hover-rate');
-                level = level.nextElementSibling;
-            }
+        }
+        level.classList.add('hover-rate');
+        if (level.id === 'level5')
+            return;
+
+        level = level.nextElementSibling;
+        while (level.id !== 'level5') {
             level.classList.remove('hover-rate');
+            level = level.nextElementSibling;
+        }
+        level.classList.remove('hover-rate');
     }
 
-    mouseOut = () => {
-        
+    const mouseOut = () => {
+
         let level = document.getElementById('level1');
 
         while (level.id !== 'level5') {
@@ -34,12 +37,12 @@ class Rating extends Component {
             level = level.nextElementSibling;
         }
         level.classList.remove('hover-rate');
-        this.addRate();
+        addRate();
     }
 
 
-    addRate = () => {
-        const { id } = this.props;
+    const addRate = () => {
+        const { id } = props;
         const vote = localStorage.getItem(`vote-${id}`);
         if (vote) {
             let level = document.getElementById('level1');
@@ -64,7 +67,7 @@ class Rating extends Component {
     }
 
 
-    removeRate = () => {
+    const removeRate = () => {
         let level = document.getElementById('level1');
         while (level.id !== 'level5') {
             level.classList.remove('rated');
@@ -73,38 +76,47 @@ class Rating extends Component {
         level.classList.remove('rated');
     }
 
-    calulateAverage = (arr) => {
-        const avg = arr.reduce((total, value) => total += value)/arr.length;
-        return Math.round(avg*100)/100;
+    const calulateAverage = (arr) => {
+        const avg = arr.reduce((total, value) => total += value) / arr.length;
+        return Math.round(avg * 100) / 100;
     }
 
-    render() {
-        return (
-            <div className="rate-wrapper p-tb-10">
-                <div className="your-rate-wrapper p-t-20">
-                    <span>Your rating: </span>
-                    <i className="fas fa-star" id="level1" onClick={() => this.props.clickToRate(1)}
-                    onMouseOver={() => this.mouseOver('level1')} onMouseOut={() => this.mouseOut()}/>
+    const [location, setLocation] = useState(() => window.location.href);
+    useEffect(() => {
+        setLocation(window.location.href);
+    })
 
-                    <i className="fas fa-star" id="level2" onClick={() => this.props.clickToRate(2)}
-                    onMouseOver={() => this.mouseOver('level2')} onMouseOut={() => this.mouseOut()}/>
 
-                    <i className="fas fa-star" id="level3" onClick={() => this.props.clickToRate(3)}
-                    onMouseOver={() => this.mouseOver('level3')} onMouseOut={() => this.mouseOut()}/>
+    return (
+        <div className="rate-wrapper p-tb-10">
+            <div className="your-rate-wrapper p-t-20">
+                <span>Your rating: </span>
+                <i className="fas fa-star" id="level1" onClick={() => props.clickToRate(1)}
+                    onMouseOver={() => mouseOver('level1')} onMouseOut={() => mouseOut()} />
 
-                    <i className="fas fa-star" id="level4" onClick={() => this.props.clickToRate(4)}
-                    onMouseOver={() => this.mouseOver('level4')} onMouseOut={() => this.mouseOut()}/>
+                <i className="fas fa-star" id="level2" onClick={() => props.clickToRate(2)}
+                    onMouseOver={() => mouseOver('level2')} onMouseOut={() => mouseOut()} />
 
-                    <i className="fas fa-star" id="level5" onClick={() => this.props.clickToRate(5)}
-                    onMouseOver={() => this.mouseOver('level5')} onMouseOut={() => this.mouseOut()}/>
-                </div>
-                <div className="rate">
-                    <span>Ratings: {this.calulateAverage(this.props.rating || [0])} </span>
-                    <span>({this.props.rating ? this.props.rating.length : 0} votes)</span>
-                </div>
+                <i className="fas fa-star" id="level3" onClick={() => props.clickToRate(3)}
+                    onMouseOver={() => mouseOver('level3')} onMouseOut={() => mouseOut()} />
+
+                <i className="fas fa-star" id="level4" onClick={() => props.clickToRate(4)}
+                    onMouseOver={() => mouseOver('level4')} onMouseOut={() => mouseOut()} />
+
+                <i className="fas fa-star" id="level5" onClick={() => props.clickToRate(5)}
+                    onMouseOver={() => mouseOver('level5')} onMouseOut={() => mouseOut()} />
             </div>
-        );
-    }
+            <div className="rate">
+                <span>Ratings: {calulateAverage(props.rating || [0])} </span>
+                <span>({props.rating ? props.rating.length : 0} votes)</span>
+            </div>
+            <div>
+                <LikeFacebook location={location} />
+                <ShareFacebook location={location} />
+            </div>
+        </div>
+    );
+
 }
 
 export default Rating;

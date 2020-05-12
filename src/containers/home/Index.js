@@ -19,7 +19,8 @@ const Home = (props) => {
             <Fragment>
                 <HomeHeader 
                 src={props.cover}
-                hideLoadingBar={props.hideLoadingBar}/>
+                hideLoadingBar={props.hideLoadingBar}
+                color={'fc-white'}/>
                 <Messenger />
                 <section className="container-main-content">
                     {/*CONTENT 1*/}

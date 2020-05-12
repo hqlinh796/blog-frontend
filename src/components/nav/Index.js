@@ -16,6 +16,7 @@ const Nav = (props) => {
     const [isShowModal, setShowModal] = useState(false);
     const [keyword, setKeyword] = useState('');
 
+    //Nav fix in top
     const FixNav = isShow => {
         return (
             <div className="fix-main-nav fix-main-nav-show" style={{ top: isShowFixNav ? '0' : '-80px' }}>
@@ -35,7 +36,7 @@ const Nav = (props) => {
                                         <li><NavLink to="/blog/tat-ca" className="link fc-black link-white-hover">Blogs</NavLink></li>
 
                                         <li><NavLink exact to="/contact" className="link fc-black link-white-hover">Contact</NavLink></li>
-                                        <li><span onClick={(e) => clickSearch(e)}><i className="fas fa-search link fc-black link-white-hover" /></span></li>
+                                        <li><span onClick={(e) => clickSearch(e)} style={{cursor: 'pointer'}}><i className="fas fa-search link fc-black link-white-hover" /></span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -65,10 +66,12 @@ const Nav = (props) => {
                                     </div>
                                     <div className="link-nav">
                                         <ul className="flex">
-                                            <li><NavLink exact to="/" className="link fc-black link-white-hover">Home</NavLink></li>
-                                            <li><NavLink to="/blog/tat-ca" className="link fc-black link-white-hover">Blogs</NavLink></li>
-                                            <li><NavLink exact to="/contact" className="link fc-black link-white-hover">Contact</NavLink></li>
-                                            <li><span onClick={() => clickSearch()} style={{ cursor: 'pointer' }}><i className="fas fa-search link fc-black link-white-hover" /></span></li>
+                                            <li><NavLink exact to="/" className={`link ${props.color || 'fc-black'} link-white-hover`}>Home</NavLink></li>
+                                            <li><NavLink to="/blog/tat-ca" className={`link ${props.color || 'fc-black'} link-white-hover`}>Blogs</NavLink></li>
+                                            <li><NavLink exact to="/contact" className={`link ${props.color || 'fc-black'} link-white-hover`}>Contact</NavLink></li>
+                                            <li><span onClick={() => clickSearch()} style={{ cursor: 'pointer' }}>
+                                                <i className={`fas fa-search link ${props.color || 'fc-black'} link-white-hover`} />
+                                            </span></li>
                                         </ul>
                                     </div>
                                 </div>

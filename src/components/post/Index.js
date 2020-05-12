@@ -9,10 +9,6 @@ import  './index.css';
 
 const Post = (props) => {
     
-    const showPostDetail = (postDetail) => <ContentBlog postDetail={postDetail}/>
-    
-    const showPostDetailSkeleton = () => <ContentBlogSkeleton />
-
     const getLocation = () => window.location.href;
 
     useEffect(() => {
@@ -24,8 +20,8 @@ const Post = (props) => {
         <Fragment>
             <div className="post-detail-cover" style={{backgroundImage: `url(${cover})`}}>
                 <div>
-                    <h1 className="post-detail-title fs-40 fc-white">{title}</h1>
-                    <div className="date-and-topic fs-16 m-t-20 fc-white">
+                    <h1 className="post-detail-title fc-white">{title}</h1>
+                    <div className="date-and-topic m-t-20 fc-white">
                         <img src='/img/calendar.svg' alt='calendar'/>
                         <span className="date-post-detail">{date && new Date(date).toDateString()}</span>
                         &nbsp; |
@@ -39,7 +35,7 @@ const Post = (props) => {
             </div>
             <div className="col col-lg-1"></div>
             <div className="left-slide-bar-blog-detail-wrapper p-b-50 col-lg-10 col">
-                {!props.isFetching ? showPostDetail(props.postDetail) : showPostDetailSkeleton()}
+                {!props.isFetching ? <ContentBlog postDetail={props.postDetail}/> : <ContentBlogSkeleton />}
                 <Rating
                     rating={rating} 
                     clickToRate={(num) => props.clickToRate(num)}

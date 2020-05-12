@@ -4,13 +4,29 @@ import {toSlug} from '../../utils/helpers';
 import '../rightbaritem/Index.css';
 
 
+
 const TopViewItem = (props) => {
 
     const { title, cover, _id, views } = props.data;
+    // const [imgLoaded, setImgLoaded] = useState(false);
+
+    // useEffect(() => {
+        
+    // })
+
+    // const changeImage =  (src) => {
+    //     const img = document.createElement('img');
+    //     img.src = src;
+    //     // img.addEventListener('load', async () => {
+    //     //     return img;
+    //     // })
+    //     return ;
+    // }
+
     
     return (
         <div className="top-post-detail right-bar-item flex flex-a-c m-b-25">
-            <img  src={cover || 'https://via.placeholder.com/80x80'} alt={title}/>
+            <img src={cover} alt={title} />
             <div className="right-bar-item-text m-l-20 lh-15">
                 <Link className="fs-18 fc-black a-hover-to-green" to={'/blog/' + toSlug(title) + '.' + _id} title={title}>
                     {title}
