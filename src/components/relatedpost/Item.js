@@ -9,7 +9,10 @@ const RelatedPostItem = (props) => {
     return (
         <div className="col col-md-4 related-post-item">
             <div>
-                <img alt={title} className="related-thumbnail m-b-10" src={cover} />
+                <Link to={'/blog/' + toSlug(title) + '.' + _id}>
+                    <img alt={title} className="related-thumbnail m-b-10" src={cover} />
+                </Link>
+                
             </div>
             <Link to={'/blog/' + toSlug(title) + '.' + _id}>{title}</Link>
         </div>

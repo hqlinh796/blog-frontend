@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
+import CommentCount from '../commentcount';
 import {toSlug} from '../../utils/helpers';
 import './Index.css';
 
@@ -49,7 +50,6 @@ const PostThumbnail = (props) => {
         const avg = arr.reduce((total, value) => total = parseInt(total) + parseInt(value)) / arr.length;
         return Math.round(avg * 100) / 100;
     }
-
     
         const {title, description, date, cover, tags, _id, category, rating} = props.post;
         return (
@@ -74,9 +74,19 @@ const PostThumbnail = (props) => {
                         &nbsp;
                         <span> | </span>
                         &nbsp;
+                        <i class="fas fa-comments"></i>
+                        &nbsp;
+                        <span className="dis-inline-block" id={`fb-comment-count-${_id}`}>
+                            <CommentCount location={window.location.origin + "/blog/" + toSlug(title) + "." + _id}/>
+                        </span>
+                        &nbsp;
+                       comments
+                       <span> | </span>
+                        &nbsp;
                         <i className="fas fa-star" />
                         &nbsp;
                         {calculateAverageRating(rating)}
+                        &nbsp;
                     </div>
                     <div className="tags">
                         <span>Tags: </span>

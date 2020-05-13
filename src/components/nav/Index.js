@@ -47,9 +47,8 @@ const Nav = (props) => {
         )
     }
 
-    const handleToggleMenuClick = () => {
-        setShowCollapseNav(!isShowCollapseNav);
-    }
+    const handleToggleMenuClick = () => setShowCollapseNav(!isShowCollapseNav);
+
 
     const CollapseNav = (isShow) => {
         const opacity = isShow ? '1' : '0';
