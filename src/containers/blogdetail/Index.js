@@ -2,11 +2,11 @@ import React, { useEffect, Fragment } from 'react';
 import {connect} from 'react-redux';
 
 import Post from '../../components/post/Index';
-import './Index.css';
+import {Helmet} from "react-helmet";
+//<meta property="og:image" content="http://www.whatever.com/resources/filename.jpg" /> 
 
+import './Index.css';
 import {fetchRelatedPost, ratePost, fetchPostDetail, resetPostDetail} from '../../actions/PostDetail.Actions'
-
-import './Index.css';
 import Footer from '../../components/footer/Index';
 import BackToTop from '../../components/backtotop/Index';
 import Nav from '../../components/nav/Index';
@@ -21,7 +21,7 @@ const BlogDetail = (props) => {
         const postID = props.match.params.id;
         props.fetchPostDetail(postID);
         props.fetchRelatedPost(postID);
-    }, [])
+    }, [props.match.params.id])
 
 
     // const addRate = () => {
@@ -72,6 +72,10 @@ const BlogDetail = (props) => {
     
     return (
         <Fragment>
+            <Helmet>
+                <meta property="og:image" content={props.postDetail.cover} /> 
+                <title>{props.postDetail.title}</title>
+            </Helmet>
             <Nav color={'fc-white'}/>
             {/* <Messenger /> */}
             <section className="container-blog-detail-content p-tb-100">

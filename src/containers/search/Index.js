@@ -32,7 +32,7 @@ const Blog = (props) => {
         resetResult
     } = props;
 
-    const [category, setCategory] = useState('');
+    
     const [keyword, setKeyword] = useState('');
 
     useEffect(() => {
@@ -45,8 +45,8 @@ const Blog = (props) => {
     
     useEffect(() => {
         resetResult();
-        searchPost(keyword, 0, 'date', category)
-    }, [keyword, category])
+        searchPost(keyword, 0, 'date', 'tat-ca')
+    }, [keyword])
 
     useEffect(() => {
         document.title = `Search for ${keyword}`;
@@ -60,7 +60,7 @@ const Blog = (props) => {
 
     const fetchMorePost = () => {
         if (hasMore && !isPostFetching)
-            searchPost(keyword, page + 1, 'date', category);
+            searchPost(keyword, page + 1, 'date', 'tat-ca');
     }
 
 

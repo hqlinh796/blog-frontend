@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import ContentBlog from '../contentpost/Index';
 import RelatedPost from '../relatedpost/Index';
 import ContentBlogSkeleton from '../contentpost/Skeleton';
@@ -10,10 +10,6 @@ import  './index.css';
 const Post = (props) => {
     
     const getLocation = () => window.location.href;
-
-    useEffect(() => {
-        document.title = props.postDetail.title;
-    })
     
     const {cover, title, date, category, author, rating} = props.postDetail;
     return (

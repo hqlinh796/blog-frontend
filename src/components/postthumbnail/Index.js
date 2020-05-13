@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {toSlug} from '../../utils/helpers';
 import './Index.css';
 
-class PostThumbnail extends Component {
+const PostThumbnail = (props) => {
     
     
 
-    getDate = (timestamp)=>{
+    const getDate = (timestamp)=>{
         const date = new Date(timestamp);
         return date.getDate();
     }
 
-    getMonth = (timestamp)=>{
+    const getMonth = (timestamp)=>{
         const date = new Date(timestamp);
         switch (date.getMonth()) {
             case 0:
@@ -45,14 +45,13 @@ class PostThumbnail extends Component {
         
     }
 
-    calcurateAverageRating = (ratings) => {
-        const total = ratings.reduce((total, rating) => total += rating);
-        return Math.round(total * 100 /ratings.length)/100;
+    const calculateAverageRating = (arr) => {
+        const avg = arr.reduce((total, value) => total = parseInt(total) + parseInt(value)) / arr.length;
+        return Math.round(avg * 100) / 100;
     }
 
-    render() {
-        
-        const {title, description, date, cover, tags, _id, category, rating} = this.props.post;
+    
+        const {title, description, date, cover, tags, _id, category, rating} = props.post;
         return (
             
             <div className="post-overview m-b-100">
@@ -60,8 +59,8 @@ class PostThumbnail extends Component {
                 <div className="post-text-detail p-t-70 p-b-40 p-lr-30">
                     <div className="date-post">
                         <div className="lh-13 txt-center">
-                            <p className="fs-23 f-bold">{this.getDate(parseInt(date)) }</p>
-                            <p className="fs-20">{this.getMonth(parseInt(date)) }</p>
+                            <p className="fs-23 f-bold">{getDate(parseInt(date)) }</p>
+                            <p className="fs-20">{getMonth(parseInt(date)) }</p>
                         </div>
                     </div>
                     <Link to={"/blog/" + toSlug(title) + "." + _id} className="fs-23 f-bold fc-black a-hover-to-green">{title }</Link>
@@ -77,7 +76,7 @@ class PostThumbnail extends Component {
                         &nbsp;
                         <i className="fas fa-star" />
                         &nbsp;
-                        {this.calcurateAverageRating(rating)}
+                        {calculateAverageRating(rating)}
                     </div>
                     <div className="tags">
                         <span>Tags: </span>
@@ -88,7 +87,6 @@ class PostThumbnail extends Component {
                 </div>
             </div>
         );
-    }
 }
 
 export default PostThumbnail;
