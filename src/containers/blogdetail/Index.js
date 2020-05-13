@@ -74,11 +74,11 @@ const BlogDetail = (props) => {
         <Fragment>
             <Helmet>
                 <title>{props.postDetail.title + '- Linhtinh'}</title>
-                {/* <meta property="og:image" content={postDetail.cover} /> 
+                <meta property="og:image" content={postDetail.cover} /> 
                 <meta property="og:url" content={window.location.href} />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={postDetail.title} />
-                <meta property="og:description" content={postDetail.description} /> */}
+                <meta property="og:description" content={postDetail.description} />
             </Helmet>
             <Nav color={'fc-white'}/>
             {/* <Messenger /> */}

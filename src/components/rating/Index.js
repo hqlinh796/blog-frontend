@@ -22,7 +22,7 @@ const Rating = (props) => {
     const getLocation = () => window.location.href;
 
     const [yourRating, setYourRating] = useState(0);
-    
+
     useEffect(() => {
         const yourRating = parseInt(localStorage.getItem(`vote-${props.id}`)) || 0;
         setYourRating(yourRating);
@@ -64,7 +64,6 @@ const Rating = (props) => {
             </div>
             <div>
                 <LikeFacebook location={getLocation()} />
-                <ShareFacebook location={getLocation()} />
             </div>
         </div>
     );
