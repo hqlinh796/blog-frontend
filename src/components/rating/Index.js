@@ -51,6 +51,14 @@ const Rating = (props) => {
         return elements;
     }
 
+    const [share, setShare] = useState(false);
+    useEffect(() => {
+        const headElement = document.querySelector('head');
+        headElement.addEventListener('change', () => {
+            setShare(true);
+        })
+    }, [])
+
     return (
         <div className="rate-wrapper p-tb-10">
             <div className="your-rate-wrapper p-t-20">
@@ -63,7 +71,7 @@ const Rating = (props) => {
                 <span>({props.rating ? props.rating.length : 0} votes)</span>
             </div>
             <div>
-                <LikeFacebook location={getLocation()} />
+                {share ? <LikeFacebook location={getLocation()} /> : null}
             </div>
         </div>
     );
