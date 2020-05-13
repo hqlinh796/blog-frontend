@@ -69,12 +69,16 @@ const BlogDetail = (props) => {
     }
 
  
-    
+    const {postDetail} = props;
     return (
         <Fragment>
             <Helmet>
-                <meta property="og:image" content={props.postDetail.cover} /> 
-                <title>{props.postDetail.title}</title>
+                <title>{props.postDetail.title + '- Linhtinh'}</title>
+                <meta property="og:image" content={postDetail.cover} /> 
+                <meta property="og:url" content={window.location.href} />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={postDetail.title} />
+                <meta property="og:description" content={postDetail.description} />
             </Helmet>
             <Nav color={'fc-white'}/>
             {/* <Messenger /> */}
