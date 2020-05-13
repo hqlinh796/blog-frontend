@@ -33,14 +33,17 @@ const Blog = (props) => {
     } = props;
 
     
-    const [keyword, setKeyword] = useState('');
+    const [keyword, setKeyword] = useState(() => {
+        const parsed = queryString.parse(props.location.search);
+        return parsed.keyword;
+    });
 
     useEffect(() => {
         const parsed = queryString.parse(props.location.search),
             keyword = parsed.keyword;
         //const category = topic === 'tat-ca' ? '' : topic;
         setKeyword(keyword);
-    }, [props.location.search])
+    }, [queryString.parse(props.location.search).keyword])
 
     
     useEffect(() => {
