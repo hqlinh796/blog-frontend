@@ -5,7 +5,7 @@ import './index.css';
 const LikeFacebook = (props) => {
     return (
         <FacebookProvider appId="577342806204805">
-            <Like href={props.location} colorScheme="dark" showFaces className="like-facebook-button"/>
+            <Like href={props.location} colorScheme="dark" showFaces className="like-facebook-button" share/>
         </FacebookProvider>
     );
 };
