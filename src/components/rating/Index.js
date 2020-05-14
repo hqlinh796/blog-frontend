@@ -15,6 +15,8 @@ const Rating = (props) => {
         setYourRating(yourRating);
     }
     const calculateAverageRating = (arr) => {
+        if (!arr.length)
+            return 0;
         const avg = arr.reduce((total, value) => total = parseInt(total) + parseInt(value)) / arr.length;
         return Math.round(avg * 100) / 100;
     }

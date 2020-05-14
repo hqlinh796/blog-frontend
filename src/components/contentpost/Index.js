@@ -9,11 +9,9 @@ const ContentBlog = (props) => {
             <div className="post-detail fs-18">
                 <div className="p-b-30">
                     <div className="post-content lh-15">
-                        <p>
-                            {content}
+                        <p dangerouslySetInnerHTML={{ __html: content }}>
                         </p>
-                        <p>
-                            {content}
+                        <p dangerouslySetInnerHTML={{ __html: content }}>
                         </p>
                         <h3 className="dis-inline-block m-t-15 f-bold">Tags: &nbsp; </h3>
                         {tags && tags.map((tag, index) =>
